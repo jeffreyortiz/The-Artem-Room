@@ -9,6 +9,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
+     CUSTOM CURSOR SECTION
+     To add a custom cursor, remove the /* and */ /* below this block 
+     and change 'cursor.png' to your cursor image file.
+     ============================================================ */
+  
+  /*
+  * {
+    cursor: url('your-custom-cursor.png'), auto !important;
+  }
+  a, button, .btn, .nav-cta, .chip, .carousel-btn, .dot, .mini-btn {
+    cursor: url('your-pointer-cursor.png'), pointer !important;
+  }
+  */
+
+  /* ============================================================
      CONFIG-DRIVEN TEMPLATE
      ============================================================ */
 
@@ -29,7 +44,7 @@
     /* Global Font */
     --grenze: 'Grenze Gotisch', cursive;
 
-    --nav-h: 60px;
+    --nav-h: 70px;
     --edge: 20px;
 
     color-scheme: dark;
@@ -59,6 +74,7 @@
     width: 100%;
     position: relative;
     font-size: 1.1rem;
+    letter-spacing: 0.02em; 
   }
 
   /* ---------- background layer ---------- */
@@ -94,23 +110,24 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
-    /* Fixed RGBA to match #490413 (73, 4, 19) */
-    background: rgba(73, 4, 19, 0.86); 
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--light-pink);
+    background: rgba(73, 4, 19, 0.92); 
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--burgundy); 
     padding: 0 var(--edge);
   }
   .nav-brand {
     font-family: var(--grenze);
-    font-size: 1.4rem;
-    letter-spacing: 0.01em;
+    font-size: clamp(1.5rem, 6vw, 2.2rem); 
+    letter-spacing: 0.03em;
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .nav-links {
     display: none;
     gap: 28px;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
   .nav-links a {
     text-decoration: none;
@@ -123,18 +140,23 @@
   
   .nav-cta {
     font-family: var(--grenze);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
     background: var(--pale-pink);
     color: var(--deep-pink);
     border: none;
-    padding: 8px 16px;
-    border-radius: 3px;
+    padding: 8px 20px;
+    border-radius: 30px; 
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    flex-shrink: 0;
   }
-  .nav-cta:hover { opacity: 0.88; }
+  .nav-cta:hover { 
+    opacity: 0.9; 
+    transform: scale(1.02);
+  }
 
   @media (min-width: 860px) {
     .nav-links { display: flex; }
@@ -144,7 +166,9 @@
   .hero {
     position: relative;
     width: 100%;
-    overflow: hidden; 
+    max-width: 1000px; 
+    margin: 24px auto; 
+    padding: 0 var(--edge); 
   }
   .carousel {
     display: flex;
@@ -153,9 +177,12 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    height: 78vh;
-    min-height: 420px;
-    max-height: 720px;
+    height: 65vh; 
+    min-height: 400px;
+    max-height: 650px;
+    border-radius: 24px; 
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); 
+    background-color: var(--burgundy);
   }
   .carousel::-webkit-scrollbar { display: none; }
 
@@ -179,20 +206,19 @@
   .slide-shade {
     position: absolute;
     inset: 0;
-    /* Fixed RGBA to match #490413 (73, 4, 19) */
-    background: linear-gradient(180deg, rgba(73,4,19,0) 35%, rgba(73,4,19,0.95) 100%);
+    background: linear-gradient(180deg, rgba(73,4,19,0) 45%, rgba(73,4,19,0.95) 100%);
   }
   
   .slide-copy {
     position: relative;
-    padding: 0 var(--edge) 40px;
+    padding: 0 24px 45px;
     width: 100%;
   }
   .slide-eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--beige-trans);
     margin-bottom: 6px;
   }
@@ -204,33 +230,33 @@
   .slide-title {
     font-family: var(--grenze);
     font-weight: 600;
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    line-height: 1.02;
+    font-size: clamp(2.5rem, 8vw, 4.2rem);
+    line-height: 1.05;
     margin: 0 0 8px;
   }
   .slide-tag {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: var(--pale-pink);
-    max-width: 34ch;
+    max-width: 38ch;
     margin: 0;
   }
 
   .carousel-controls {
     position: absolute;
-    inset: 0;
+    inset: 0 var(--edge); 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 0 16px;
     pointer-events: none;
   }
   .carousel-btn {
     pointer-events: auto;
-    width: 40px; height: 40px;
+    width: 44px; height: 44px;
     border-radius: 50%;
     border: 1px solid var(--light-pink);
-    background: var(--burgundy); 
-    backdrop-filter: blur(6px);
+    background: rgba(168, 23, 94, 0.7); 
+    backdrop-filter: blur(8px);
     color: var(--pale-pink);
     display: none;
     align-items: center;
@@ -238,8 +264,12 @@
     cursor: pointer;
     font-size: 1.5rem;
     line-height: 1;
+    transition: background 0.2s ease, transform 0.2s ease;
   }
-  .carousel-btn:hover { background: var(--deep-pink); }
+  .carousel-btn:hover { 
+    background: var(--burgundy); 
+    transform: scale(1.05);
+  }
   @media (min-width: 640px) {
     .carousel-btn { display: flex; }
   }
@@ -247,7 +277,7 @@
   .dots {
     position: absolute;
     left: 50%;
-    bottom: 16px;
+    bottom: 20px;
     transform: translateX(-50%);
     display: flex;
     gap: 8px;
@@ -256,71 +286,138 @@
   .dot {
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--burgundy); 
+    background: rgba(255, 255, 255, 0.4); 
     border: none;
     padding: 0;
     cursor: pointer;
     transition: background 0.2s ease, width 0.2s ease;
   }
-  .dot.active { background: var(--pale-pink); width: 20px; border-radius: 4px; }
+  .dot.active { background: var(--pale-pink); width: 24px; border-radius: 4px; }
 
   /* ---------- quick nav chips ---------- */
   .chipbar {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     overflow-x: auto;
-    padding: 18px var(--edge) 6px;
+    padding: 12px var(--edge) 12px;
     scrollbar-width: none;
+    max-width: 1000px;
+    margin: 0 auto; 
   }
   .chipbar::-webkit-scrollbar { display: none; }
   .chip {
     flex: none;
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    font-size: 1rem;
-    padding: 8px 14px;
-    border: 1px solid var(--light-pink);
+    gap: 8px;
+    font-size: 1.05rem;
+    padding: 10px 18px;
+    border: 1px solid rgba(255, 145, 197, 0.4);
     border-radius: 30px;
     text-decoration: none;
     color: var(--beige-trans);
+    transition: all 0.2s ease;
+    background: rgba(73, 4, 19, 0.4);
   }
-  .chip .swatch { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
-  .chip:hover, .chip:focus-visible { color: var(--pale-pink); border-color: var(--burgundy); }
+  .chip .swatch { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .chip:hover, .chip:focus-visible { 
+    color: var(--deep-pink); 
+    border-color: var(--pale-pink);
+    background: var(--pale-pink); 
+  }
 
   /* ---------- service sections ---------- */
-  .services { padding: 20px 0 10px; }
+  .services { padding: 20px 0 10px; max-width: 1000px; margin: 0 auto; }
 
   .service {
     scroll-margin-top: calc(var(--nav-h) + 12px);
-    padding: 56px var(--edge);
-    border-top: 1px solid var(--light-pink);
+    padding: 60px var(--edge);
+    border-top: 1px solid rgba(255, 145, 197, 0.2);
     display: grid;
-    gap: 22px;
+    gap: 24px;
   }
+  
   .service-visual {
-    aspect-ratio: 4 / 3;
-    border-radius: 6px;
+    aspect-ratio: 4 / 5; 
+    width: 88%; 
+    margin: 0 auto; 
+    border-radius: 20px; 
     overflow: hidden;
     position: relative;
-    background-color: var(--burgundy); /* solid color fallback while image loads */
+    background-color: var(--burgundy); 
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35); 
   }
-  .service-visual img {
+
+  /* --- Mini Carousels for Services --- */
+  .mini-carousel-wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .mini-carousel {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mini-carousel::-webkit-scrollbar { display: none; }
+  .mini-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .mini-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  
+  .mini-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(73, 4, 19, 0.7);
+    color: var(--pale-pink);
+    border: 1px solid var(--light-pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    font-size: 1.3rem;
+    line-height: 1;
+    z-index: 2;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .mini-btn:hover { background: var(--burgundy); }
+  .mini-btn.prev { left: 12px; }
+  .mini-btn.next { right: 12px; }
+  /* Show mini arrows only on desktop by default for cleaner mobile view, 
+     but users can always swipe on mobile */
+  @media (max-width: 640px) {
+    .mini-btn { display: none; }
   }
 
   .service-head {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 12px;
+    margin-bottom: 12px;
   }
-  .service-swatch { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex: none; }
+  .service-swatch { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); flex: none; }
   .service-name {
     font-family: var(--grenze);
-    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
     font-weight: 600;
     margin: 0;
   }
@@ -328,75 +425,96 @@
     color: var(--beige-trans);
     line-height: 1.6;
     max-width: 52ch;
-    margin: 0 0 18px;
-  }
-
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .badge {
-    font-size: 0.9rem;
-    color: var(--beige-trans);
-    border: 1px solid var(--light-pink);
-    border-radius: 4px;
-    padding: 5px 10px;
+    margin: 0 0 22px;
+    font-size: 1.15rem;
   }
 
   .service-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   .btn {
     font-family: var(--grenze);
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 3px;
+    padding: 10px 28px;
+    border-radius: 30px; 
     text-decoration: none;
     display: inline-block;
     border: 1px solid transparent;
     cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
   }
   .btn-solid { background: var(--pale-pink); color: var(--deep-pink); }
-  .btn-solid:hover { opacity: 0.88; }
-  .btn-outline { background: transparent; color: var(--pale-pink); border-color: var(--light-pink); }
-  .btn-outline:hover { border-color: var(--burgundy); }
-
+  .btn-solid:hover { opacity: 0.9; transform: scale(1.03); }
+  .btn-outline { background: transparent; color: var(--pale-pink); border: 1px solid rgba(255, 145, 197, 0.4); }
+  .btn-outline:hover { border-color: var(--pale-pink); transform: scale(1.03); }
+  
   @media (min-width: 860px) {
     .service {
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      gap: 56px;
-      padding: 72px var(--edge);
+      gap: 64px;
+      padding: 80px var(--edge);
+    }
+    .service-visual {
+      width: 100%; 
+      margin: 0;
     }
     .service:nth-of-type(even) .service-visual { order: 2; }
   }
 
-  /* ---------- booking placeholder panel ---------- */
-  .booking-panel {
-    margin: 40px var(--edge) 0;
-    border: 1px dashed var(--light-pink);
-    border-radius: 8px;
-    padding: 28px;
-    max-width: 1180px;
+  /* ---------- highly stylized contact panel ---------- */
+  .contact-panel {
+    margin: 60px var(--edge) 0;
+    border: 1px solid rgba(255, 145, 197, 0.2);
+    border-radius: 24px;
+    background: linear-gradient(145deg, rgba(73, 4, 19, 0.8), rgba(168, 23, 94, 0.3));
+    padding: 48px 32px;
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    scroll-margin-top: calc(var(--nav-h) + 20px);
   }
-  .booking-panel h3 {
+  .contact-panel h3 {
     font-family: var(--grenze);
     font-weight: 600;
-    margin: 0 0 8px;
-    font-size: 1.8rem;
+    margin: 0 0 16px;
+    font-size: clamp(2.2rem, 5vw, 3rem);
   }
-  .booking-panel p { color: var(--beige-trans); line-height: 1.6; margin: 0; max-width: 60ch; }
+  .contact-panel p { 
+    color: var(--beige-trans); 
+    line-height: 1.6; 
+    margin: 0 auto 32px; 
+    max-width: 55ch; 
+    font-size: 1.15rem;
+  }
+  .contact-panel-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
 
   /* ---------- footer ---------- */
   footer {
-    border-top: 1px solid var(--light-pink);
-    padding: 40px var(--edge) calc(40px + env(safe-area-inset-bottom, 0px));
-    margin-top: 60px;
+    border-top: 1px solid rgba(255, 145, 197, 0.2);
+    padding: 50px var(--edge) calc(50px + env(safe-area-inset-bottom, 0px));
+    margin-top: 80px;
     color: var(--pale-pink);
-    font-size: 1rem;
+    font-size: 1.15rem;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    background: rgba(73, 4, 19, 0.8);
   }
-  footer .foot-brand { font-family: var(--grenze); color: var(--pale-pink); font-size: 1.5rem; margin-bottom: 6px; }
+  footer .foot-brand { 
+    font-family: var(--grenze); 
+    color: var(--pale-pink); 
+    font-size: 2.8rem; 
+    margin-bottom: 8px; 
+  }
 </style>
 </head>
 <body>
@@ -406,7 +524,7 @@
 <nav class="nav">
   <div class="nav-brand" id="brand-name">Studio</div>
   <div class="nav-links" id="nav-links"></div>
-  <a class="nav-cta" href="#contact">Get in touch</a>
+  <a class="nav-cta" href="#contact-panel">Get in touch</a>
 </nav>
 
 <div class="hero">
@@ -422,12 +540,13 @@
 
 <main class="services" id="services"></main>
 
-<div class="booking-panel">
-  <h3>Booking coming soon</h3>
-  <p>This is a portfolio preview — booking isn't wired up yet. In the meantime, reach out directly below and we'll get you sorted.</p>
+<div class="contact-panel" id="contact-panel">
+  <h3>Let's Create Something Beautiful</h3>
+  <p>Ready to transform your vision into reality? Reach out directly to discuss your ideas, get a custom quote, or schedule a consultation. We are currently accepting new clients.</p>
+  <div class="contact-panel-actions" id="contact-actions"></div>
 </div>
 
-<footer id="contact">
+<footer>
   <div class="foot-brand" id="foot-brand">Studio</div>
   <div id="foot-addr">123 Main Street · Your City</div>
   <div id="foot-contact">hello@yourstudio.com · (000) 000-0000</div>
@@ -435,17 +554,27 @@
 
 <script>
 /* ================================================================
-   BUSINESS CONFIG — ADD YOUR PICTURES HERE
+   BUSINESS CONFIG — ADD YOUR INFO & PICTURES HERE
+   Note: Change 'image: "..."' to 'images: ["..."]' (an array) 
+   to enable the mini-carousels in each section.
    ================================================================ */
 const BUSINESS = {
-  name: "Studio", 
-  address: "123 Main Street · Your City",
-  contact: "theartemroom@gmail.com · (786) 694-3553",
+  name: "The Artem Room", 
+  address: "NYC",
+  email: "theartemroom@gmail.com",
+  phone: "(786) 694-3553",
+  phoneRaw: "7866943553", 
+  
   services: [
     {
       id: "tattooing",
       name: "Tattooing",
-      image: "YOUR_TATTOO_PHOTO.jpg", /* <--- PUT YOUR IMAGE FILE NAME HERE */
+      /* You can add multiple images here separated by commas! */
+      images: [
+        "photos/IMG_1318.png",
+        "photos/IMG_1720.png",
+        "photos/IMG_2271.PNG"
+      ], 
       tag: "Fine line patchwork, with a heavy focus on optimal placement",
       desc: "Every piece starts as a conversation. Share references and placement, and we'll sketch a custom design ahead of your session.",
       color: "var(--c-tattoo)"
@@ -453,7 +582,9 @@ const BUSINESS = {
     {
       id: "piercing",
       name: "Piercing",
-      image: "YOUR_PIERCING_PHOTO.jpg", /* <--- PUT YOUR IMAGE FILE NAME HERE */
+      images: [
+        "photos/IMG_4482.png"
+      ], 
       tag: "Ear curation, facial & body piercing, implant-grade jewelry",
       desc: "A quick consult confirms placement and jewelry before we book your slot — most piercings are same-week.",
       color: "var(--c-piercing)"
@@ -461,7 +592,9 @@ const BUSINESS = {
     {
       id: "nails",
       name: "Nails",
-      image: "YOUR_NAILS_PHOTO.jpg", /* <--- PUT YOUR IMAGE FILE NAME HERE */
+      images: [
+        "photos/IMG_2268.jpg"
+      ], 
       tag: "Manicure, gel, and hand-painted nail art",
       desc: "Pick a time that works and come as you are — no consultation needed for standard sets.",
       color: "var(--c-nails)"
@@ -469,7 +602,9 @@ const BUSINESS = {
     {
       id: "makeup",
       name: "Makeup",
-      image: "YOUR_MAKEUP_PHOTO.jpg", /* <--- PUT YOUR IMAGE FILE NAME HERE */
+      images: [
+        "photos/IMG_2270.PNG"
+      ], 
       tag: "Editorial, event & bridal makeup",
       desc: "Single sessions book directly. Bridal and large events get a short consult first to plan trials and timing.",
       color: "var(--c-makeup)"
@@ -477,7 +612,9 @@ const BUSINESS = {
     {
       id: "hair",
       name: "Hair",
-      image: "photos\IMG_4493.png", /* <--- PUT YOUR IMAGE FILE NAME HERE */
+      images: [
+        "photos/IMG_4493.png"
+      ], 
       tag: "Cut, color & styling",
       desc: "Choose your service and time — straightforward booking, no forms required.",
       color: "var(--c-hair)"
@@ -489,7 +626,12 @@ const BUSINESS = {
 document.getElementById('brand-name').textContent = BUSINESS.name;
 document.getElementById('foot-brand').textContent = BUSINESS.name;
 document.getElementById('foot-addr').textContent = BUSINESS.address;
-document.getElementById('foot-contact').textContent = BUSINESS.contact;
+document.getElementById('foot-contact').textContent = `${BUSINESS.email} · ${BUSINESS.phone}`;
+
+document.getElementById('contact-actions').innerHTML = `
+  <a class="btn btn-solid" href="mailto:${BUSINESS.email}">Email Us</a>
+  <a class="btn btn-outline" href="tel:${BUSINESS.phoneRaw}">Call ${BUSINESS.phone}</a>
+`;
 
 const carousel = document.getElementById('carousel');
 const dotsWrap = document.getElementById('dots');
@@ -498,13 +640,16 @@ const navLinks = document.getElementById('nav-links');
 const servicesWrap = document.getElementById('services');
 
 BUSINESS.services.forEach((svc, i) => {
-  // --- CAROUSEL SLIDE ---
+  // Grab the first image to use in the top hero carousel
+  const primaryImage = svc.images && svc.images.length > 0 ? svc.images[0] : "";
+
+  // --- MAIN HERO SLIDE ---
   const slide = document.createElement('div');
   slide.className = 'slide';
   slide.style.setProperty('--accent', svc.color);
   slide.innerHTML = `
     <div class="slide-art">
-      <img src="${svc.image}" alt="${svc.name}" style="width: 100%; height: 100%; object-fit: cover;">
+      <img src="${primaryImage}" alt="${svc.name}" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
     </div>
     <div class="slide-shade"></div>
     <div class="slide-copy">
@@ -533,14 +678,34 @@ BUSINESS.services.forEach((svc, i) => {
   nl.textContent = svc.name;
   navLinks.appendChild(nl);
 
-  // --- SERVICE SECTIONS ---
+  // --- SERVICE SECTIONS WITH OPTIONAL MINI-CAROUSEL ---
   const section = document.createElement('section');
   section.className = 'service';
   section.id = svc.id;
+  
+  // Build the images HTML (creates multiple slides if there are multiple images)
+  let slidesHTML = '';
+  if(svc.images && svc.images.length > 0) {
+    svc.images.forEach(img => {
+      slidesHTML += `<div class="mini-slide"><img src="${img}" alt="${svc.name} example"></div>`;
+    });
+  }
+
+  // Determine if we need next/prev buttons for this section
+  const hasMultiple = svc.images && svc.images.length > 1;
+  const controlsHTML = hasMultiple ? `
+    <button class="mini-btn prev" onclick="scrollMini('${svc.id}', -1)" aria-label="Previous photo">‹</button>
+    <button class="mini-btn next" onclick="scrollMini('${svc.id}', 1)" aria-label="Next photo">›</button>
+  ` : '';
 
   section.innerHTML = `
     <div class="service-visual">
-      <img src="${svc.image}" alt="${svc.name}">
+      <div class="mini-carousel-wrap">
+        <div class="mini-carousel" id="mc-${svc.id}">
+          ${slidesHTML}
+        </div>
+        ${controlsHTML}
+      </div>
     </div>
     <div class="service-content">
       <div class="service-head">
@@ -549,13 +714,13 @@ BUSINESS.services.forEach((svc, i) => {
       </div>
       <p class="service-desc">${svc.desc}</p>
       <div class="service-actions">
-        <a class="btn btn-solid" href="#contact">Inquire</a>
+        <a class="btn btn-solid" href="#contact-panel">Inquire</a>
       </div>
     </div>`;
   servicesWrap.appendChild(section);
 });
 
-/* ---------- carousel behavior ---------- */
+/* ---------- Main Carousel Behavior ---------- */
 const slides = Array.from(carousel.children);
 const dots = Array.from(dotsWrap.children);
 
@@ -587,6 +752,21 @@ carousel.addEventListener('scroll', () => {
     ticking = false;
   });
 });
+
+/* ---------- Mini Carousel Behavior (For individual services) ---------- */
+window.scrollMini = function(serviceId, direction) {
+  const container = document.getElementById(`mc-${serviceId}`);
+  if (!container) return;
+  const slideWidth = container.clientWidth;
+  // Calculate nearest index then add direction
+  const currentIdx = Math.round(container.scrollLeft / slideWidth);
+  const targetScroll = (currentIdx + direction) * slideWidth;
+  
+  container.scrollTo({
+    left: targetScroll,
+    behavior: 'smooth'
+  });
+};
 </script>
 </body>
 </html>
