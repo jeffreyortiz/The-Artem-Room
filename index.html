@@ -402,10 +402,32 @@
   .mini-btn:hover { background: var(--burgundy); }
   .mini-btn.prev { left: 12px; }
   .mini-btn.next { right: 12px; }
-  /* Show mini arrows only on desktop by default for cleaner mobile view, 
-     but users can always swipe on mobile */
   @media (max-width: 640px) {
     .mini-btn { display: none; }
+  }
+
+  /* --- Mini Carousel Dots --- */
+  .mini-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 3;
+    pointer-events: none; /* Let users swipe over them */
+  }
+  .mini-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    transition: background 0.2s ease, width 0.2s ease;
+  }
+  .mini-dot.active {
+    background: var(--pale-pink);
+    width: 18px;
+    border-radius: 4px;
   }
 
   .service-head {
@@ -555,8 +577,6 @@
 <script>
 /* ================================================================
    BUSINESS CONFIG — ADD YOUR INFO & PICTURES HERE
-   Note: Change 'image: "..."' to 'images: ["..."]' (an array) 
-   to enable the mini-carousels in each section.
    ================================================================ */
 const BUSINESS = {
   name: "The Artem Room", 
@@ -569,7 +589,6 @@ const BUSINESS = {
     {
       id: "tattooing",
       name: "Tattooing",
-      /* You can add multiple images here separated by commas! */
       images: [
         "photos/IMG_1318.png",
         "photos/IMG_1720.png",
@@ -583,7 +602,8 @@ const BUSINESS = {
       id: "piercing",
       name: "Piercing",
       images: [
-        "photos/IMG_4482.png"
+        "photos/IMG_4482.png",
+        "photos/IMG_4483.png"
       ], 
       tag: "Ear curation, facial & body piercing, implant-grade jewelry",
       desc: "A quick consult confirms placement and jewelry before we book your slot — most piercings are same-week.",
@@ -683,16 +703,25 @@ BUSINESS.services.forEach((svc, i) => {
   section.className = 'service';
   section.id = svc.id;
   
-  // Build the images HTML (creates multiple slides if there are multiple images)
+  // Build the images HTML and the Dots HTML
   let slidesHTML = '';
+  let miniDotsHTML = '';
+  const hasMultiple = svc.images && svc.images.length > 1;
+
   if(svc.images && svc.images.length > 0) {
-    svc.images.forEach(img => {
+    if (hasMultiple) miniDotsHTML += `<div class="mini-dots" id="md-${svc.id}">`;
+    
+    svc.images.forEach((img, idx) => {
       slidesHTML += `<div class="mini-slide"><img src="${img}" alt="${svc.name} example"></div>`;
+      if (hasMultiple) {
+        miniDotsHTML += `<div class="mini-dot ${idx === 0 ? 'active' : ''}"></div>`;
+      }
     });
+
+    if (hasMultiple) miniDotsHTML += `</div>`;
   }
 
-  // Determine if we need next/prev buttons for this section
-  const hasMultiple = svc.images && svc.images.length > 1;
+  // Determine if we need next/prev arrows for this section
   const controlsHTML = hasMultiple ? `
     <button class="mini-btn prev" onclick="scrollMini('${svc.id}', -1)" aria-label="Previous photo">‹</button>
     <button class="mini-btn next" onclick="scrollMini('${svc.id}', 1)" aria-label="Next photo">›</button>
@@ -705,6 +734,7 @@ BUSINESS.services.forEach((svc, i) => {
           ${slidesHTML}
         </div>
         ${controlsHTML}
+        ${miniDotsHTML}
       </div>
     </div>
     <div class="service-content">
@@ -718,6 +748,29 @@ BUSINESS.services.forEach((svc, i) => {
       </div>
     </div>`;
   servicesWrap.appendChild(section);
+
+  // --- Attach scroll listeners to the new mini-carousels for the dots to work ---
+  if (hasMultiple) {
+    // We use setTimeout to ensure the DOM has painted the element before grabbing it
+    setTimeout(() => {
+      const mc = document.getElementById(`mc-${svc.id}`);
+      const mdWrap = document.getElementById(`md-${svc.id}`);
+      if (mc && mdWrap) {
+        const mDots = Array.from(mdWrap.children);
+        let mTicking = false;
+        
+        mc.addEventListener('scroll', () => {
+          if (mTicking) return;
+          mTicking = true;
+          requestAnimationFrame(() => {
+            const idx = Math.round(mc.scrollLeft / mc.clientWidth);
+            mDots.forEach((d, index) => d.classList.toggle('active', index === idx));
+            mTicking = false;
+          });
+        });
+      }
+    }, 0);
+  }
 });
 
 /* ---------- Main Carousel Behavior ---------- */
