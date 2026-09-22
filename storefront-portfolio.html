@@ -6,31 +6,28 @@
 <title>Studio — Tattoo, Piercing, Nails, Makeup, Hair</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
      CONFIG-DRIVEN TEMPLATE
-     Everything brand/business specific lives in BUSINESS config
-     (see <script> at bottom). Swap that object + the SVG hero art
-     to re-skin this for a different client.
      ============================================================ */
 
   :root {
-    --ink:        #161310;
-    --ink-2:      #1f1b16;
-    --bone:       #ECE4D6;
-    --bone-dim:   #ECE4D6cc;
-    --bone-faint: #ECE4D680;
-    --line:       #ECE4D626;
+    --deep-pink:   #490413; /* Your dark red */
+    --light-pink:  #FF91C5;
+    --pale-pink:   #FFF7FC;
+    --beige-trans: #ECE4D6cc;
+    --burgundy:    #A8175E;
 
-    --c-tattoo:   #7E93A7; /* steel blue-grey */
-    --c-piercing: #C7BFB2; /* warm silver */
-    --c-nails:    #C1485B; /* lacquer red */
-    --c-makeup:   #D6A24C; /* bronze gold */
-    --c-hair:     #A97452; /* copper */
+    /* Service accents */
+    --c-tattoo:   #7E93A7;
+    --c-piercing: #C7BFB2;
+    --c-nails:    #C1485B;
+    --c-makeup:   #D6A24C;
+    --c-hair:     #A97452;
 
-    --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
-    --sans: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* Global Font */
+    --grenze: 'Grenze Gotisch', cursive;
 
     --nav-h: 60px;
     --edge: 20px;
@@ -52,22 +49,19 @@
 
   body {
     margin: 0;
-    background: var(--ink);
-    color: var(--bone);
-    font-family: var(--sans);
+    background: var(--deep-pink);
+    color: var(--pale-pink);
+    font-family: var(--grenze);
     -webkit-font-smoothing: antialiased;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
     overflow-x: hidden;
     width: 100%;
     position: relative;
+    font-size: 1.1rem;
   }
 
-  /* ---------- background layer ----------
-     Empty on purpose. This is the hook for your cyber-sigil artwork:
-     background-image: url('data:image/svg+xml;base64,...') or an
-     inline <img>/<svg>, background-size/position/opacity to taste.
-     Sits behind everything, ignores clicks, stays put on scroll. */
+  /* ---------- background layer ---------- */
   .bg-layer {
     position: fixed;
     inset: 0;
@@ -76,8 +70,8 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    /* background-image: url('your-artwork.svg'); */
-    /* opacity: 0.35; */
+    background-image: url('photos/5-Photoroom.png'); 
+    opacity: .25; 
   }
 
   a { color: inherit; }
@@ -100,38 +94,41 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(22,19,16,0.86);
+    
+    /* Fixed RGBA to match #490413 (73, 4, 19) */
+    background: rgba(73, 4, 19, 0.86); 
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--light-pink);
     padding: 0 var(--edge);
   }
   .nav-brand {
-    font-family: var(--serif);
-    font-size: 1.15rem;
+    font-family: var(--grenze);
+    font-size: 1.4rem;
     letter-spacing: 0.01em;
-    font-weight: 500;
+    font-weight: 600;
   }
   .nav-links {
     display: none;
     gap: 28px;
-    font-size: 0.92rem;
+    font-size: 1.1rem;
   }
   .nav-links a {
     text-decoration: none;
-    color: var(--bone-dim);
+    color: var(--beige-trans);
     padding: 6px 2px;
     border-bottom: 1px solid transparent;
     transition: color 0.15s ease, border-color 0.15s ease;
   }
-  .nav-links a:hover, .nav-links a:focus-visible { color: var(--bone); border-color: var(--bone-faint); }
+  .nav-links a:hover, .nav-links a:focus-visible { color: var(--pale-pink); border-color: var(--burgundy); }
+  
   .nav-cta {
-    font-family: var(--sans);
-    font-size: 0.88rem;
+    font-family: var(--grenze);
+    font-size: 1.1rem;
     font-weight: 600;
-    background: var(--bone);
-    color: var(--ink);
+    background: var(--pale-pink);
+    color: var(--deep-pink);
     border: none;
-    padding: 10px 16px;
+    padding: 8px 16px;
     border-radius: 3px;
     cursor: pointer;
     text-decoration: none;
@@ -147,7 +144,7 @@
   .hero {
     position: relative;
     width: 100%;
-    overflow: hidden; /* clips any sub-pixel scroll-snap sliver at narrow widths */
+    overflow: hidden; 
   }
   .carousel {
     display: flex;
@@ -178,11 +175,14 @@
     inset: 0;
   }
   .slide-art svg { width: 100%; height: 100%; }
+  
   .slide-shade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(22,19,16,0) 35%, rgba(22,19,16,0.92) 100%);
+    /* Fixed RGBA to match #490413 (73, 4, 19) */
+    background: linear-gradient(180deg, rgba(73,4,19,0) 35%, rgba(73,4,19,0.95) 100%);
   }
+  
   .slide-copy {
     position: relative;
     padding: 0 var(--edge) 40px;
@@ -192,8 +192,8 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.82rem;
-    color: var(--bone-dim);
+    font-size: 1rem;
+    color: var(--beige-trans);
     margin-bottom: 6px;
   }
   .slide-swatch {
@@ -202,15 +202,15 @@
     flex: none;
   }
   .slide-title {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(2.1rem, 8vw, 3.4rem);
+    font-family: var(--grenze);
+    font-weight: 600;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
     line-height: 1.02;
     margin: 0 0 8px;
   }
   .slide-tag {
-    font-size: 0.98rem;
-    color: var(--bone-dim);
+    font-size: 1.15rem;
+    color: var(--pale-pink);
     max-width: 34ch;
     margin: 0;
   }
@@ -228,18 +228,18 @@
     pointer-events: auto;
     width: 40px; height: 40px;
     border-radius: 50%;
-    border: 1px solid var(--line);
-    background: rgba(22,19,16,0.5);
+    border: 1px solid var(--light-pink);
+    background: var(--burgundy); 
     backdrop-filter: blur(6px);
-    color: var(--bone);
+    color: var(--pale-pink);
     display: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     line-height: 1;
   }
-  .carousel-btn:hover { background: rgba(22,19,16,0.75); }
+  .carousel-btn:hover { background: var(--deep-pink); }
   @media (min-width: 640px) {
     .carousel-btn { display: flex; }
   }
@@ -254,15 +254,15 @@
     z-index: 3;
   }
   .dot {
-    width: 7px; height: 7px;
+    width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--bone-faint);
+    background: var(--burgundy); 
     border: none;
     padding: 0;
     cursor: pointer;
     transition: background 0.2s ease, width 0.2s ease;
   }
-  .dot.active { background: var(--bone); width: 20px; border-radius: 4px; }
+  .dot.active { background: var(--pale-pink); width: 20px; border-radius: 4px; }
 
   /* ---------- quick nav chips ---------- */
   .chipbar {
@@ -278,15 +278,15 @@
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    font-size: 0.88rem;
+    font-size: 1rem;
     padding: 8px 14px;
-    border: 1px solid var(--line);
+    border: 1px solid var(--light-pink);
     border-radius: 30px;
     text-decoration: none;
-    color: var(--bone-dim);
+    color: var(--beige-trans);
   }
   .chip .swatch { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
-  .chip:hover, .chip:focus-visible { color: var(--bone); border-color: var(--bone-faint); }
+  .chip:hover, .chip:focus-visible { color: var(--pale-pink); border-color: var(--burgundy); }
 
   /* ---------- service sections ---------- */
   .services { padding: 20px 0 10px; }
@@ -294,7 +294,7 @@
   .service {
     scroll-margin-top: calc(var(--nav-h) + 12px);
     padding: 56px var(--edge);
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--light-pink);
     display: grid;
     gap: 22px;
   }
@@ -303,8 +303,13 @@
     border-radius: 6px;
     overflow: hidden;
     position: relative;
+    background-color: var(--burgundy); /* solid color fallback while image loads */
   }
-  .service-visual svg { width: 100%; height: 100%; }
+  .service-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   .service-head {
     display: flex;
@@ -314,13 +319,13 @@
   }
   .service-swatch { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex: none; }
   .service-name {
-    font-family: var(--serif);
-    font-size: clamp(1.6rem, 4vw, 2.1rem);
-    font-weight: 500;
+    font-family: var(--grenze);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 600;
     margin: 0;
   }
   .service-desc {
-    color: var(--bone-dim);
+    color: var(--beige-trans);
     line-height: 1.6;
     max-width: 52ch;
     margin: 0 0 18px;
@@ -328,30 +333,29 @@
 
   .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
   .badge {
-    font-size: 0.8rem;
-    color: var(--bone-dim);
-    border: 1px solid var(--line);
+    font-size: 0.9rem;
+    color: var(--beige-trans);
+    border: 1px solid var(--light-pink);
     border-radius: 4px;
     padding: 5px 10px;
   }
 
   .service-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   .btn {
-    font-family: var(--sans);
-    font-size: 0.92rem;
+    font-family: var(--grenze);
+    font-size: 1.2rem;
     font-weight: 600;
-    padding: 12px 20px;
+    padding: 10px 20px;
     border-radius: 3px;
     text-decoration: none;
     display: inline-block;
     border: 1px solid transparent;
     cursor: pointer;
   }
-  .btn-solid { background: var(--bone); color: var(--ink); }
+  .btn-solid { background: var(--pale-pink); color: var(--deep-pink); }
   .btn-solid:hover { opacity: 0.88; }
-  .btn-outline { background: transparent; color: var(--bone); border-color: var(--line); }
-  .btn-outline:hover { border-color: var(--bone-faint); }
-  .btn-note { font-size: 0.85rem; color: var(--bone-faint); }
+  .btn-outline { background: transparent; color: var(--pale-pink); border-color: var(--light-pink); }
+  .btn-outline:hover { border-color: var(--burgundy); }
 
   @media (min-width: 860px) {
     .service {
@@ -366,7 +370,7 @@
   /* ---------- booking placeholder panel ---------- */
   .booking-panel {
     margin: 40px var(--edge) 0;
-    border: 1px dashed var(--line);
+    border: 1px dashed var(--light-pink);
     border-radius: 8px;
     padding: 28px;
     max-width: 1180px;
@@ -374,25 +378,25 @@
     margin-right: auto;
   }
   .booking-panel h3 {
-    font-family: var(--serif);
-    font-weight: 500;
+    font-family: var(--grenze);
+    font-weight: 600;
     margin: 0 0 8px;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
   }
-  .booking-panel p { color: var(--bone-dim); line-height: 1.6; margin: 0; max-width: 60ch; }
+  .booking-panel p { color: var(--beige-trans); line-height: 1.6; margin: 0; max-width: 60ch; }
 
   /* ---------- footer ---------- */
   footer {
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--light-pink);
     padding: 40px var(--edge) calc(40px + env(safe-area-inset-bottom, 0px));
     margin-top: 60px;
-    color: var(--bone-faint);
-    font-size: 0.88rem;
+    color: var(--pale-pink);
+    font-size: 1rem;
     display: flex;
     flex-direction: column;
     gap: 6px;
   }
-  footer .foot-brand { font-family: var(--serif); color: var(--bone); font-size: 1.05rem; margin-bottom: 6px; }
+  footer .foot-brand { font-family: var(--grenze); color: var(--pale-pink); font-size: 1.5rem; margin-bottom: 6px; }
 </style>
 </head>
 <body>
@@ -431,29 +435,25 @@
 
 <script>
 /* ================================================================
-   BUSINESS CONFIG — everything client-specific lives here.
-   This is the PORTFOLIO variant: no booking logic, just a showcase
-   with a single "Inquire" CTA per service pointing at contact info.
-   To re-skin for a different business: replace this object and the
-   art() functions below (or swap in real <img> tags pointing at
-   hosted photos once this is off Claude and live on real hosting —
-   remote images aren't loaded in this preview).
+   BUSINESS CONFIG — ADD YOUR PICTURES HERE
    ================================================================ */
 const BUSINESS = {
-  name: "Studio", // replace with the real business name
+  name: "Studio", 
   address: "123 Main Street · Your City",
-  contact: "hello@yourstudio.com · (000) 000-0000",
+  contact: "theartemroom@gmail.com · (786) 694-3553",
   services: [
     {
       id: "tattooing",
       name: "Tattooing",
-      tag: "Custom linework, fine line & color, by appointment",
+      image: "YOUR_TATTOO_PHOTO.jpg", /* <--- PUT YOUR IMAGE FILE NAME HERE */
+      tag: "Fine line patchwork, with a heavy focus on optimal placement",
       desc: "Every piece starts as a conversation. Share references and placement, and we'll sketch a custom design ahead of your session.",
       color: "var(--c-tattoo)"
     },
     {
       id: "piercing",
       name: "Piercing",
+      image: "YOUR_PIERCING_PHOTO.jpg", /* <--- PUT YOUR IMAGE FILE NAME HERE */
       tag: "Ear curation, facial & body piercing, implant-grade jewelry",
       desc: "A quick consult confirms placement and jewelry before we book your slot — most piercings are same-week.",
       color: "var(--c-piercing)"
@@ -461,6 +461,7 @@ const BUSINESS = {
     {
       id: "nails",
       name: "Nails",
+      image: "YOUR_NAILS_PHOTO.jpg", /* <--- PUT YOUR IMAGE FILE NAME HERE */
       tag: "Manicure, gel, and hand-painted nail art",
       desc: "Pick a time that works and come as you are — no consultation needed for standard sets.",
       color: "var(--c-nails)"
@@ -468,6 +469,7 @@ const BUSINESS = {
     {
       id: "makeup",
       name: "Makeup",
+      image: "YOUR_MAKEUP_PHOTO.jpg", /* <--- PUT YOUR IMAGE FILE NAME HERE */
       tag: "Editorial, event & bridal makeup",
       desc: "Single sessions book directly. Bridal and large events get a short consult first to plan trials and timing.",
       color: "var(--c-makeup)"
@@ -475,38 +477,13 @@ const BUSINESS = {
     {
       id: "hair",
       name: "Hair",
+      image: "photos\IMG_4493.png", /* <--- PUT YOUR IMAGE FILE NAME HERE */
       tag: "Cut, color & styling",
       desc: "Choose your service and time — straightforward booking, no forms required.",
       color: "var(--c-hair)"
     }
   ]
 };
-
-/* ---------- simple per-service placeholder art ----------
-   Swap these for real <img src="..."> once photos are hosted
-   outside this preview (remote images are blocked in-preview). */
-function art(id, colorVar) {
-  const strokes = {
-    tattooing: `<path d="M60 150 L110 100 M100 90 l14 14 M150 60 q30 -10 40 20 q-30 10 -40 -20" stroke-width="3"/>`,
-    piercing: `<circle cx="120" cy="90" r="26" stroke-width="3"/><path d="M120 116 v34" stroke-width="3"/>`,
-    nails: `<path d="M90 130 q10 -60 30 -60 q20 0 30 60 q-30 14 -60 0 Z" stroke-width="3"/>`,
-    makeup: `<path d="M100 70 l10 60 M100 130 l-14 20 M100 130 l14 20" stroke-width="3"/><circle cx="150" cy="80" r="14" stroke-width="3"/>`,
-    hair: `<path d="M70 70 q50 -20 90 10 q-10 40 -50 50 q-40 -10 -40 -60 Z" stroke-width="3"/>`
-  };
-  return `
-  <svg viewBox="0 0 220 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="g-${id}" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#1f1b16"/>
-        <stop offset="100%" stop-color="#161310"/>
-      </linearGradient>
-    </defs>
-    <rect width="220" height="220" fill="url(#g-${id})"/>
-    <g fill="none" stroke="${colorVar}" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
-      ${strokes[id] || ""}
-    </g>
-  </svg>`;
-}
 
 /* ---------- render ---------- */
 document.getElementById('brand-name').textContent = BUSINESS.name;
@@ -521,12 +498,14 @@ const navLinks = document.getElementById('nav-links');
 const servicesWrap = document.getElementById('services');
 
 BUSINESS.services.forEach((svc, i) => {
-  // hero slide
+  // --- CAROUSEL SLIDE ---
   const slide = document.createElement('div');
   slide.className = 'slide';
   slide.style.setProperty('--accent', svc.color);
   slide.innerHTML = `
-    <div class="slide-art">${art(svc.id, svc.color)}</div>
+    <div class="slide-art">
+      <img src="${svc.image}" alt="${svc.name}" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
     <div class="slide-shade"></div>
     <div class="slide-copy">
       <div class="slide-eyebrow"><span class="slide-swatch"></span>${i + 1} of ${BUSINESS.services.length}</div>
@@ -535,14 +514,13 @@ BUSINESS.services.forEach((svc, i) => {
     </div>`;
   carousel.appendChild(slide);
 
-  // dot
+  // --- NAVIGATION DOTS & CHIPS ---
   const dot = document.createElement('button');
   dot.className = 'dot' + (i === 0 ? ' active' : '');
   dot.setAttribute('aria-label', `Go to ${svc.name}`);
   dot.addEventListener('click', () => scrollToSlide(i));
   dotsWrap.appendChild(dot);
 
-  // chip
   const chip = document.createElement('a');
   chip.className = 'chip';
   chip.href = `#${svc.id}`;
@@ -550,28 +528,26 @@ BUSINESS.services.forEach((svc, i) => {
   chip.innerHTML = `<span class="swatch"></span>${svc.name}`;
   chipbar.appendChild(chip);
 
-  // nav link
   const nl = document.createElement('a');
   nl.href = `#${svc.id}`;
   nl.textContent = svc.name;
   navLinks.appendChild(nl);
 
-  // service section
+  // --- SERVICE SECTIONS ---
   const section = document.createElement('section');
   section.className = 'service';
   section.id = svc.id;
 
-  const badges = [];
-
   section.innerHTML = `
-    <div class="service-visual">${art(svc.id, svc.color)}</div>
+    <div class="service-visual">
+      <img src="${svc.image}" alt="${svc.name}">
+    </div>
     <div class="service-content">
       <div class="service-head">
         <span class="service-swatch" style="background:${svc.color}"></span>
         <h2 class="service-name">${svc.name}</h2>
       </div>
       <p class="service-desc">${svc.desc}</p>
-      ${badges.length ? `<div class="badges">${badges.map(b => `<span class="badge">${b}</span>`).join('')}</div>` : ''}
       <div class="service-actions">
         <a class="btn btn-solid" href="#contact">Inquire</a>
       </div>
