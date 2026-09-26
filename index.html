@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Artem Room — Tattoo, Piercing, Nails, Makeup, Hair</title>
+
+<!-- ============================================================
+     SEO & LINK PREVIEW SETTINGS
+     Change these so your site looks great on Google and when texted!
+     ============================================================ -->
+<meta name="description" content="NYC's premier studio for custom tattoos, piercings, nails, makeup, and hair.">
+<meta name="keywords" content="Tattoo, Piercing, Nails, Makeup, Hair, NYC Studio, The Artem Room">
+<!-- Open Graph tags (These control how the link looks when shared on iMessage/Facebook) -->
+<meta property="og:title" content="The Artem Room | NYC Studio">
+<meta property="og:description" content="Ready to transform your vision into reality? Book your next session with us.">
+<meta property="og:image" content="photos/5-Photoroom.png"> <!-- The image that shows in the link preview -->
+<meta property="og:type" content="website">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -415,7 +428,7 @@
     display: flex;
     gap: 6px;
     z-index: 3;
-    pointer-events: none; /* Let users swipe over them */
+    pointer-events: none;
   }
   .mini-dot {
     width: 6px; height: 6px;
@@ -537,6 +550,32 @@
     font-size: 2.8rem; 
     margin-bottom: 8px; 
   }
+
+  /* --- Socials styling --- */
+  .social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .social-chip {
+    font-family: var(--grenze);
+    font-size: 1.15rem;
+    padding: 6px 18px;
+    border: 1px solid rgba(255, 145, 197, 0.3);
+    border-radius: 30px;
+    color: var(--pale-pink);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: rgba(73, 4, 19, 0.4);
+  }
+  .social-chip:hover {
+    background: var(--pale-pink);
+    color: var(--deep-pink);
+    border-color: var(--pale-pink);
+  }
+
 </style>
 </head>
 <body>
@@ -570,6 +609,10 @@
 
 <footer>
   <div class="foot-brand" id="foot-brand">The Artem Room</div>
+  
+  <!-- Dynamic Socials container -->
+  <div id="foot-socials" class="social-links"></div>
+  
   <div id="foot-addr">NYC</div>
   <div id="foot-contact">theartemroom@gmail.com · (786) 694-3553</div>
 </footer>
@@ -585,6 +628,17 @@ const BUSINESS = {
   phone: "(786) 694-3553",
   phoneRaw: "7866943553", 
   
+  /* 
+   * SOCIAL MEDIA LINKS
+   * To add a social, put the link in quotes.
+   * To hide a social, leave the quotes empty like this: url: "" 
+   */
+  socials: [
+    { label: "Instagram", url: "https://instagram.com/theartemroom" },
+    { label: "TikTok", url: "" },
+    { label: "Facebook", url: "" }
+  ],
+
   services: [
     {
       id: "tattooing",
@@ -652,6 +706,23 @@ document.getElementById('contact-actions').innerHTML = `
   <a class="btn btn-solid" href="mailto:${BUSINESS.email}">Email Us</a>
   <a class="btn btn-outline" href="tel:${BUSINESS.phoneRaw}">Call ${BUSINESS.phone}</a>
 `;
+
+// --- Smart Socials Render Logic ---
+const socialWrap = document.getElementById('foot-socials');
+let hasSocials = false;
+
+if (BUSINESS.socials && BUSINESS.socials.length > 0) {
+  BUSINESS.socials.forEach(soc => {
+    if (soc.url && soc.url.trim() !== "") {
+      hasSocials = true;
+      socialWrap.innerHTML += `<a href="${soc.url}" target="_blank" rel="noopener noreferrer" class="social-chip">${soc.label}</a>`;
+    }
+  });
+}
+// If there are no valid social links, hide the container so there's no empty gap
+if (!hasSocials) {
+  socialWrap.style.display = "none";
+}
 
 const carousel = document.getElementById('carousel');
 const dotsWrap = document.getElementById('dots');
