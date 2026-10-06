@@ -1,8 +1,10 @@
 # The Artem Room — website + booking
 
-Live site: https://jeffreyortiz.github.io/The-Artem-Room/ (GitHub Pages, `main` branch)
+Live site: https://theartemroom.netlify.app/ (Netlify auto-deploys every push to `main`)
 
-No build step. Plain HTML/CSS/JS files, hosted for free on GitHub Pages.
+Dashboard: https://theartemroom.netlify.app/bookings.html
+
+No build step. Plain HTML/CSS/JS files, hosted for free on Netlify.
 
 | File | What it is |
 |---|---|
@@ -79,13 +81,16 @@ Five wrong tries locks sign-in for 15 minutes.
 
 ## Testing changes before they go live
 
-Work on a branch (e.g. `booking-test`) and preview it at:
+Work on a branch (e.g. `booking-test`), never straight on `main` (every push to `main` goes live).
+Preview a branch at:
 
 ```
 https://raw.githack.com/jeffreyortiz/The-Artem-Room/<branch>/index.html
 ```
 
-When it's right, merge the branch into `main` and GitHub Pages updates in a minute or two.
+(Netlify can also build a preview link per branch: Site configuration → Build & deploy →
+Branches and deploy contexts → "All".) When it's right, merge into `main` and Netlify
+publishes it in under a minute.
 
 ## SEO checklist after going live
 
@@ -93,5 +98,6 @@ When it's right, merge the branch into `main` and GitHub Pages updates in a minu
 - Make a free Google Business Profile (biggest win for "tattoo near me" searches) and link
   this site from it and from Instagram.
 - A custom domain (e.g. `theartemroom.com`) looks more professional and ranks better than a
-  github.io address. If you add one, find & replace the old URL in `index.html`,
-  `robots.txt` and `sitemap.xml`, and update `dashboard_url` in `artem_settings`.
+  netlify.app address; Netlify can connect one (Domain management). If you add one, find &
+  replace `https://theartemroom.netlify.app/` in `index.html`, `robots.txt` and
+  `sitemap.xml`, and update `dashboard_url` in the `artem_settings` table.
