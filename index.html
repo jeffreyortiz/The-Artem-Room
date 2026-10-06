@@ -3,49 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Artem Room — Tattoo, Piercing, Nails, Makeup, Hair</title>
 
 <!-- ============================================================
-     SEO & LINK PREVIEW SETTINGS
-     Change these so your site looks great on Google and when texted!
+     SEO & LINK PREVIEWS
+     If you ever move to a custom domain (e.g. theartemroom.com),
+     find & replace  https://jeffreyortiz.github.io/The-Artem-Room/
+     everywhere in this file, robots.txt and sitemap.xml.
      ============================================================ -->
-<meta name="description" content="NYC's premier studio for custom tattoos, piercings, nails, makeup, and hair.">
-<meta name="keywords" content="Tattoo, Piercing, Nails, Makeup, Hair, NYC Studio, The Artem Room, NYC, viral">
-<!-- Open Graph tags (These control how the link looks when shared on iMessage/Facebook) -->
-<meta property="og:title" content="The Artem Room — Tattoo, Piercing, Nails, Makeup, Hair">
-<meta property="og:description" content="Ready to transform your vision into reality? Book your next session with us.">
-<meta property="og:image" content="photos/IMG_1317.png"> <!-- The image that shows in the link preview -->
-<meta property="og:type" content="website">
+<title>The Artem Room — NYC Tattoo, Piercing, Nails, Makeup &amp; Hair</title>
+<meta name="description" content="The Artem Room is a New York City studio for custom fine line tattoos, piercing with implant-grade jewelry, nail art, editorial &amp; bridal makeup, and hair. Request your appointment online.">
+<link rel="canonical" href="https://jeffreyortiz.github.io/The-Artem-Room/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#490413">
+<meta name="format-detection" content="telephone=no">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  /* ============================================================
-     CUSTOM CURSOR SECTION
-     To add a custom cursor, remove the /* and */ /* below this block 
-     and change 'cursor.png' to your cursor image file.
-     ============================================================ */
-  
-  /*
-  * {
-    cursor: url('your-custom-cursor.png'), auto !important;
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Artem Room">
+<meta property="og:title" content="The Artem Room — NYC Tattoo, Piercing, Nails, Makeup &amp; Hair">
+<meta property="og:description" content="Custom tattoos, piercings, nails, makeup and hair in NYC. Request your appointment online.">
+<meta property="og:url" content="https://jeffreyortiz.github.io/The-Artem-Room/">
+<meta property="og:image" content="https://jeffreyortiz.github.io/The-Artem-Room/img/og-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Artem Room — tattoo, piercing, nails, makeup and hair in New York City">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
+<!-- Self-hosted font (no Google Fonts round trips) + the first hero photo, fetched right away -->
+<link rel="preload" href="fonts/grenze-gotisch-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" fetchpriority="high"
+      imagesrcset="img/tattoo-blackwork-leg-480.webp 480w, img/tattoo-blackwork-leg-800.webp 800w, img/tattoo-blackwork-leg-1200.webp 1200w, img/tattoo-blackwork-leg-1600.webp 1600w"
+      imagesizes="(min-width: 1000px) 960px, calc(100vw - 40px)">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["TattooParlor", "BeautySalon"],
+  "@id": "https://jeffreyortiz.github.io/The-Artem-Room/#studio",
+  "name": "The Artem Room",
+  "url": "https://jeffreyortiz.github.io/The-Artem-Room/",
+  "description": "New York City studio for custom fine line tattoos, piercing with implant-grade jewelry, nail art, editorial and bridal makeup, and hair cut, color and styling.",
+  "image": [
+    "https://jeffreyortiz.github.io/The-Artem-Room/img/og-share.jpg",
+    "https://jeffreyortiz.github.io/The-Artem-Room/img/tattoo-blackwork-leg-1200.webp"
+  ],
+  "logo": "https://jeffreyortiz.github.io/The-Artem-Room/img/icon-512.png",
+  "telephone": "+1-786-694-3553",
+  "email": "theartemroom@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "New York", "addressRegion": "NY", "addressCountry": "US" },
+  "areaServed": { "@type": "City", "name": "New York City" },
+  "sameAs": ["https://instagram.com/theartemroom"],
+  "potentialAction": {
+    "@type": "ReserveAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://jeffreyortiz.github.io/The-Artem-Room/#book",
+      "actionPlatform": ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"]
+    },
+    "result": { "@type": "Reservation", "name": "Appointment request" }
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Studio services",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tattooing", "description": "Custom fine line patchwork tattoos with a heavy focus on placement." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Piercing", "description": "Ear curation, facial and body piercing with implant-grade jewelry." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Nails", "description": "Manicure, gel and hand-painted nail art." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Makeup", "description": "Editorial, event and bridal makeup." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Hair", "description": "Cut, color and styling." } }
+    ]
   }
-  a, button, .btn, .nav-cta, .chip, .carousel-btn, .dot, .mini-btn {
+}
+</script>
+
+<style>
+  @font-face {
+    font-family: 'Grenze Gotisch';
+    src: url('fonts/grenze-gotisch-latin.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* ============================================================
+     CUSTOM CURSOR (optional)
+     Remove the comment markers around the block below and point
+     it at your cursor image to use a custom cursor.
+     ============================================================ */
+  /*
+  * { cursor: url('your-custom-cursor.png'), auto !important; }
+  a, button, .btn, .nav-cta, .chip, .carousel-btn, .dot, .mini-btn, .choice > span {
     cursor: url('your-pointer-cursor.png'), pointer !important;
   }
   */
 
   /* ============================================================
-     CONFIG-DRIVEN TEMPLATE
+     COLORS & BASICS
      ============================================================ */
-
   :root {
-    --deep-pink:   #490413; /* Your dark red */
+    --deep-pink:   #490413; /* dark red background */
     --light-pink:  #FF91C5;
     --pale-pink:   #FFF7FC;
     --beige-trans: #ECE4D6cc;
     --burgundy:    #A8175E;
+    --error:       #FFB3C7;
 
     /* Service accents */
     --c-tattoo:   #7E93A7;
@@ -54,8 +120,7 @@
     --c-makeup:   #D6A24C;
     --c-hair:     #A97452;
 
-    /* Global Font */
-    --grenze: 'Grenze Gotisch', cursive;
+    --grenze: 'Grenze Gotisch', Georgia, 'Times New Roman', serif;
 
     --nav-h: 70px;
     --edge: 20px;
@@ -64,11 +129,13 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   html {
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
     overflow-x: hidden;
     width: 100%;
+    -webkit-text-size-adjust: 100%;
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -87,10 +154,25 @@
     width: 100%;
     position: relative;
     font-size: 1.1rem;
-    letter-spacing: 0.02em; 
+    letter-spacing: 0.02em;
   }
 
-  /* ---------- background layer ---------- */
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  :focus-visible { outline: 2px solid var(--light-pink); outline-offset: 3px; }
+
+  .skip {
+    position: absolute; left: 12px; top: -60px; z-index: 100;
+    background: var(--pale-pink); color: var(--deep-pink);
+    padding: 8px 16px; border-radius: 30px; text-decoration: none; font-weight: 600;
+  }
+  .skip:focus { top: calc(12px + env(safe-area-inset-top, 0px)); }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  /* ---------- background art (loads after the page so it never slows the first paint) ---------- */
   .bg-layer {
     position: fixed;
     inset: 0;
@@ -99,18 +181,11 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-image: url('photos/5-Photoroom.png'); 
-    opacity: .25; 
+    opacity: .25;
   }
-
-  a { color: inherit; }
-  img { max-width: 100%; display: block; }
-
-  .wrap {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding-left: var(--edge);
-    padding-right: var(--edge);
+  .bg-ready .bg-layer { background-image: url('img/bg-heart-sigil-900.webp'); }
+  @media (min-width: 900px) {
+    .bg-ready .bg-layer { background-image: url('img/bg-heart-sigil-1200.webp'); }
   }
 
   /* ---------- top nav ---------- */
@@ -123,19 +198,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(73, 4, 19, 0.92); 
+    gap: 16px;
+    background: rgba(73, 4, 19, 0.92);
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--burgundy); 
+    border-bottom: 1px solid var(--burgundy);
     padding: 0 var(--edge);
   }
   .nav-brand {
     font-family: var(--grenze);
-    font-size: clamp(1.5rem, 6vw, 2.2rem); 
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
     letter-spacing: 0.03em;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-decoration: none;
   }
   .nav-links {
     display: none;
@@ -150,7 +228,7 @@
     transition: color 0.15s ease, border-color 0.15s ease;
   }
   .nav-links a:hover, .nav-links a:focus-visible { color: var(--pale-pink); border-color: var(--burgundy); }
-  
+
   .nav-cta {
     font-family: var(--grenze);
     font-size: 1.15rem;
@@ -159,17 +237,14 @@
     color: var(--deep-pink);
     border: none;
     padding: 8px 20px;
-    border-radius: 30px; 
+    border-radius: 30px;
     cursor: pointer;
     text-decoration: none;
     white-space: nowrap;
     transition: transform 0.2s ease, opacity 0.2s ease;
     flex-shrink: 0;
   }
-  .nav-cta:hover { 
-    opacity: 0.9; 
-    transform: scale(1.02);
-  }
+  .nav-cta:hover { opacity: 0.9; transform: scale(1.02); }
 
   @media (min-width: 860px) {
     .nav-links { display: flex; }
@@ -179,9 +254,9 @@
   .hero {
     position: relative;
     width: 100%;
-    max-width: 1000px; 
-    margin: 24px auto; 
-    padding: 0 var(--edge); 
+    max-width: 1000px;
+    margin: 24px auto;
+    padding: 0 var(--edge);
   }
   .carousel {
     display: flex;
@@ -190,11 +265,12 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    height: 65vh; 
+    height: 65vh;
+    height: 65svh;
     min-height: 400px;
     max-height: 650px;
-    border-radius: 24px; 
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); 
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     background-color: var(--burgundy);
   }
   .carousel::-webkit-scrollbar { display: none; }
@@ -209,19 +285,17 @@
     display: flex;
     align-items: flex-end;
     overflow: hidden;
+    text-decoration: none;
   }
-  .slide-art {
-    position: absolute;
-    inset: 0;
-  }
-  .slide-art svg { width: 100%; height: 100%; }
-  
+  .slide-art { position: absolute; inset: 0; }
+  .slide-art img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
   .slide-shade {
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg, rgba(73,4,19,0) 45%, rgba(73,4,19,0.95) 100%);
   }
-  
+
   .slide-copy {
     position: relative;
     padding: 0 24px 45px;
@@ -256,7 +330,7 @@
 
   .carousel-controls {
     position: absolute;
-    inset: 0 var(--edge); 
+    inset: 0 var(--edge);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -268,7 +342,8 @@
     width: 44px; height: 44px;
     border-radius: 50%;
     border: 1px solid var(--light-pink);
-    background: rgba(168, 23, 94, 0.7); 
+    background: rgba(168, 23, 94, 0.7);
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     color: var(--pale-pink);
     display: none;
@@ -277,12 +352,10 @@
     cursor: pointer;
     font-size: 1.5rem;
     line-height: 1;
+    font-family: var(--grenze);
     transition: background 0.2s ease, transform 0.2s ease;
   }
-  .carousel-btn:hover { 
-    background: var(--burgundy); 
-    transform: scale(1.05);
-  }
+  .carousel-btn:hover { background: var(--burgundy); transform: scale(1.05); }
   @media (min-width: 640px) {
     .carousel-btn { display: flex; }
   }
@@ -290,22 +363,31 @@
   .dots {
     position: absolute;
     left: 50%;
-    bottom: 20px;
+    bottom: 14px;
     transform: translateX(-50%);
     display: flex;
-    gap: 8px;
+    gap: 0;
     z-index: 3;
   }
+  /* 24px tap area around each small dot */
   .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4); 
+    width: 24px; height: 24px;
+    background: none;
     border: none;
     padding: 0;
     cursor: pointer;
+    display: grid;
+    place-items: center;
+  }
+  .dot::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.4);
     transition: background 0.2s ease, width 0.2s ease;
   }
-  .dot.active { background: var(--pale-pink); width: 24px; border-radius: 4px; }
+  .dot.active { width: 36px; }
+  .dot.active::before { background: var(--pale-pink); width: 24px; }
 
   /* ---------- quick nav chips ---------- */
   .chipbar {
@@ -315,7 +397,7 @@
     padding: 12px var(--edge) 12px;
     scrollbar-width: none;
     max-width: 1000px;
-    margin: 0 auto; 
+    margin: 0 auto;
   }
   .chipbar::-webkit-scrollbar { display: none; }
   .chip {
@@ -333,10 +415,33 @@
     background: rgba(73, 4, 19, 0.4);
   }
   .chip .swatch { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-  .chip:hover, .chip:focus-visible { 
-    color: var(--deep-pink); 
+  .chip:hover, .chip:focus-visible {
+    color: var(--deep-pink);
     border-color: var(--pale-pink);
-    background: var(--pale-pink); 
+    background: var(--pale-pink);
+  }
+
+  /* ---------- intro ---------- */
+  .intro {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 36px var(--edge) 8px;
+    text-align: center;
+  }
+  .intro h1 {
+    font-family: var(--grenze);
+    font-weight: 600;
+    font-size: clamp(1.9rem, 5.5vw, 2.8rem);
+    line-height: 1.1;
+    margin: 0 auto 14px;
+    max-width: 22ch;
+  }
+  .intro p {
+    color: var(--beige-trans);
+    line-height: 1.6;
+    max-width: 58ch;
+    margin: 0 auto;
+    font-size: 1.15rem;
   }
 
   /* ---------- service sections ---------- */
@@ -349,24 +454,20 @@
     display: grid;
     gap: 24px;
   }
-  
+
   .service-visual {
-    aspect-ratio: 4 / 5; 
-    width: 88%; 
-    margin: 0 auto; 
-    border-radius: 20px; 
+    aspect-ratio: 4 / 5;
+    width: 88%;
+    margin: 0 auto;
+    border-radius: 20px;
     overflow: hidden;
     position: relative;
-    background-color: var(--burgundy); 
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35); 
+    background-color: var(--burgundy);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
   }
 
-  /* --- Mini Carousels for Services --- */
-  .mini-carousel-wrap {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
+  /* --- Mini carousels for services --- */
+  .mini-carousel-wrap { width: 100%; height: 100%; position: relative; }
   .mini-carousel {
     display: flex;
     width: 100%;
@@ -389,9 +490,8 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    display: block;
   }
-  
+
   .mini-btn {
     position: absolute;
     top: 50%;
@@ -406,11 +506,13 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     font-size: 1.3rem;
     line-height: 1;
+    font-family: var(--grenze);
     z-index: 2;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease;
   }
   .mini-btn:hover { background: var(--burgundy); }
   .mini-btn.prev { left: 12px; }
@@ -419,7 +521,6 @@
     .mini-btn { display: none; }
   }
 
-  /* --- Mini Carousel Dots --- */
   .mini-dots {
     position: absolute;
     left: 50%;
@@ -437,11 +538,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.5);
     transition: background 0.2s ease, width 0.2s ease;
   }
-  .mini-dot.active {
-    background: var(--pale-pink);
-    width: 18px;
-    border-radius: 4px;
-  }
+  .mini-dot.active { background: var(--pale-pink); width: 18px; border-radius: 4px; }
 
   .service-head {
     display: flex;
@@ -455,6 +552,11 @@
     font-size: clamp(2.4rem, 5vw, 3.2rem);
     font-weight: 600;
     margin: 0;
+  }
+  .service-tag {
+    color: var(--pale-pink);
+    font-size: 1.2rem;
+    margin: 0 0 10px;
   }
   .service-desc {
     color: var(--beige-trans);
@@ -470,18 +572,19 @@
     font-size: 1.25rem;
     font-weight: 600;
     padding: 10px 28px;
-    border-radius: 30px; 
+    border-radius: 30px;
     text-decoration: none;
     display: inline-block;
     border: 1px solid transparent;
     cursor: pointer;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
   }
   .btn-solid { background: var(--pale-pink); color: var(--deep-pink); }
   .btn-solid:hover { opacity: 0.9; transform: scale(1.03); }
   .btn-outline { background: transparent; color: var(--pale-pink); border: 1px solid rgba(255, 145, 197, 0.4); }
   .btn-outline:hover { border-color: var(--pale-pink); transform: scale(1.03); }
-  
+  .btn[disabled] { opacity: .6; cursor: progress; transform: none; }
+
   @media (min-width: 860px) {
     .service {
       grid-template-columns: 1fr 1fr;
@@ -489,46 +592,179 @@
       gap: 64px;
       padding: 80px var(--edge);
     }
-    .service-visual {
-      width: 100%; 
-      margin: 0;
-    }
-    .service:nth-of-type(even) .service-visual { order: 2; }
+    .service-visual { width: 100%; margin: 0; }
+    .service:nth-child(even) .service-visual { order: 2; }
   }
 
-  /* ---------- highly stylized contact panel ---------- */
-  .contact-panel {
-    margin: 60px var(--edge) 0;
+  /* ---------- booking panel (same styling as the old contact panel) ---------- */
+  .book-panel {
+    margin: 60px auto 0;
+    width: calc(100% - 2 * var(--edge));
     border: 1px solid rgba(255, 145, 197, 0.2);
     border-radius: 24px;
-    background: linear-gradient(145deg, rgba(73, 4, 19, 0.8), rgba(168, 23, 94, 0.3));
-    padding: 48px 32px;
+    background: linear-gradient(145deg, rgba(73, 4, 19, 0.85), rgba(168, 23, 94, 0.3));
+    padding: 48px 22px;
     max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
     box-shadow: 0 15px 35px rgba(0,0,0,0.25);
     scroll-margin-top: calc(var(--nav-h) + 20px);
   }
-  .contact-panel h3 {
+  @media (min-width: 640px) { .book-panel { padding: 56px 40px; } }
+  .book-head { text-align: center; margin-bottom: 36px; }
+  .book-head h2 {
     font-family: var(--grenze);
     font-weight: 600;
-    margin: 0 0 16px;
+    margin: 0 0 14px;
     font-size: clamp(2.2rem, 5vw, 3rem);
+    line-height: 1.1;
   }
-  .contact-panel p { 
-    color: var(--beige-trans); 
-    line-height: 1.6; 
-    margin: 0 auto 32px; 
-    max-width: 55ch; 
+  .book-head p {
+    color: var(--beige-trans);
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 52ch;
     font-size: 1.15rem;
   }
-  .contact-panel-actions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
+
+  .book-form { max-width: 640px; margin: 0 auto; display: grid; gap: 34px; }
+  .step { border: 0; margin: 0; padding: 0; min-width: 0; display: grid; gap: 18px; }
+  .step-title {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 1.45rem; font-weight: 600; padding: 0; margin: 0 0 2px;
   }
+  .step-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: grid; place-items: center;
+    border: 1px solid var(--light-pink); color: var(--light-pink);
+    font-size: 1rem; flex: none;
+  }
+
+  .field { display: grid; gap: 8px; min-width: 0; }
+  .field > label, .field-label { font-size: 1.15rem; color: var(--pale-pink); }
+  .optional { color: var(--beige-trans); font-size: .95rem; }
+  .hint { color: var(--beige-trans); font-size: 1rem; line-height: 1.5; margin: 0; }
+  .input {
+    width: 100%;
+    font: inherit;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    color: var(--pale-pink);
+    background: rgba(73, 4, 19, 0.6);
+    border: 1px solid rgba(255, 145, 197, 0.35);
+    border-radius: 14px;
+    padding: 12px 16px;
+    min-height: 50px;
+    transition: border-color .15s ease, background .15s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .input::placeholder { color: rgba(236, 228, 214, 0.5); }
+  .input:hover { border-color: rgba(255, 145, 197, 0.6); }
+  .input:focus-visible { outline: 2px solid var(--light-pink); outline-offset: 1px; border-color: var(--light-pink); }
+  textarea.input { min-height: 120px; resize: vertical; line-height: 1.5; }
+  select.input {
+    background-image: linear-gradient(45deg, transparent 50%, var(--light-pink) 50%), linear-gradient(135deg, var(--light-pink) 50%, transparent 50%);
+    background-position: calc(100% - 22px) 52%, calc(100% - 16px) 52%;
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 42px;
+  }
+  input[type="date"].input { display: block; min-width: 0; }
+  input[type="date"]::-webkit-date-and-time-value { text-align: left; }
+  .input[aria-invalid="true"] { border-color: #FF6B8B; }
+  .err { color: var(--error); font-size: 1rem; margin: 0; }
+  .err:empty { display: none; }
+
+  .row-2 { display: grid; gap: 18px; }
+  @media (min-width: 600px) { .row-2 { grid-template-columns: 1fr 1fr; } }
+
+  /* chip-style radio buttons & checkboxes */
+  .choices { display: flex; flex-wrap: wrap; gap: 10px; border: 0; padding: 0; margin: 0; }
+  .choice { position: relative; }
+  .choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .choice > span {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 1.1rem;
+    padding: 10px 18px;
+    min-height: 44px;
+    border: 1px solid rgba(255, 145, 197, 0.4);
+    border-radius: 30px;
+    color: var(--beige-trans);
+    background: rgba(73, 4, 19, 0.4);
+    cursor: pointer;
+    transition: all .15s ease;
+    user-select: none;
+  }
+  .choice > span:hover { border-color: var(--pale-pink); color: var(--pale-pink); }
+  .choice input:checked + span { background: var(--pale-pink); color: var(--deep-pink); border-color: var(--pale-pink); }
+  .choice input:focus-visible + span { outline: 2px solid var(--light-pink); outline-offset: 2px; }
+  .choice .swatch { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex: none; }
+  .choices[aria-invalid="true"] .choice > span { border-color: #FF6B8B; }
+
+  .check { display: flex; gap: 12px; align-items: flex-start; font-size: 1.1rem; line-height: 1.4; cursor: pointer; }
+  .check input { width: 22px; height: 22px; margin: 1px 0 0; accent-color: var(--light-pink); flex: none; }
+
+  .svc-note {
+    margin: 0;
+    padding: 14px 16px;
+    border-left: 3px solid var(--accent, var(--light-pink));
+    background: rgba(73, 4, 19, 0.45);
+    border-radius: 0 12px 12px 0;
+    color: var(--beige-trans);
+    line-height: 1.5;
+    font-size: 1.05rem;
+  }
+
+  /* reference photo picker */
+  .photo-drop {
+    display: grid; place-items: center; gap: 4px;
+    text-align: center;
+    padding: 20px 16px;
+    border: 1.5px dashed rgba(255, 145, 197, 0.5);
+    border-radius: 16px;
+    background: rgba(73, 4, 19, 0.35);
+    cursor: pointer;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .photo-drop:hover, .photo-drop.drag { border-color: var(--pale-pink); background: rgba(168, 23, 94, 0.25); }
+  .photo-drop strong { font-size: 1.15rem; font-weight: 600; }
+  .photo-drop small { color: var(--beige-trans); font-size: .95rem; }
+  .photo-input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+  .photo-input:focus-visible + .photo-drop { outline: 2px solid var(--light-pink); outline-offset: 2px; }
+  .thumbs { display: flex; flex-wrap: wrap; gap: 10px; }
+  .thumbs:empty { display: none; }
+  .thumb { position: relative; width: 76px; height: 76px; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; border: 1px solid rgba(255,145,197,.4); }
+  .thumb button {
+    position: absolute; top: -8px; right: -8px;
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 1px solid var(--light-pink); background: var(--deep-pink); color: var(--pale-pink);
+    font: 600 1rem/1 var(--grenze); cursor: pointer; display: grid; place-items: center; padding: 0;
+  }
+
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .submit-row { display: grid; gap: 14px; justify-items: center; text-align: center; }
+  .submit-row .btn { width: 100%; max-width: 360px; font-size: 1.35rem; padding: 14px 28px; }
+  .fine-print { color: var(--beige-trans); font-size: 1rem; line-height: 1.5; margin: 0; max-width: 46ch; }
+  .form-error {
+    margin: 0; padding: 14px 16px; border-radius: 14px;
+    background: rgba(255, 107, 139, 0.12); border: 1px solid rgba(255, 107, 139, 0.5);
+    color: var(--pale-pink); line-height: 1.5; text-align: left;
+  }
+  .form-error a { color: var(--light-pink); }
+
+  .book-success { text-align: center; max-width: 520px; margin: 0 auto; display: grid; gap: 16px; justify-items: center; }
+  .book-success .sigil { font-size: 2.6rem; color: var(--light-pink); line-height: 1; }
+  .book-success h3 { font-size: clamp(2rem, 5vw, 2.6rem); font-weight: 600; margin: 0; }
+  .book-success p { color: var(--beige-trans); line-height: 1.6; margin: 0; font-size: 1.15rem; }
+
+  .direct {
+    margin: 44px auto 0; padding-top: 32px; max-width: 640px;
+    border-top: 1px solid rgba(255, 145, 197, 0.2);
+    text-align: center; display: grid; gap: 16px;
+  }
+  .direct p { margin: 0; color: var(--beige-trans); font-size: 1.15rem; }
+  .direct-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
 
   /* ---------- footer ---------- */
   footer {
@@ -544,14 +780,12 @@
     gap: 8px;
     background: rgba(73, 4, 19, 0.8);
   }
-  footer .foot-brand { 
-    font-family: var(--grenze); 
-    color: var(--pale-pink); 
-    font-size: 2.8rem; 
-    margin-bottom: 8px; 
-  }
+  footer .foot-brand { font-family: var(--grenze); color: var(--pale-pink); font-size: 2.8rem; margin-bottom: 8px; }
+  footer address { font-style: normal; display: grid; gap: 8px; }
+  footer address a { text-decoration: none; }
+  footer address a:hover { text-decoration: underline; }
+  footer small { color: var(--beige-trans); font-size: .95rem; margin-top: 10px; }
 
-  /* --- Socials styling --- */
   .social-links {
     display: flex;
     justify-content: center;
@@ -570,327 +804,701 @@
     transition: all 0.2s ease;
     background: rgba(73, 4, 19, 0.4);
   }
-  .social-chip:hover {
-    background: var(--pale-pink);
-    color: var(--deep-pink);
-    border-color: var(--pale-pink);
-  }
-
+  .social-chip:hover { background: var(--pale-pink); color: var(--deep-pink); border-color: var(--pale-pink); }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="bg-layer" aria-hidden="true"></div>
 
-<div class="bg-layer" id="bgLayer"></div>
+<header class="nav">
+  <a class="nav-brand" href="#top" id="top-link">The Artem Room</a>
+  <nav class="nav-links" id="nav-links" aria-label="Services"></nav>
+  <a class="nav-cta" href="#book">Book now</a>
+</header>
 
-<nav class="nav">
-  <div class="nav-brand" id="brand-name">The Artem Room</div>
-  <div class="nav-links" id="nav-links"></div>
-  <a class="nav-cta" href="#contact-panel">Get in touch</a>
-</nav>
+<!-- ============================================================
+     HERO CAROUSEL — one <a class="slide"> per service.
+     The first slide's photo loads immediately (it's preloaded in
+     <head>); the rest load as they're swiped to.
+     ============================================================ -->
+<section class="hero" id="top" aria-roledescription="carousel" aria-label="Featured services">
+  <div class="carousel" id="carousel" tabindex="0">
 
-<div class="hero">
-  <div class="carousel" id="carousel"></div>
+    <a class="slide" href="#tattooing" style="--accent: var(--c-tattoo)" aria-label="Tattooing, 1 of 5">
+      <div class="slide-art">
+        <img src="img/tattoo-blackwork-leg-800.webp"
+             srcset="img/tattoo-blackwork-leg-480.webp 480w, img/tattoo-blackwork-leg-800.webp 800w, img/tattoo-blackwork-leg-1200.webp 1200w, img/tattoo-blackwork-leg-1600.webp 1600w"
+             sizes="(min-width: 1000px) 960px, calc(100vw - 40px)"
+             width="1200" height="1600" fetchpriority="high" decoding="async"
+             alt="Blackwork tattoo running down the length of a client's shin">
+      </div>
+      <div class="slide-shade"></div>
+      <div class="slide-copy">
+        <div class="slide-eyebrow"><span class="slide-swatch"></span>1 of 5</div>
+        <p class="slide-title">Tattooing</p>
+        <p class="slide-tag">Fine line patchwork, with a heavy focus on optimal placement</p>
+      </div>
+    </a>
+
+    <a class="slide" href="#piercing" style="--accent: var(--c-piercing)" aria-label="Piercing, 2 of 5">
+      <div class="slide-art">
+        <img src="img/piercing-navel-1-800.webp"
+             srcset="img/piercing-navel-1-480.webp 480w, img/piercing-navel-1-800.webp 800w"
+             sizes="(min-width: 1000px) 960px, calc(100vw - 40px)"
+             width="800" height="1064" loading="lazy" decoding="async"
+             alt="Fresh navel piercing with implant-grade titanium jewelry">
+      </div>
+      <div class="slide-shade"></div>
+      <div class="slide-copy">
+        <div class="slide-eyebrow"><span class="slide-swatch"></span>2 of 5</div>
+        <p class="slide-title">Piercing</p>
+        <p class="slide-tag">Ear curation, facial &amp; body piercing, implant-grade jewelry</p>
+      </div>
+    </a>
+
+    <a class="slide" href="#nails" style="--accent: var(--c-nails)" aria-label="Nails, 3 of 5">
+      <div class="slide-art">
+        <img src="img/nails-blue-stiletto-800.webp"
+             srcset="img/nails-blue-stiletto-480.webp 480w, img/nails-blue-stiletto-800.webp 800w, img/nails-blue-stiletto-1200.webp 1200w"
+             sizes="(min-width: 1000px) 960px, calc(100vw - 40px)"
+             width="800" height="1064" loading="lazy" decoding="async"
+             alt="Long glossy sky-blue stiletto nails">
+      </div>
+      <div class="slide-shade"></div>
+      <div class="slide-copy">
+        <div class="slide-eyebrow"><span class="slide-swatch"></span>3 of 5</div>
+        <p class="slide-title">Nails</p>
+        <p class="slide-tag">Manicure, gel, and hand-painted nail art</p>
+      </div>
+    </a>
+
+    <a class="slide" href="#makeup" style="--accent: var(--c-makeup)" aria-label="Makeup, 4 of 5">
+      <div class="slide-art">
+        <img src="img/makeup-editorial-800.webp"
+             srcset="img/makeup-editorial-480.webp 480w, img/makeup-editorial-800.webp 800w, img/makeup-editorial-1200.webp 1200w"
+             sizes="(min-width: 1000px) 960px, calc(100vw - 40px)"
+             width="800" height="1062" loading="lazy" decoding="async"
+             alt="Editorial makeup look with teal graphic eyeshadow and face gems">
+      </div>
+      <div class="slide-shade"></div>
+      <div class="slide-copy">
+        <div class="slide-eyebrow"><span class="slide-swatch"></span>4 of 5</div>
+        <p class="slide-title">Makeup</p>
+        <p class="slide-tag">Editorial, event &amp; bridal makeup</p>
+      </div>
+    </a>
+
+    <a class="slide" href="#hair" style="--accent: var(--c-hair)" aria-label="Hair, 5 of 5">
+      <div class="slide-art">
+        <img src="img/hair-vivid-red-800.webp"
+             srcset="img/hair-vivid-red-480.webp 480w, img/hair-vivid-red-800.webp 800w"
+             sizes="(min-width: 1000px) 960px, calc(100vw - 40px)"
+             width="800" height="1048" loading="lazy" decoding="async"
+             alt="Vivid red hair color styled in a high bun with face-framing pieces">
+      </div>
+      <div class="slide-shade"></div>
+      <div class="slide-copy">
+        <div class="slide-eyebrow"><span class="slide-swatch"></span>5 of 5</div>
+        <p class="slide-title">Hair</p>
+        <p class="slide-tag">Cut, color &amp; styling</p>
+      </div>
+    </a>
+
+  </div>
   <div class="carousel-controls">
-    <button class="carousel-btn" id="prevBtn" aria-label="Previous service">‹</button>
-    <button class="carousel-btn" id="nextBtn" aria-label="Next service">›</button>
+    <button class="carousel-btn" id="prevBtn" type="button" aria-label="Previous service">‹</button>
+    <button class="carousel-btn" id="nextBtn" type="button" aria-label="Next service">›</button>
   </div>
   <div class="dots" id="dots"></div>
-</div>
+</section>
 
-<div class="chipbar" id="chipbar"></div>
+<nav class="chipbar" id="chipbar" aria-label="Jump to a service"></nav>
 
-<main class="services" id="services"></main>
+<main id="main">
 
-<div class="contact-panel" id="contact-panel">
-  <h3>Let's Create Something Beautiful</h3>
-  <p>Ready to transform your vision into reality? Reach out directly to discuss your ideas, get a custom quote, or schedule a consultation. We are currently accepting new clients.</p>
-  <div class="contact-panel-actions" id="contact-actions"></div>
-</div>
+  <section class="intro" aria-labelledby="intro-title">
+    <h1 id="intro-title">Tattoo, Piercing, Nails, Makeup &amp; Hair in NYC</h1>
+    <p>The Artem Room is a New York City studio for custom fine line tattoos, piercing with implant-grade jewelry, hand-painted nail art, editorial and bridal makeup, and hair cut, color &amp; styling. Request a time below and we'll text you to confirm.</p>
+  </section>
+
+  <!-- ============================================================
+       SERVICES — one <section class="service"> per service.
+       To add/remove a photo: add/remove an <img> block inside
+       .mini-carousel. Arrows & dots appear automatically when a
+       service has more than one photo. The nav links, chips and
+       booking-form choices are built from these sections.
+       data-name   = label used in menus and the booking form
+       data-accent = the little color dot
+       ============================================================ -->
+  <div class="services" id="services">
+
+    <section class="service" id="tattooing" data-name="Tattooing" data-accent="var(--c-tattoo)" aria-labelledby="tattooing-title">
+      <div class="service-visual">
+        <div class="mini-carousel-wrap">
+          <div class="mini-carousel">
+            <div class="mini-slide"><img src="img/tattoo-blackwork-leg-800.webp" srcset="img/tattoo-blackwork-leg-480.webp 480w, img/tattoo-blackwork-leg-800.webp 800w, img/tattoo-blackwork-leg-1200.webp 1200w" sizes="(min-width: 860px) 460px, 88vw" width="800" height="1067" loading="lazy" decoding="async" alt="Blackwork tattoo running down the shin, healed alongside other patchwork pieces"></div>
+            <div class="mini-slide"><img src="img/tattoo-red-cloud-800.webp" srcset="img/tattoo-red-cloud-480.webp 480w, img/tattoo-red-cloud-800.webp 800w, img/tattoo-red-cloud-1200.webp 1200w" sizes="(min-width: 860px) 460px, 88vw" width="800" height="1067" loading="lazy" decoding="async" alt="Bold red cloud tattoo with clean black outline"></div>
+            <div class="mini-slide"><img src="img/tattoo-fine-line-lotus-800.webp" srcset="img/tattoo-fine-line-lotus-480.webp 480w, img/tattoo-fine-line-lotus-800.webp 800w, img/tattoo-fine-line-lotus-1200.webp 1200w" sizes="(min-width: 860px) 460px, 88vw" width="800" height="1060" loading="lazy" decoding="async" alt="Fine line lotus tattoo with dotted accents below the navel"></div>
+          </div>
+        </div>
+      </div>
+      <div class="service-content">
+        <div class="service-head">
+          <span class="service-swatch" style="background: var(--c-tattoo)"></span>
+          <h2 class="service-name" id="tattooing-title">Tattooing</h2>
+        </div>
+        <p class="service-tag">Fine line patchwork, with a heavy focus on optimal placement</p>
+        <p class="service-desc">Every piece starts as a conversation. Share references and placement, and we'll sketch a custom design ahead of your session.</p>
+        <div class="service-actions">
+          <a class="btn btn-solid" href="#book" data-book="tattooing">Book a tattoo</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="service" id="piercing" data-name="Piercing" data-accent="var(--c-piercing)" aria-labelledby="piercing-title">
+      <div class="service-visual">
+        <div class="mini-carousel-wrap">
+          <div class="mini-carousel">
+            <div class="mini-slide"><img src="img/piercing-navel-1-800.webp" srcset="img/piercing-navel-1-480.webp 480w, img/piercing-navel-1-800.webp 800w" sizes="(min-width: 860px) 460px, 88vw" width="800" height="1064" loading="lazy" decoding="async" alt="Navel piercing with polished implant-grade titanium barbell"></div>
+            <div class="mini-slide"><img src="img/piercing-navel-2-800.webp" srcset="img/piercing-navel-2-480.webp 480w, img/piercing-navel-2-800.webp 800w" sizes="(min-width: 860px) 460px, 88vw" width="800" height="1076" loading="lazy" decoding="async" alt="Close-up of a navel piercing with a gem-set bottom ball"></div>
+          </div>
+        </div>
+      </div>
+      <div class="service-content">
+        <div class="service-head">
+          <span class="service-swatch" style="background: var(--c-piercing)"></span>
+          <h2 class="service-name" id="piercing-title">Piercing</h2>
+        </div>
+        <p class="service-tag">Ear curation, facial &amp; body piercing, implant-grade jewelry</p>
+        <p class="service-desc">A quick consult confirms placement and jewelry before we book your slot — most piercings are same-week.</p>
+        <div class="service-actions">
+          <a class="btn btn-solid" href="#book" data-book="piercing">Book a piercing</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="service" id="nails" data-name="Nails" data-accent="var(--c-nails)" aria-labelledby="nails-title">
+      <div class="service-visual">
+        <div class="mini-carousel-wrap">
+          <div class="mini-carousel">
+            <div class="mini-slide"><img src="img/nails-blue-stiletto-800.webp" srcset="img/nails-blue-stiletto-480.webp 480w, img/nails-blue-stiletto-800.webp 800w, img/nails-blue-stiletto-1200.webp 1200w" sizes="(min-width: 860px) 460px, 88vw" width="800" height="1064" loading="lazy" decoding="async" alt="Glossy sky-blue stiletto gel nails"></div>
+          </div>
+        </div>
+      </div>
+      <div class="service-content">
+        <div class="service-head">
+          <span class="service-swatch" style="background: var(--c-nails)"></span>
+          <h2 class="service-name" id="nails-title">Nails</h2>
+        </div>
+        <p class="service-tag">Manicure, gel, and hand-painted nail art</p>
+        <p class="service-desc">Pick a time that works and come as you are — no consultation needed for standard sets.</p>
+        <div class="service-actions">
+          <a class="btn btn-solid" href="#book" data-book="nails">Book nails</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="service" id="makeup" data-name="Makeup" data-accent="var(--c-makeup)" aria-labelledby="makeup-title">
+      <div class="service-visual">
+        <div class="mini-carousel-wrap">
+          <div class="mini-carousel">
+            <div class="mini-slide"><img src="img/makeup-editorial-800.webp" srcset="img/makeup-editorial-480.webp 480w, img/makeup-editorial-800.webp 800w, img/makeup-editorial-1200.webp 1200w" sizes="(min-width: 860px) 460px, 88vw" width="800" height="1062" loading="lazy" decoding="async" alt="Editorial makeup with teal graphic liner, face gems and a deep berry lip"></div>
+          </div>
+        </div>
+      </div>
+      <div class="service-content">
+        <div class="service-head">
+          <span class="service-swatch" style="background: var(--c-makeup)"></span>
+          <h2 class="service-name" id="makeup-title">Makeup</h2>
+        </div>
+        <p class="service-tag">Editorial, event &amp; bridal makeup</p>
+        <p class="service-desc">Single sessions book directly. Bridal and large events get a short consult first to plan trials and timing.</p>
+        <div class="service-actions">
+          <a class="btn btn-solid" href="#book" data-book="makeup">Book makeup</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="service" id="hair" data-name="Hair" data-accent="var(--c-hair)" aria-labelledby="hair-title">
+      <div class="service-visual">
+        <div class="mini-carousel-wrap">
+          <div class="mini-carousel">
+            <div class="mini-slide"><img src="img/hair-vivid-red-800.webp" srcset="img/hair-vivid-red-480.webp 480w, img/hair-vivid-red-800.webp 800w" sizes="(min-width: 860px) 460px, 88vw" width="800" height="1048" loading="lazy" decoding="async" alt="Vivid red hair color with face-framing curtain pieces"></div>
+          </div>
+        </div>
+      </div>
+      <div class="service-content">
+        <div class="service-head">
+          <span class="service-swatch" style="background: var(--c-hair)"></span>
+          <h2 class="service-name" id="hair-title">Hair</h2>
+        </div>
+        <p class="service-tag">Cut, color &amp; styling</p>
+        <p class="service-desc">Choose your service and time — straightforward booking, no forms required.</p>
+        <div class="service-actions">
+          <a class="btn btn-solid" href="#book" data-book="hair">Book hair</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============================================================
+       BOOKING — requests go to Olie's phone + her bookings page.
+       ============================================================ -->
+  <section class="book-panel" id="book" aria-labelledby="book-title">
+    <div class="book-head">
+      <h2 id="book-title">Let's Create Something Beautiful</h2>
+      <p>Tell us what you have in mind and when works for you. We'll reach out to confirm your exact time — no payment needed to send a request.</p>
+    </div>
+
+    <form class="book-form" id="bookForm" novalidate>
+      <fieldset class="step">
+        <legend class="step-title"><span class="step-num">1</span>What are you booking?</legend>
+        <div class="choices" id="serviceChoices" role="radiogroup" aria-describedby="err-service"></div>
+        <p class="err" id="err-service" role="alert"></p>
+        <p class="svc-note" id="svcNote" hidden></p>
+      </fieldset>
+
+      <fieldset class="step">
+        <legend class="step-title"><span class="step-num">2</span>Your idea</legend>
+
+        <div class="row-2" data-only="tattooing" hidden>
+          <div class="field">
+            <label for="placement">Placement</label>
+            <input class="input" id="placement" name="placement" maxlength="200" placeholder="e.g. inner forearm, ankle">
+          </div>
+          <div class="field">
+            <label for="size">Approximate size</label>
+            <select class="input" id="size" name="size">
+              <option value="">Not sure yet</option>
+              <option>Tiny (under 2 in)</option>
+              <option>Small (palm-sized)</option>
+              <option>Medium (hand to half forearm)</option>
+              <option>Large (half sleeve or bigger)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="details">Tell us more <span class="optional">(optional)</span></label>
+          <textarea class="input" id="details" name="details" maxlength="3000" placeholder="Style, colors, inspiration, anything we should know…"></textarea>
+        </div>
+
+        <div class="field">
+          <span class="field-label" id="photos-label">Reference photos <span class="optional">(optional, up to 3)</span></span>
+          <input class="photo-input" type="file" id="photos" accept="image/*" multiple aria-labelledby="photos-label">
+          <label class="photo-drop" for="photos" id="photoDrop">
+            <strong>Add photos</strong>
+            <small>Inspiration, placement, your current nails or hair</small>
+          </label>
+          <div class="thumbs" id="thumbs"></div>
+          <p class="err" id="err-photos" role="alert"></p>
+        </div>
+
+        <label class="check" data-only="tattooing" hidden>
+          <input type="checkbox" id="isAdult" name="is_adult" aria-describedby="err-is_adult">
+          <span>I'm 18 or older (required for tattoos in New York)</span>
+        </label>
+        <p class="err" id="err-is_adult" role="alert"></p>
+      </fieldset>
+
+      <fieldset class="step">
+        <legend class="step-title"><span class="step-num">3</span>When works for you?</legend>
+        <div class="row-2">
+          <div class="field">
+            <label for="prefDate">Preferred day</label>
+            <input class="input" type="date" id="prefDate" name="preferred_date">
+          </div>
+          <div class="field">
+            <label for="altDate">Backup day <span class="optional">(optional)</span></label>
+            <input class="input" type="date" id="altDate" name="alt_date">
+          </div>
+        </div>
+        <div class="field">
+          <span class="field-label" id="time-label">Time of day</span>
+          <div class="choices" role="radiogroup" aria-labelledby="time-label">
+            <label class="choice"><input type="radio" name="time_pref" value="morning"><span>Morning</span></label>
+            <label class="choice"><input type="radio" name="time_pref" value="afternoon"><span>Afternoon</span></label>
+            <label class="choice"><input type="radio" name="time_pref" value="evening"><span>Evening</span></label>
+            <label class="choice"><input type="radio" name="time_pref" value="flexible" checked><span>I'm flexible</span></label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="step">
+        <legend class="step-title"><span class="step-num">4</span>How do we reach you?</legend>
+        <div class="field">
+          <label for="name">Name</label>
+          <input class="input" id="name" name="name" autocomplete="name" maxlength="120" required aria-describedby="err-name">
+          <p class="err" id="err-name" role="alert"></p>
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input class="input" type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" maxlength="40" aria-describedby="err-phone">
+            <p class="err" id="err-phone" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="email">Email <span class="optional">(optional)</span></label>
+            <input class="input" type="email" id="email" name="email" autocomplete="email" maxlength="200" aria-describedby="err-email">
+            <p class="err" id="err-email" role="alert"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="instagram">Instagram <span class="optional">(optional)</span></label>
+          <input class="input" id="instagram" name="instagram" maxlength="60" placeholder="@yourhandle" autocapitalize="off" autocorrect="off" spellcheck="false">
+        </div>
+        <div class="field">
+          <span class="field-label" id="contact-label">Best way to reach you</span>
+          <div class="choices" role="radiogroup" aria-labelledby="contact-label">
+            <label class="choice"><input type="radio" name="contact_pref" value="text" checked><span>Text</span></label>
+            <label class="choice"><input type="radio" name="contact_pref" value="call"><span>Call</span></label>
+            <label class="choice"><input type="radio" name="contact_pref" value="email"><span>Email</span></label>
+            <label class="choice"><input type="radio" name="contact_pref" value="instagram"><span>Instagram DM</span></label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- spam trap: real people never see or fill this -->
+      <div class="hp" aria-hidden="true">
+        <label for="website">Leave this empty</label>
+        <input id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="submit-row">
+        <p class="form-error" id="formError" role="alert" hidden></p>
+        <button class="btn btn-solid" type="submit" id="submitBtn">Send request</button>
+        <p class="fine-print">Sending a request doesn't lock in a time. We'll confirm availability with you directly.</p>
+      </div>
+    </form>
+
+    <div class="book-success" id="bookSuccess" tabindex="-1" hidden>
+      <div class="sigil" aria-hidden="true">✦</div>
+      <h3>Request sent</h3>
+      <p id="successMsg">Thank you! We'll reach out soon to confirm your time.</p>
+      <button class="btn btn-outline" type="button" id="bookAnother">Send another request</button>
+    </div>
+
+    <div class="direct">
+      <p>Rather talk first?</p>
+      <div class="direct-actions">
+        <a class="btn btn-outline" href="sms:+17866943553">Text us</a>
+        <a class="btn btn-outline" href="tel:+17866943553">Call</a>
+        <a class="btn btn-outline" href="mailto:theartemroom@gmail.com">Email</a>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
-  <div class="foot-brand" id="foot-brand">The Artem Room</div>
-  
-  <!-- Dynamic Socials container -->
-  <div id="foot-socials" class="social-links"></div>
-  
-  <div id="foot-addr">NYC</div>
-  <div id="foot-contact">theartemroom@gmail.com · (786) 694-3553</div>
+  <div class="foot-brand">The Artem Room</div>
+
+  <!-- Social links: add more <a> tags here (TikTok, Facebook...) -->
+  <div class="social-links">
+    <a class="social-chip" href="https://instagram.com/theartemroom" target="_blank" rel="noopener">Instagram</a>
+  </div>
+
+  <address>
+    <span>New York, NY</span>
+    <span><a href="mailto:theartemroom@gmail.com">theartemroom@gmail.com</a> · <a href="tel:+17866943553">(786) 694-3553</a></span>
+  </address>
+  <small>© <span id="year">2026</span> The Artem Room</small>
 </footer>
 
 <script>
 /* ================================================================
-   BUSINESS CONFIG — ADD YOUR INFO & PICTURES HERE
+   SETTINGS
    ================================================================ */
-const BUSINESS = {
-  name: "The Artem Room", 
-  address: "NYC",
+const SITE = {
+  bookingEndpoint: "https://fgcrygrjyyvnwxatungm.supabase.co/functions/v1/artem-book",
+  phone: "+17866943553",
   email: "theartemroom@gmail.com",
-  phone: "(786) 694-3553",
-  phoneRaw: "7866943553", 
-  
-  /* 
-   * SOCIAL MEDIA LINKS
-   * To add a social, put the link in quotes.
-   * To hide a social, leave the quotes empty like this: url: "" 
-   */
-  socials: [
-    { label: "Instagram", url: "https://instagram.com/theartemroom" },
-    { label: "TikTok", url: "" },
-    { label: "Facebook", url: "" }
-  ],
-
-  services: [
-    {
-      id: "tattooing",
-      name: "Tattooing",
-      images: [
-        "photos/IMG_1318.png",
-        "photos/IMG_1720.png",
-        "photos/IMG_2271.PNG"
-      ], 
-      tag: "Fine line patchwork, with a heavy focus on optimal placement",
-      desc: "Every piece starts as a conversation. Share references and placement, and we'll sketch a custom design ahead of your session.",
-      color: "var(--c-tattoo)"
-    },
-    {
-      id: "piercing",
-      name: "Piercing",
-      images: [
-        "photos/IMG_4482.png",
-        "photos/IMG_4483.png"
-      ], 
-      tag: "Ear curation, facial & body piercing, implant-grade jewelry",
-      desc: "A quick consult confirms placement and jewelry before we book your slot — most piercings are same-week.",
-      color: "var(--c-piercing)"
-    },
-    {
-      id: "nails",
-      name: "Nails",
-      images: [
-        "photos/IMG_2268.jpg"
-      ], 
-      tag: "Manicure, gel, and hand-painted nail art",
-      desc: "Pick a time that works and come as you are — no consultation needed for standard sets.",
-      color: "var(--c-nails)"
-    },
-    {
-      id: "makeup",
-      name: "Makeup",
-      images: [
-        "photos/IMG_2270.PNG"
-      ], 
-      tag: "Editorial, event & bridal makeup",
-      desc: "Single sessions book directly. Bridal and large events get a short consult first to plan trials and timing.",
-      color: "var(--c-makeup)"
-    },
-    {
-      id: "hair",
-      name: "Hair",
-      images: [
-        "photos/IMG_4493.png"
-      ], 
-      tag: "Cut, color & styling",
-      desc: "Choose your service and time — straightforward booking, no forms required.",
-      color: "var(--c-hair)"
-    }
-  ]
+  maxPhotos: 3
 };
 
-/* ---------- render ---------- */
-document.getElementById('brand-name').textContent = BUSINESS.name;
-document.getElementById('foot-brand').textContent = BUSINESS.name;
-document.getElementById('foot-addr').textContent = BUSINESS.address;
-document.getElementById('foot-contact').textContent = `${BUSINESS.email} · ${BUSINESS.phone}`;
+// Hint text inside "Tell us more", per service
+const DETAILS_PLACEHOLDER = {
+  tattooing: "Describe your idea: style, any text, black & grey or color…",
+  piercing:  "Which piercing(s)? e.g. helix, nostril, navel. Any jewelry in mind?",
+  nails:     "Set type, length, shape, colors, any art you want…",
+  makeup:    "What's the occasion? Event, bridal, editorial… how many people?",
+  hair:      "Cut, color or styling? Tell us about your hair now and the goal…"
+};
 
-document.getElementById('contact-actions').innerHTML = `
-  <a class="btn btn-solid" href="mailto:${BUSINESS.email}">Email</a>
-  <a class="btn btn-outline" href="tel:${BUSINESS.phoneRaw}">Call ${BUSINESS.phone}</a>
-`;
+// Used in the "Thank you" message: "Your ___ request is in"
+const REQUEST_NOUN = { tattooing: 'tattoo', piercing: 'piercing', nails: 'nail', makeup: 'makeup', hair: 'hair' };
 
-// --- Smart Socials Render Logic ---
-const socialWrap = document.getElementById('foot-socials');
-let hasSocials = false;
+/* ================================================================
+   BUILD MENUS FROM THE SERVICE SECTIONS
+   ================================================================ */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
+const services = $$('.service').map(sec => ({
+  id: sec.id,
+  name: sec.dataset.name,
+  accent: sec.dataset.accent,
+  desc: $('.service-desc', sec).textContent.trim()
+}));
 
-if (BUSINESS.socials && BUSINESS.socials.length > 0) {
-  BUSINESS.socials.forEach(soc => {
-    if (soc.url && soc.url.trim() !== "") {
-      hasSocials = true;
-      socialWrap.innerHTML += `<a href="${soc.url}" target="_blank" rel="noopener noreferrer" class="social-chip">${soc.label}</a>`;
-    }
-  });
-}
-// If there are no valid social links, hide the container so there's no empty gap
-if (!hasSocials) {
-  socialWrap.style.display = "none";
-}
-
-const carousel = document.getElementById('carousel');
-const dotsWrap = document.getElementById('dots');
-const chipbar = document.getElementById('chipbar');
-const navLinks = document.getElementById('nav-links');
-const servicesWrap = document.getElementById('services');
-
-BUSINESS.services.forEach((svc, i) => {
-  // Grab the first image to use in the top hero carousel
-  const primaryImage = svc.images && svc.images.length > 0 ? svc.images[0] : "";
-
-  // --- MAIN HERO SLIDE ---
-  const slide = document.createElement('div');
-  slide.className = 'slide';
-  slide.style.setProperty('--accent', svc.color);
-  slide.innerHTML = `
-    <div class="slide-art">
-      <img src="${primaryImage}" alt="${svc.name}" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
-    </div>
-    <div class="slide-shade"></div>
-    <div class="slide-copy">
-      <div class="slide-eyebrow"><span class="slide-swatch"></span>${i + 1} of ${BUSINESS.services.length}</div>
-      <h1 class="slide-title">${svc.name}</h1>
-      <p class="slide-tag">${svc.tag}</p>
-    </div>`;
-  carousel.appendChild(slide);
-
-  // --- NAVIGATION DOTS & CHIPS ---
-  const dot = document.createElement('button');
-  dot.className = 'dot' + (i === 0 ? ' active' : '');
-  dot.setAttribute('aria-label', `Go to ${svc.name}`);
-  dot.addEventListener('click', () => scrollToSlide(i));
-  dotsWrap.appendChild(dot);
-
-  const chip = document.createElement('a');
-  chip.className = 'chip';
-  chip.href = `#${svc.id}`;
-  chip.style.setProperty('--accent', svc.color);
-  chip.innerHTML = `<span class="swatch"></span>${svc.name}`;
-  chipbar.appendChild(chip);
-
-  const nl = document.createElement('a');
-  nl.href = `#${svc.id}`;
-  nl.textContent = svc.name;
-  navLinks.appendChild(nl);
-
-  // --- SERVICE SECTIONS WITH OPTIONAL MINI-CAROUSEL ---
-  const section = document.createElement('section');
-  section.className = 'service';
-  section.id = svc.id;
-  
-  // Build the images HTML and the Dots HTML
-  let slidesHTML = '';
-  let miniDotsHTML = '';
-  const hasMultiple = svc.images && svc.images.length > 1;
-
-  if(svc.images && svc.images.length > 0) {
-    if (hasMultiple) miniDotsHTML += `<div class="mini-dots" id="md-${svc.id}">`;
-    
-    svc.images.forEach((img, idx) => {
-      slidesHTML += `<div class="mini-slide"><img src="${img}" alt="${svc.name} example"></div>`;
-      if (hasMultiple) {
-        miniDotsHTML += `<div class="mini-dot ${idx === 0 ? 'active' : ''}"></div>`;
-      }
-    });
-
-    if (hasMultiple) miniDotsHTML += `</div>`;
-  }
-
-  // Determine if we need next/prev arrows for this section
-  const controlsHTML = hasMultiple ? `
-    <button class="mini-btn prev" onclick="scrollMini('${svc.id}', -1)" aria-label="Previous photo">‹</button>
-    <button class="mini-btn next" onclick="scrollMini('${svc.id}', 1)" aria-label="Next photo">›</button>
-  ` : '';
-
-  section.innerHTML = `
-    <div class="service-visual">
-      <div class="mini-carousel-wrap">
-        <div class="mini-carousel" id="mc-${svc.id}">
-          ${slidesHTML}
-        </div>
-        ${controlsHTML}
-        ${miniDotsHTML}
-      </div>
-    </div>
-    <div class="service-content">
-      <div class="service-head">
-        <span class="service-swatch" style="background:${svc.color}"></span>
-        <h2 class="service-name">${svc.name}</h2>
-      </div>
-      <p class="service-desc">${svc.desc}</p>
-      <div class="service-actions">
-        <a class="btn btn-solid" href="#contact-panel">Inquire</a>
-      </div>
-    </div>`;
-  servicesWrap.appendChild(section);
-
-  // --- Attach scroll listeners to the new mini-carousels for the dots to work ---
-  if (hasMultiple) {
-    // We use setTimeout to ensure the DOM has painted the element before grabbing it
-    setTimeout(() => {
-      const mc = document.getElementById(`mc-${svc.id}`);
-      const mdWrap = document.getElementById(`md-${svc.id}`);
-      if (mc && mdWrap) {
-        const mDots = Array.from(mdWrap.children);
-        let mTicking = false;
-        
-        mc.addEventListener('scroll', () => {
-          if (mTicking) return;
-          mTicking = true;
-          requestAnimationFrame(() => {
-            const idx = Math.round(mc.scrollLeft / mc.clientWidth);
-            mDots.forEach((d, index) => d.classList.toggle('active', index === idx));
-            mTicking = false;
-          });
-        });
-      }
-    }, 0);
-  }
+const navLinks = $('#nav-links'), chipbar = $('#chipbar'), choiceWrap = $('#serviceChoices');
+services.forEach(s => {
+  navLinks.insertAdjacentHTML('beforeend', `<a href="#${s.id}">${s.name}</a>`);
+  chipbar.insertAdjacentHTML('beforeend',
+    `<a class="chip" href="#${s.id}" style="--accent:${s.accent}"><span class="swatch"></span>${s.name}</a>`);
+  choiceWrap.insertAdjacentHTML('beforeend',
+    `<label class="choice" style="--accent:${s.accent}"><input type="radio" name="service" value="${s.id}"><span><span class="swatch"></span>${s.name}</span></label>`);
 });
+$('#year').textContent = new Date().getFullYear();
 
-/* ---------- Main Carousel Behavior ---------- */
-const slides = Array.from(carousel.children);
-const dots = Array.from(dotsWrap.children);
-
-function scrollToSlide(i) {
-  slides[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-}
-
-document.getElementById('prevBtn').addEventListener('click', () => {
-  const i = Math.max(0, currentIndex() - 1);
-  scrollToSlide(i);
+/* ================================================================
+   HERO CAROUSEL
+   ================================================================ */
+const carousel = $('#carousel');
+const slides = $$('.slide', carousel);
+const dotsWrap = $('#dots');
+slides.forEach((sl, i) => {
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'dot' + (i === 0 ? ' active' : '');
+  b.setAttribute('aria-label', `Show ${$('.slide-title', sl).textContent}`);
+  b.addEventListener('click', () => goTo(i));
+  dotsWrap.appendChild(b);
 });
-document.getElementById('nextBtn').addEventListener('click', () => {
-  const i = Math.min(slides.length - 1, currentIndex() + 1);
-  scrollToSlide(i);
-});
-
-function currentIndex() {
-  const w = carousel.clientWidth;
-  return Math.round(carousel.scrollLeft / w);
+const dots = $$('.dot', dotsWrap);
+const current = () => Math.round(carousel.scrollLeft / carousel.clientWidth);
+function goTo(i) {
+  const n = slides.length;
+  carousel.scrollTo({ left: ((i + n) % n) * carousel.clientWidth, behavior: 'smooth' });
 }
-
+$('#prevBtn').addEventListener('click', () => goTo(current() - 1));
+$('#nextBtn').addEventListener('click', () => goTo(current() + 1));
+carousel.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current() + 1); }
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current() - 1); }
+});
 let ticking = false;
 carousel.addEventListener('scroll', () => {
   if (ticking) return;
   ticking = true;
   requestAnimationFrame(() => {
-    const idx = currentIndex();
-    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    const idx = current();
+    dots.forEach((d, i) => { d.classList.toggle('active', i === idx); d.setAttribute('aria-current', i === idx); });
     ticking = false;
   });
+}, { passive: true });
+
+/* ================================================================
+   SERVICE PHOTO CAROUSELS (arrows + dots only when 2+ photos)
+   ================================================================ */
+$$('.mini-carousel').forEach(mc => {
+  const count = mc.children.length;
+  if (count < 2) return;
+  const wrap = mc.parentElement;
+  const name = mc.closest('.service').dataset.name;
+  wrap.insertAdjacentHTML('beforeend', `
+    <button class="mini-btn prev" type="button" aria-label="Previous ${name} photo">‹</button>
+    <button class="mini-btn next" type="button" aria-label="Next ${name} photo">›</button>
+    <div class="mini-dots" aria-hidden="true">${'<span class="mini-dot"></span>'.repeat(count)}</div>`);
+  const mDots = $$('.mini-dot', wrap);
+  mDots[0].classList.add('active');
+  const idx = () => Math.round(mc.scrollLeft / mc.clientWidth);
+  const go = d => mc.scrollTo({ left: ((idx() + d + count) % count) * mc.clientWidth, behavior: 'smooth' });
+  $('.mini-btn.prev', wrap).addEventListener('click', () => go(-1));
+  $('.mini-btn.next', wrap).addEventListener('click', () => go(1));
+  let t = false;
+  mc.addEventListener('scroll', () => {
+    if (t) return; t = true;
+    requestAnimationFrame(() => { mDots.forEach((d, i) => d.classList.toggle('active', i === idx())); t = false; });
+  }, { passive: true });
 });
 
-/* ---------- Mini Carousel Behavior (For individual services) ---------- */
-window.scrollMini = function(serviceId, direction) {
-  const container = document.getElementById(`mc-${serviceId}`);
-  if (!container) return;
-  const slideWidth = container.clientWidth;
-  // Calculate nearest index then add direction
-  const currentIdx = Math.round(container.scrollLeft / slideWidth);
-  const targetScroll = (currentIdx + direction) * slideWidth;
-  
-  container.scrollTo({
-    left: targetScroll,
-    behavior: 'smooth'
-  });
-};
+/* ================================================================
+   BOOKING FORM
+   ================================================================ */
+const form = $('#bookForm');
+const openedAt = Date.now();
+let photos = []; // compressed data URLs
+
+// dates: no past days, max one year out
+(function setDateLimits() {
+  const d = new Date(); d.setDate(d.getDate() + 1);
+  const max = new Date(); max.setFullYear(max.getFullYear() + 1);
+  const iso = x => new Date(x.getTime() - x.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  ['#prefDate', '#altDate'].forEach(s => { $(s).min = iso(d); $(s).max = iso(max); });
+})();
+
+function selectService(id, opts = {}) {
+  const input = $(`input[name="service"][value="${id}"]`, form);
+  if (!input) return;
+  input.checked = true;
+  onServiceChange();
+  if (opts.focus) input.focus({ preventScroll: true });
+}
+function onServiceChange() {
+  const id = form.service.value;
+  const svc = services.find(s => s.id === id);
+  $$('[data-only]', form).forEach(el => { el.hidden = el.dataset.only !== id; });
+  const note = $('#svcNote');
+  note.hidden = !svc;
+  if (svc) { note.textContent = svc.desc; note.style.setProperty('--accent', svc.accent); }
+  $('#details').placeholder = DETAILS_PLACEHOLDER[id] || 'Style, colors, inspiration, anything we should know…';
+  setError('service', '');
+}
+form.addEventListener('change', e => { if (e.target.name === 'service') onServiceChange(); });
+
+// "Book …" buttons, and links like  ?service=nails#book , pre-pick the service
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-book]');
+  if (a) selectService(a.dataset.book);
+});
+const urlService = new URLSearchParams(location.search).get('service');
+if (urlService) selectService(urlService);
+
+// ----- reference photos: shrink on the phone before upload -----
+async function compress(file) {
+  const bitmap = await createImageBitmap(file).catch(() => null);
+  let w, h, src = bitmap;
+  if (!bitmap) {
+    // older Safari fallback
+    src = await new Promise((res, rej) => {
+      const img = new Image(); img.onload = () => res(img); img.onerror = rej;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  w = src.width; h = src.height;
+  const scale = Math.min(1, 1600 / Math.max(w, h));
+  const c = document.createElement('canvas');
+  c.width = Math.round(w * scale); c.height = Math.round(h * scale);
+  c.getContext('2d').drawImage(src, 0, 0, c.width, c.height);
+  return c.toDataURL('image/jpeg', 0.82);
+}
+async function addPhotos(files) {
+  setError('photos', '');
+  const list = Array.from(files).filter(f => f.type.startsWith('image/') || /\.(heic|heif)$/i.test(f.name));
+  for (const f of list) {
+    if (photos.length >= SITE.maxPhotos) { setError('photos', `Up to ${SITE.maxPhotos} photos.`); break; }
+    try { photos.push(await compress(f)); }
+    catch { setError('photos', "One photo couldn't be read. Try a JPG or PNG."); }
+  }
+  renderThumbs();
+}
+function renderThumbs() {
+  $('#thumbs').innerHTML = photos.map((p, i) =>
+    `<div class="thumb"><img src="${p}" alt="Reference photo ${i + 1}"><button type="button" data-rm="${i}" aria-label="Remove photo ${i + 1}">×</button></div>`).join('');
+  $('#photoDrop strong').textContent = photos.length ? (photos.length < SITE.maxPhotos ? 'Add another photo' : 'Photo limit reached') : 'Add photos';
+}
+$('#photos').addEventListener('change', e => { addPhotos(e.target.files); e.target.value = ''; });
+$('#thumbs').addEventListener('click', e => {
+  const b = e.target.closest('[data-rm]');
+  if (b) { photos.splice(+b.dataset.rm, 1); renderThumbs(); }
+});
+const drop = $('#photoDrop');
+['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('drag'); }));
+['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('drag'); }));
+drop.addEventListener('drop', e => addPhotos(e.dataTransfer.files));
+
+// ----- validation -----
+function setError(field, msg) {
+  const el = $(`#err-${field}`);
+  if (el) el.textContent = msg;
+  const input = field === 'service' ? choiceWrap : form.elements[field] || $('#isAdult');
+  if (input && input.setAttribute) input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+}
+['name', 'phone', 'email'].forEach(f => form.elements[f].addEventListener('input', () => setError(f, '')));
+$('#isAdult').addEventListener('change', () => setError('is_adult', ''));
+
+function validate(d) {
+  const e = {};
+  if (!d.service) e.service = 'Pick a service.';
+  if (!d.name) e.name = 'Add your name.';
+  const digits = d.phone.replace(/\D/g, '');
+  if (d.phone && digits.length < 10) e.phone = 'That phone number looks short.';
+  if (!d.phone && ['text', 'call'].includes(d.contact_pref)) e.phone = 'Add a phone number so we can text or call you.';
+  if (!d.phone && !d.email) e.phone = 'Add a phone number or email so we can reach you.';
+  if (d.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email)) e.email = "That email doesn't look right.";
+  if (!d.email && d.contact_pref === 'email') e.email = 'Add your email so we can write back.';
+  if (d.service === 'tattooing' && !d.is_adult) e.is_adult = 'You must be 18+ to get tattooed in New York.';
+  return e;
+}
+function showErrors(errs) {
+  ['service', 'name', 'phone', 'email', 'is_adult', 'photos'].forEach(f => setError(f, errs[f] || ''));
+  const first = Object.keys(errs)[0];
+  if (!first) return;
+  const target = first === 'service' ? $('input[name="service"]', form) : first === 'is_adult' ? $('#isAdult') : form.elements[first];
+  if (target) {
+    target.focus({ preventScroll: true });
+    target.closest('.field, .step, .check')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+const smsFallback = d => `sms:${SITE.phone}?&body=${encodeURIComponent(
+  `Hi! I'd like to book ${services.find(s => s.id === d.service)?.name || 'an appointment'}${d.preferred_date ? ' around ' + d.preferred_date : ''}. — ${d.name}`)}`;
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  const fd = new FormData(form);
+  const d = {
+    service: fd.get('service') || '',
+    name: (fd.get('name') || '').trim(),
+    phone: (fd.get('phone') || '').trim(),
+    email: (fd.get('email') || '').trim(),
+    instagram: (fd.get('instagram') || '').trim(),
+    contact_pref: fd.get('contact_pref') || 'text',
+    preferred_date: fd.get('preferred_date') || '',
+    alt_date: fd.get('alt_date') || '',
+    time_pref: fd.get('time_pref') || 'flexible',
+    details: (fd.get('details') || '').trim(),
+    placement: fd.get('service') === 'tattooing' ? (fd.get('placement') || '').trim() : '',
+    size: fd.get('service') === 'tattooing' ? (fd.get('size') || '') : '',
+    is_adult: $('#isAdult').checked,
+    website: fd.get('website') || '',
+    elapsed_ms: Date.now() - openedAt
+  };
+  const errs = validate(d);
+  const formError = $('#formError');
+  formError.hidden = true;
+  if (Object.keys(errs).length) return showErrors(errs);
+
+  const btn = $('#submitBtn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const res = await fetch(SITE.bookingEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...d, photos })
+    });
+    const out = await res.json().catch(() => ({}));
+    if (res.status === 422 && out.fields) { showErrors(out.fields); throw Object.assign(new Error(out.error), { soft: true }); }
+    if (!res.ok || !out.ok) throw new Error(out.error || 'Something went wrong.');
+
+    const how = { text: 'text you', call: 'call you', email: 'email you', instagram: 'DM you on Instagram' }[d.contact_pref];
+    const first = d.name.split(/\s+/)[0];
+    $('#successMsg').textContent =
+      `Thank you, ${first}! Your ${REQUEST_NOUN[d.service] || 'booking'} request is in. We'll ${how} soon to confirm your time.`;
+    form.hidden = true;
+    const ok = $('#bookSuccess');
+    ok.hidden = false;
+    ok.focus({ preventScroll: true });
+    $('#book').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (err) {
+    formError.innerHTML = err.soft ? err.message :
+      `We couldn't send your request just now. <a href="${smsFallback(d)}">Text us instead</a> or email <a href="mailto:${SITE.email}">${SITE.email}</a>.`;
+    formError.hidden = false;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Send request';
+  }
+});
+
+$('#bookAnother').addEventListener('click', () => {
+  form.reset(); photos = []; renderThumbs(); onServiceChange();
+  $('#bookSuccess').hidden = true; form.hidden = false;
+  $('input[name="service"]', form).focus();
+});
+
+/* background art loads last so the photos come first */
+window.addEventListener('load', () => document.documentElement.classList.add('bg-ready'));
 </script>
 </body>
 </html>

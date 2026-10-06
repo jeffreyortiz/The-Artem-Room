@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /bookings.html
+
+Sitemap: https://jeffreyortiz.github.io/The-Artem-Room/sitemap.xml

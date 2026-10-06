@@ -1,121 +1,97 @@
-# Studio Storefront Template
+# The Artem Room — website + booking
 
-Two self-contained HTML files. No build step, no dependencies to install —
-open either one in a browser and it works. Everything client-specific
-(name, services, colors, copy) lives in one `BUSINESS` object near the
-bottom of each file's `<script>` tag.
+Live site: https://jeffreyortiz.github.io/The-Artem-Room/ (GitHub Pages, `main` branch)
 
-- **`storefront.html`** — full version with booking-aware CTAs (per-service
-  "Book now" vs "Request a consultation", deposit/form badges). Use this
-  once a booking backend is wired up.
-- **`storefront-portfolio.html`** — same look, no booking logic. Every
-  service just says "Inquire" and points at contact info. Use this *now*,
-  while your wife is showing work and booking isn't live yet.
+No build step. Plain HTML/CSS/JS files, hosted for free on GitHub Pages.
 
-Both are one file each — HTML, CSS, and JS all inline. That's intentional:
-it makes them trivial to drop into any static host with zero config.
-
----
-
-## Editing a site (per client)
-
-Everything you'll touch for a new client is in one place: the `BUSINESS`
-object near the bottom of the `<script>` tag.
-
-```js
-const BUSINESS = {
-  name: "Studio",
-  address: "123 Main Street · Your City",
-  contact: "hello@yourstudio.com · (000) 000-0000",
-  services: [ /* ...5 service objects... */ ]
-};
-```
-
-To rebrand for a new client:
-
-1. Change `name`, `address`, `contact`.
-2. Edit/add/remove entries in `services` — each needs `id`, `name`, `tag`
-   (one-liner under the hero title), `desc` (longer blurb), and `color`.
-   Fewer or more than 5 services works fine; the carousel and nav build
-   themselves from the array.
-3. In `storefront.html` only: set `flowType` to `"direct"` or
-   `"consultation"` per service, and `requiresForm` / `requiresDeposit`
-   booleans — these drive the badges and CTA label automatically.
-4. Swap the color palette in the `:root` CSS block (`--c-tattoo`,
-   `--c-piercing`, etc. — rename/repurpose these per service).
-5. Replace the placeholder line-art in the `art()` JS function with real
-   photos once you're hosting somewhere that allows remote images —
-   either `<img src="...">` elements or `background-image` in CSS.
-6. Drop a background design (like your cyber-sigil piece) into the empty
-   `.bg-layer` div — it's a fixed, full-page layer sitting behind
-   everything, already wired up and just waiting for a
-   `background-image`.
-
----
-
-## Suggested repo layout for multiple clients
-
-```
-storefront-template/
-├── base/
-│   ├── storefront.html              ← the master booking template
-│   └── storefront-portfolio.html    ← the master portfolio template
-├── clients/
-│   ├── wife-studio/
-│   │   ├── storefront.html          ← copied from base, BUSINESS edited
-│   │   └── storefront-portfolio.html
-│   └── client-2/
-│       ├── storefront.html
-│       └── storefront-portfolio.html
-└── README.md
-```
-
-Keep `base/` untouched as your starting point. For each new client, copy
-`base/` into `clients/<name>/` and only edit the `BUSINESS` object, the
-color variables, and the artwork. This keeps every client's site a clean
-diff from the template, so improvements you make to the template later
-(a layout fix, a new section) are easy to port into existing client sites
-by hand or with a merge tool.
-
-Deploying any single file: drag-and-drop onto Netlify, or push to a repo
-and turn on GitHub Pages / Vercel / Cloudflare Pages — all of them serve
-a static `.html` file with no configuration needed.
-
----
-
-## Adding real booking
-
-The template's CTAs already point at `#book` (an anchor to the footer /
-booking panel). Wiring up a real backend is about picking a platform and
-routing each service's CTA to the right place — you don't need to touch
-layout code for this.
-
-**1. Pick a booking platform based on what each service needs:**
-
-| Need | Good fit |
+| File | What it is |
 |---|---|
-| Simple direct booking (nails, hair) | Square Appointments, Fresha — both free at small scale, embeddable widget or hosted booking page |
-| Consultation + intake form + deposit (tattooing, piercing) | Boulevard or Vagaro (built for studios, handle consult requests + deposits natively), *or* a lighter stack: Tally/Jotform for the intake form + a Stripe Payment Link for the deposit, with you manually confirming and booking the slot afterward |
+| `index.html` | The public site: hero carousel, services, booking request form |
+| `bookings.html` | Olie's private bookings dashboard (PIN-protected, not indexed by Google) |
+| `img/` | Optimized photos (WebP, several sizes each), share image, app icons |
+| `photos/` | Original full-size photos. Not loaded by the site — kept as source files |
+| `fonts/` | Self-hosted Grenze Gotisch (faster than Google Fonts) |
+| `supabase/functions/` | Copies of the two backend functions (already deployed) |
+| `robots.txt`, `sitemap.xml`, `site.webmanifest` | SEO + "Add to Home Screen" files |
 
-**2. Get an embed snippet or booking link** from whichever platform you
-pick — they all provide either a `<script>` embed or a hosted URL
-(e.g. `https://book.squareup.com/appointments/your-shop`).
+---
 
-**3. Route each service's CTA:**
-   - Direct-booking services (`flowType: "direct"`): set `bookingUrl` to
-     the platform's booking link (or an anchor to a widget you've
-     embedded in the `.booking-panel` section).
-   - Consultation services (`flowType: "consultation"`): set `bookingUrl`
-     to your intake form link instead (Tally/Jotform/the platform's own
-     consult-request form). The deposit request typically happens *after*
-     you review the consult, not before — so this is usually a manual
-     step until you're doing enough volume to automate it.
+## Editing the site
 
-**4. Replace the `.booking-panel` placeholder** with the actual embed —
-either paste the platform's `<script>`/`<iframe>` snippet into that div,
-or leave it as a styled link-out button if the platform doesn't offer an
-embeddable widget.
+Everything is plain HTML inside `index.html`, with comments marking each part.
 
-Start manual (form + you following up) if you're not sure yet — it's zero
-cost and tells you which parts are actually worth automating before you
-commit to a platform's monthly fee.
+- **Change a service's text**: edit its `<section class="service">` block. The nav links,
+  the chips under the hero, and the booking form's service choices are built from these
+  sections automatically.
+- **Hero carousel**: one `<a class="slide">` per service near the top. If you change a
+  service's tagline, change it in both the slide and the section.
+- **Colors**: the `:root` block at the top of the `<style>`.
+- **Contact info**: phone/email appear in the booking section, the footer, the
+  `SITE` settings at the top of the `<script>`, and the JSON-LD block in `<head>`
+  (that block is what Google reads for the business info).
+
+### Adding a photo
+
+Big iPhone photos make the site slow, so don't link the originals. Make WebP copies first
+(e.g. squoosh.app, or ask Claude): widths **480, 800 and 1200 px**, named like
+`img/nails-chrome-480.webp`, `img/nails-chrome-800.webp`, `img/nails-chrome-1200.webp`.
+Then copy an existing `<div class="mini-slide">…</div>` line, swap the file names, and
+write a short `alt` description of what's in the photo (this helps Google Images).
+
+---
+
+## How booking works
+
+1. A client fills in the form on the site (service, idea, up to 3 reference photos,
+   preferred day/time, contact info). Photos are shrunk on their phone before upload.
+2. The form posts to the `artem-book` Supabase Edge Function, which checks it, blocks
+   spam (hidden trap field + rate limits), saves it to the `artem_bookings` table and the
+   photos to the private `artem-refs` storage bucket.
+3. The database sends a push alert to Olie's phone through **ntfy** (free app). The alert
+   shows first name, service and day only — never phone/email. Tapping it opens the
+   booking in the dashboard.
+4. Olie opens `bookings.html` (PIN), sees **New / Upcoming / Past**, texts or calls the
+   client in one tap, confirms a date & time (which pre-writes the confirmation text to the
+   client in her Messages app), marks done/declined, and keeps private notes.
+
+Backend lives in the existing Supabase project (`one-page-lvl`), in tables prefixed
+`artem_`. Row-level security is on with no public policies, so the website's visitors can't
+read anything — only the two functions can.
+
+### Phone alerts setup (once)
+
+Dashboard → ⚙︎ Settings → follow "Phone alerts": install ntfy, subscribe to the topic shown,
+tap **Send a test alert**.
+
+### Want real SMS instead of / as well as push?
+
+The `artem-book` function already supports Twilio. Create a Twilio account + number, then
+add these rows to `artem_settings`: `twilio_sid`, `twilio_token`, `twilio_from`
+(the Twilio number, `+1…`), `owner_sms_to` (Olie's cell, `+1…`). Costs roughly a cent per text
+plus the number's monthly fee, and US texting needs Twilio's A2P/toll-free registration.
+
+### PIN
+
+Change it any time in the dashboard Settings. Changing it signs out every other device.
+Five wrong tries locks sign-in for 15 minutes.
+
+---
+
+## Testing changes before they go live
+
+Work on a branch (e.g. `booking-test`) and preview it at:
+
+```
+https://raw.githack.com/jeffreyortiz/The-Artem-Room/<branch>/index.html
+```
+
+When it's right, merge the branch into `main` and GitHub Pages updates in a minute or two.
+
+## SEO checklist after going live
+
+- Add the site to Google Search Console and submit `sitemap.xml`.
+- Make a free Google Business Profile (biggest win for "tattoo near me" searches) and link
+  this site from it and from Instagram.
+- A custom domain (e.g. `theartemroom.com`) looks more professional and ranks better than a
+  github.io address. If you add one, find & replace the old URL in `index.html`,
+  `robots.txt` and `sitemap.xml`, and update `dashboard_url` in `artem_settings`.

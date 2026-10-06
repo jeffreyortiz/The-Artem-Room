@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bookings · The Artem Room</title>
+<!-- Private page for the studio owner: keep it out of search engines -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#490413">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Bookings">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="bookings.webmanifest">
+<link rel="preload" href="fonts/grenze-gotisch-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face {
+    font-family: 'Grenze Gotisch';
+    src: url('fonts/grenze-gotisch-latin.woff2') format('woff2');
+    font-weight: 100 900; font-style: normal; font-display: swap;
+  }
+  :root {
+    --deep-pink: #490413; --light-pink: #FF91C5; --pale-pink: #FFF7FC;
+    --beige-trans: #ECE4D6cc; --burgundy: #A8175E; --error: #FFB3C7;
+    --c-tattooing: #7E93A7; --c-piercing: #C7BFB2; --c-nails: #C1485B; --c-makeup: #D6A24C; --c-hair: #A97452;
+    --grenze: 'Grenze Gotisch', Georgia, serif;
+    --edge: 16px;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; min-height: 100vh;
+    background: var(--deep-pink);
+    background-image: radial-gradient(1200px 600px at 80% -10%, rgba(168,23,94,.35), transparent 60%);
+    background-attachment: fixed;
+    color: var(--pale-pink);
+    font-family: var(--grenze); font-size: 1.1rem; letter-spacing: .02em;
+    -webkit-font-smoothing: antialiased;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+  }
+  a { color: inherit; }
+  button { font: inherit; letter-spacing: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--light-pink); outline-offset: 2px; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 var(--edge); }
+
+  /* header */
+  .top {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(73,4,19,.94); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--burgundy);
+    padding-top: env(safe-area-inset-top, 0px);
+    margin-top: calc(-1 * env(safe-area-inset-top, 0px));
+  }
+  .top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 62px; }
+  .brand { font-size: 1.6rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .brand small { font-size: 1rem; color: var(--light-pink); font-weight: 500; margin-left: 6px; }
+  .icon-btn {
+    width: 42px; height: 42px; border-radius: 50%;
+    border: 1px solid rgba(255,145,197,.4); background: rgba(73,4,19,.5);
+    display: grid; place-items: center; cursor: pointer; font-size: 1.25rem; line-height: 1;
+  }
+  .icon-btn:hover { border-color: var(--pale-pink); }
+  .top-actions { display: flex; gap: 8px; }
+  .spin { animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 10px 0 12px; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: none; display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px; min-height: 40px; border-radius: 30px;
+    border: 1px solid rgba(255,145,197,.4); background: rgba(73,4,19,.4);
+    color: var(--beige-trans); cursor: pointer; font-size: 1.05rem;
+  }
+  .tab[aria-selected="true"] { background: var(--pale-pink); color: var(--deep-pink); border-color: var(--pale-pink); }
+  .count {
+    min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px;
+    background: var(--burgundy); color: var(--pale-pink); font-size: .9rem; display: grid; place-items: center;
+  }
+  .tab[aria-selected="true"] .count { background: var(--deep-pink); }
+
+  /* login */
+  .login { min-height: 80vh; display: grid; place-items: center; padding: 24px var(--edge); }
+  .login-card {
+    width: 100%; max-width: 380px; text-align: center;
+    border: 1px solid rgba(255,145,197,.2); border-radius: 24px; padding: 40px 26px;
+    background: linear-gradient(145deg, rgba(73,4,19,.85), rgba(168,23,94,.3));
+    box-shadow: 0 15px 35px rgba(0,0,0,.3);
+  }
+  .login-card img { width: 72px; height: 72px; border-radius: 18px; margin: 0 auto 16px; display: block; }
+  .login-card h1 { font-size: 2.2rem; margin: 0 0 4px; font-weight: 600; }
+  .login-card p { color: var(--beige-trans); margin: 0 0 24px; }
+  .pin {
+    width: 100%; text-align: center; font: 600 1.8rem/1 var(--grenze); letter-spacing: .4em;
+    padding: 14px 10px 14px calc(10px + .4em); border-radius: 16px;
+    border: 1px solid rgba(255,145,197,.4); background: rgba(73,4,19,.6); color: var(--pale-pink);
+  }
+  .msg-err { color: var(--error); min-height: 1.5em; margin: 12px 0 0 !important; }
+
+  .btn {
+    font: 600 1.15rem/1 var(--grenze); letter-spacing: .02em;
+    padding: 12px 22px; min-height: 46px; border-radius: 30px; cursor: pointer;
+    text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    border: 1px solid transparent; transition: transform .15s ease, opacity .15s ease, border-color .15s ease;
+  }
+  .btn-solid { background: var(--pale-pink); color: var(--deep-pink); }
+  .btn-solid:hover { opacity: .9; }
+  .btn-outline { background: transparent; color: var(--pale-pink); border-color: rgba(255,145,197,.4); }
+  .btn-outline:hover { border-color: var(--pale-pink); }
+  .btn-sm { font-size: 1.05rem; padding: 8px 16px; min-height: 40px; }
+  .btn-danger { color: var(--error); border-color: rgba(255,107,139,.4); background: transparent; }
+  .btn[disabled] { opacity: .55; cursor: progress; }
+  .btn-block { width: 100%; margin-top: 16px; }
+
+  /* list */
+  .list { display: grid; gap: 16px; padding: 18px 0 40px; }
+  .empty { text-align: center; color: var(--beige-trans); padding: 60px 10px; }
+  .empty .big { font-size: 2.4rem; color: var(--light-pink); display: block; margin-bottom: 10px; }
+
+  .card {
+    border: 1px solid rgba(255,145,197,.22); border-radius: 20px;
+    background: linear-gradient(160deg, rgba(73,4,19,.9), rgba(120,12,58,.35));
+    box-shadow: 0 10px 26px rgba(0,0,0,.25);
+    overflow: hidden; scroll-margin-top: 140px;
+  }
+  .card.flash { animation: flash 1.6s ease 2; }
+  @keyframes flash { 50% { border-color: var(--light-pink); box-shadow: 0 0 0 3px rgba(255,145,197,.35); } }
+  .card summary { list-style: none; cursor: pointer; padding: 16px 18px; display: grid; gap: 6px; }
+  .card summary::-webkit-details-marker { display: none; }
+  .row1 { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
+  .who { font-size: 1.45rem; font-weight: 600; line-height: 1.15; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .svc { display: inline-flex; align-items: center; gap: 8px; color: var(--beige-trans); font-size: 1.05rem; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--beige-trans); font-size: 1rem; }
+  .when-strong { color: var(--pale-pink); }
+  .pill {
+    flex: none; font-size: .9rem; padding: 4px 12px; border-radius: 20px; border: 1px solid; white-space: nowrap;
+  }
+  .pill.new { background: var(--light-pink); color: var(--deep-pink); border-color: var(--light-pink); }
+  .pill.confirmed { border-color: #9FE0B5; color: #CFF5DB; }
+  .pill.completed { border-color: rgba(236,228,214,.5); color: var(--beige-trans); }
+  .pill.declined, .pill.cancelled { border-color: rgba(255,107,139,.5); color: var(--error); }
+  .chev { transition: transform .2s ease; color: var(--light-pink); }
+  details[open] .chev { transform: rotate(180deg); }
+
+  .body { padding: 0 18px 18px; display: grid; gap: 16px; border-top: 1px solid rgba(255,145,197,.15); padding-top: 16px; }
+  .kv { display: grid; grid-template-columns: 110px 1fr; gap: 6px 12px; margin: 0; }
+  .kv dt { color: var(--beige-trans); }
+  .kv dd { margin: 0; overflow-wrap: anywhere; }
+  .quote { margin: 0; padding: 12px 14px; border-left: 3px solid var(--c); background: rgba(73,4,19,.5); border-radius: 0 12px 12px 0; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .photos { display: flex; gap: 10px; flex-wrap: wrap; }
+  .photos a { display: block; width: 92px; height: 92px; }
+  .photos img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; border: 1px solid rgba(255,145,197,.35); }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .label { color: var(--beige-trans); font-size: 1rem; margin: 0 0 6px; }
+  .input {
+    width: 100%; font: inherit; font-size: 1.1rem; color: var(--pale-pink);
+    background: rgba(73,4,19,.6); border: 1px solid rgba(255,145,197,.35); border-radius: 14px;
+    padding: 10px 14px; min-height: 46px;
+  }
+  textarea.input { min-height: 80px; resize: vertical; line-height: 1.45; }
+  .confirm-box { display: grid; gap: 10px; padding: 14px; border-radius: 16px; border: 1px dashed rgba(255,145,197,.45); }
+  .saved { color: #CFF5DB; font-size: .95rem; min-height: 1.2em; }
+
+  /* settings sheet */
+  .sheet-bg { position: fixed; inset: 0; background: rgba(20,0,6,.6); z-index: 40; }
+  .sheet {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 41;
+    max-height: 88vh; overflow-y: auto;
+    background: var(--deep-pink); border-top: 1px solid var(--burgundy);
+    border-radius: 24px 24px 0 0; padding: 22px var(--edge) calc(28px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -20px 40px rgba(0,0,0,.4);
+  }
+  .sheet-inner { max-width: 560px; margin: 0 auto; display: grid; gap: 26px; }
+  .sheet h2 { margin: 0; font-size: 1.9rem; }
+  .sheet h3 { margin: 0 0 8px; font-size: 1.35rem; }
+  .sheet p, .sheet li { color: var(--beige-trans); line-height: 1.55; }
+  .sheet ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+  .topic { display: flex; gap: 8px; align-items: center; }
+  .topic code { flex: 1; min-width: 0; overflow-x: auto; padding: 10px 12px; border-radius: 12px; background: rgba(0,0,0,.25); font-size: .95rem; white-space: nowrap; }
+  .toast {
+    position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+    background: var(--pale-pink); color: var(--deep-pink); padding: 10px 20px; border-radius: 30px; z-index: 60;
+    font-weight: 600; box-shadow: 0 10px 24px rgba(0,0,0,.35); max-width: calc(100% - 32px); text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- ======== SIGN IN ======== -->
+<main class="login" id="loginView" hidden>
+  <form class="login-card" id="loginForm">
+    <img src="apple-touch-icon.png" alt="" width="72" height="72">
+    <h1>Bookings</h1>
+    <p>The Artem Room</p>
+    <label class="sr-only" for="pin" style="position:absolute;left:-9999px">PIN</label>
+    <input class="pin" id="pin" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="current-password" maxlength="12" placeholder="••••••" required>
+    <button class="btn btn-solid btn-block" type="submit" id="loginBtn">Open bookings</button>
+    <p class="msg-err" id="loginErr" role="alert"></p>
+  </form>
+</main>
+
+<!-- ======== DASHBOARD ======== -->
+<div id="appView" hidden>
+  <header class="top">
+    <div class="wrap">
+      <div class="top-row">
+        <a class="brand" href="./" title="Open the website">The Artem Room<small>Bookings</small></a>
+        <div class="top-actions">
+          <button class="icon-btn" id="refreshBtn" type="button" aria-label="Refresh">↻</button>
+          <button class="icon-btn" id="settingsBtn" type="button" aria-label="Settings">⚙︎</button>
+        </div>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Filter bookings">
+        <button class="tab" role="tab" data-tab="new" aria-selected="true">New <span class="count" id="c-new">0</span></button>
+        <button class="tab" role="tab" data-tab="upcoming" aria-selected="false">Upcoming <span class="count" id="c-upcoming">0</span></button>
+        <button class="tab" role="tab" data-tab="past" aria-selected="false">Past</button>
+        <button class="tab" role="tab" data-tab="all" aria-selected="false">All <span class="count" id="c-all">0</span></button>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="list" id="list" aria-live="polite"></div>
+  </main>
+</div>
+
+<!-- ======== SETTINGS ======== -->
+<div class="sheet-bg" id="sheetBg" hidden></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+  <div class="sheet-inner">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h2 id="sheet-title">Settings</h2>
+      <button class="icon-btn" id="closeSheet" type="button" aria-label="Close">×</button>
+    </div>
+
+    <div>
+      <h3>Phone alerts for new requests</h3>
+      <ol>
+        <li>Install the free <a href="https://apps.apple.com/us/app/ntfy/id1625396347" target="_blank" rel="noopener">ntfy app</a> (also on <a href="https://play.google.com/store/apps/details?id=io.heckel.ntfy" target="_blank" rel="noopener">Android</a>) and allow notifications.</li>
+        <li>Tap <b>+</b>, paste this topic name, and subscribe:</li>
+      </ol>
+      <div class="topic" style="margin:10px 0">
+        <code id="topicName">loading…</code>
+        <button class="btn btn-outline btn-sm" type="button" id="copyTopic">Copy</button>
+      </div>
+      <p style="margin:0 0 10px">Keep the topic name private — anyone with it could see alerts. Alerts show the client's first name, service and day, never their phone or email.</p>
+      <button class="btn btn-outline btn-sm" type="button" id="testNotify">Send a test alert</button>
+    </div>
+
+    <div>
+      <h3>Put this page on your home screen</h3>
+      <p style="margin:0">In Safari tap <b>Share</b> → <b>Add to Home Screen</b>. It opens like an app and stays signed in.</p>
+    </div>
+
+    <form id="pinForm">
+      <h3>Change PIN</h3>
+      <div style="display:grid;gap:10px">
+        <input class="input" id="curPin" type="password" inputmode="numeric" autocomplete="current-password" placeholder="Current PIN" required>
+        <input class="input" id="newPin" type="password" inputmode="numeric" autocomplete="new-password" placeholder="New PIN (6–12 digits)" minlength="6" maxlength="12" required>
+        <button class="btn btn-outline btn-sm" type="submit">Update PIN</button>
+        <p class="msg-err" id="pinErr" role="alert" style="margin:0"></p>
+      </div>
+    </form>
+
+    <button class="btn btn-danger btn-sm" type="button" id="logoutBtn" style="justify-self:start">Sign out</button>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+const API = "https://fgcrygrjyyvnwxatungm.supabase.co/functions/v1/artem-admin";
+const STUDIO = "The Artem Room";
+const SERVICE_NAME = { tattooing: "Tattooing", piercing: "Piercing", nails: "Nails", makeup: "Makeup", hair: "Hair" };
+const SERVICE_NOUN = { tattooing: "tattoo", piercing: "piercing", nails: "nail appointment", makeup: "makeup appointment", hair: "hair appointment" };
+
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const store = {
+  get: k => { try { return localStorage.getItem(k); } catch { return null; } },
+  set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} }
+};
+let token = store.get("artem_session");
+let bookings = [];
+let tab = "new";
+const openIds = new Set();
+
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toast._t); toast._t = setTimeout(() => (t.hidden = true), 2600);
+}
+
+async function api(action, data = {}) {
+  const res = await fetch(API, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...(token ? { "x-artem-session": token } : {}) },
+    body: JSON.stringify({ action, ...data })
+  });
+  const out = await res.json().catch(() => ({}));
+  if (out.reauth) { signOut(true); throw new Error(out.error || "Please sign in again."); }
+  if (!res.ok || !out.ok) throw new Error(out.error || "Something went wrong.");
+  return out;
+}
+
+/* ---------- views ---------- */
+function showLogin() { $("#appView").hidden = true; $("#loginView").hidden = false; setTimeout(() => $("#pin").focus(), 50); }
+function showApp() { $("#loginView").hidden = true; $("#appView").hidden = false; }
+function signOut(silent) {
+  if (!silent && token) api("logout").catch(() => {});
+  token = null; store.set("artem_session", null); bookings = [];
+  closeSheet(); showLogin();
+}
+
+$("#loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const btn = $("#loginBtn"); btn.disabled = true; $("#loginErr").textContent = "";
+  try {
+    const out = await api("login", { pin: $("#pin").value.trim() });
+    token = out.token; store.set("artem_session", token);
+    $("#pin").value = "";
+    showApp(); await load();
+  } catch (err) { $("#loginErr").textContent = err.message; }
+  finally { btn.disabled = false; }
+});
+
+/* ---------- formatting ---------- */
+const fmtDay = d => d ? new Date(d + "T12:00:00").toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" }) : "";
+const fmtDateTime = iso => new Date(iso).toLocaleString(undefined, { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+function ago(iso) {
+  const s = (Date.now() - new Date(iso)) / 1000;
+  if (s < 60) return "just now";
+  if (s < 3600) return Math.floor(s / 60) + "m ago";
+  if (s < 86400) return Math.floor(s / 3600) + "h ago";
+  if (s < 86400 * 7) return Math.floor(s / 86400) + "d ago";
+  return new Date(iso).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+const firstName = n => String(n || "").trim().split(/\s+/)[0];
+function telDigits(p) {
+  const d = String(p || "").replace(/[^\d+]/g, "");
+  if (d.startsWith("+")) return d;
+  return d.length === 10 ? "+1" + d : d.length === 11 && d[0] === "1" ? "+" + d : d;
+}
+const smsLink = (phone, body) => `sms:${telDigits(phone)}?&body=${encodeURIComponent(body)}`;
+const toLocalInput = iso => {
+  const d = new Date(iso); return new Date(d - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+};
+
+/* ---------- list ---------- */
+function bucket(b) {
+  if (b.status === "new") return "new";
+  if (b.status === "confirmed") return "upcoming";
+  return "past";
+}
+function render() {
+  const counts = { new: 0, upcoming: 0, all: bookings.length };
+  bookings.forEach(b => { const k = bucket(b); if (k in counts) counts[k]++; });
+  $("#c-new").textContent = counts.new; $("#c-upcoming").textContent = counts.upcoming; $("#c-all").textContent = counts.all;
+  $$(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.tab === tab));
+
+  let rows = tab === "all" ? bookings.slice() : bookings.filter(b => bucket(b) === tab);
+  if (tab === "upcoming") rows.sort((a, b) => new Date(a.scheduled_at || "2999") - new Date(b.scheduled_at || "2999"));
+  const list = $("#list");
+  if (!rows.length) {
+    const msg = { new: "No new requests right now.", upcoming: "Nothing confirmed yet.", past: "No past bookings yet.", all: "No bookings yet." }[tab];
+    list.innerHTML = `<div class="empty"><span class="big">✦</span>${msg}</div>`;
+    return;
+  }
+  list.innerHTML = rows.map(card).join("");
+}
+
+function card(b) {
+  const svc = SERVICE_NAME[b.service] || b.service;
+  const wanted = [fmtDay(b.preferred_date), b.time_pref && b.time_pref !== "flexible" ? b.time_pref : (b.time_pref ? "any time" : "")].filter(Boolean).join(" · ");
+  const whenLine = b.status === "confirmed" && b.scheduled_at
+    ? `<span class="when-strong">📅 ${esc(fmtDateTime(b.scheduled_at))}</span>`
+    : (wanted ? `<span>Wants ${esc(wanted)}</span>` : `<span>No day picked</span>`);
+  const first = firstName(b.name);
+  const helloText = `Hi ${first}! This is Olie from ${STUDIO} about your ${SERVICE_NOUN[b.service] || "appointment"} request. `;
+  const ig = b.instagram ? String(b.instagram).replace(/^@/, "") : "";
+
+  const contact = [
+    b.phone ? `<a class="btn btn-solid btn-sm" href="${esc(smsLink(b.phone, helloText))}">Text</a>` : "",
+    b.phone ? `<a class="btn btn-outline btn-sm" href="tel:${esc(telDigits(b.phone))}">Call</a>` : "",
+    b.email ? `<a class="btn btn-outline btn-sm" href="mailto:${esc(b.email)}?subject=${encodeURIComponent(STUDIO + " — your " + (SERVICE_NOUN[b.service] || "appointment") + " request")}&body=${encodeURIComponent(helloText)}">Email</a>` : "",
+    ig ? `<a class="btn btn-outline btn-sm" href="https://instagram.com/${esc(encodeURIComponent(ig))}" target="_blank" rel="noopener">Instagram</a>` : ""
+  ].join("");
+
+  const facts = [
+    ["Contact", [b.phone, b.email, ig && "@" + ig].filter(Boolean).map(esc).join("<br>")],
+    ["Prefers", esc({ text: "Text", call: "Call", email: "Email", instagram: "Instagram DM" }[b.contact_pref] || b.contact_pref)],
+    ["Wants", esc([fmtDay(b.preferred_date), b.time_pref].filter(Boolean).join(" · ") || "—")],
+    b.alt_date ? ["Backup day", esc(fmtDay(b.alt_date))] : null,
+    b.placement ? ["Placement", esc(b.placement)] : null,
+    b.size ? ["Size", esc(b.size)] : null,
+    b.service === "tattooing" ? ["18+", b.is_adult ? "Confirmed" : "Not confirmed"] : null,
+    ["Received", esc(new Date(b.created_at).toLocaleString())]
+  ].filter(Boolean);
+
+  const statusBtns = {
+    new: `<button class="btn btn-solid btn-sm" data-act="confirm-open">Confirm a time</button>
+          <button class="btn btn-outline btn-sm" data-act="status" data-to="declined">Decline</button>`,
+    confirmed: `<button class="btn btn-outline btn-sm" data-act="confirm-open">Change time</button>
+                <button class="btn btn-solid btn-sm" data-act="status" data-to="completed">Mark done</button>
+                <button class="btn btn-outline btn-sm" data-act="status" data-to="cancelled">Cancelled</button>`,
+    completed: `<button class="btn btn-outline btn-sm" data-act="status" data-to="confirmed">Move back to upcoming</button>`,
+    declined: `<button class="btn btn-outline btn-sm" data-act="status" data-to="new">Move back to new</button>`,
+    cancelled: `<button class="btn btn-outline btn-sm" data-act="status" data-to="new">Move back to new</button>`
+  }[b.status] || "";
+
+  const label = b.status === "new" ? "New" : b.status[0].toUpperCase() + b.status.slice(1);
+  return `
+  <details class="card" id="b-${esc(b.id)}" data-id="${esc(b.id)}" style="--c: var(--c-${esc(b.service)})" ${openIds.has(b.id) ? "open" : ""}>
+    <summary>
+      <div class="row1">
+        <span class="who">${esc(b.name)}</span>
+        <span class="pill ${esc(b.status)}">${label}</span>
+      </div>
+      <div class="meta">
+        <span class="svc"><span class="dot"></span>${esc(svc)}</span>
+        ${whenLine}
+        <span>${esc(ago(b.created_at))}</span>
+        ${b.photos?.length ? `<span>📎 ${b.photos.length}</span>` : ""}
+        <span class="chev" aria-hidden="true">⌄</span>
+      </div>
+    </summary>
+    <div class="body">
+      ${b.details ? `<p class="quote">${esc(b.details)}</p>` : ""}
+      ${b.photos?.length ? `<div class="photos">${b.photos.map((u, i) => `<a href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="Reference photo ${i + 1}" loading="lazy"></a>`).join("")}</div>` : ""}
+      <dl class="kv">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
+      <div class="actions">${contact}</div>
+
+      <div class="confirm-box" data-confirm hidden>
+        <label class="label" for="dt-${esc(b.id)}">Appointment date &amp; time</label>
+        <input class="input" type="datetime-local" id="dt-${esc(b.id)}" value="${b.scheduled_at ? esc(toLocalInput(b.scheduled_at)) : (b.preferred_date ? esc(b.preferred_date) + "T12:00" : "")}">
+        <div class="actions">
+          <button class="btn btn-solid btn-sm" data-act="confirm-save" data-text="1" ${b.phone ? "" : "hidden"}>Confirm &amp; text ${esc(first)}</button>
+          <button class="btn btn-outline btn-sm" data-act="confirm-save">Just confirm</button>
+        </div>
+      </div>
+
+      <div class="actions">${statusBtns}</div>
+
+      <div>
+        <label class="label" for="n-${esc(b.id)}">Private notes</label>
+        <textarea class="input" id="n-${esc(b.id)}" data-notes placeholder="Price quoted, deposit, design notes…">${esc(b.owner_notes || "")}</textarea>
+        <div class="saved" data-saved></div>
+      </div>
+      <div><button class="btn btn-danger btn-sm" data-act="delete">Delete</button></div>
+    </div>
+  </details>`;
+}
+
+async function load(quiet) {
+  const rb = $("#refreshBtn"); rb.classList.add("spin");
+  try {
+    const out = await api("list");
+    bookings = out.bookings || [];
+    render();
+    focusHash();
+  } catch (err) { if (!quiet && token) toast(err.message); }
+  finally { rb.classList.remove("spin"); }
+}
+
+// Opening a phone alert jumps to that booking (#booking-id)
+function focusHash() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id) return;
+  const b = bookings.find(x => x.id === id);
+  if (!b) return;
+  const want = tab === "all" || bucket(b) === tab ? tab : bucket(b);
+  if (want !== tab) { tab = want; }
+  openIds.add(id); render();
+  const el = document.getElementById("b-" + id);
+  if (el) { el.scrollIntoView({ block: "start" }); el.classList.add("flash"); }
+  history.replaceState(null, "", location.pathname + location.search);
+}
+
+/* ---------- actions ---------- */
+$(".tabs").addEventListener("click", e => {
+  const t = e.target.closest(".tab"); if (!t) return;
+  tab = t.dataset.tab; render(); window.scrollTo({ top: 0 });
+});
+$("#refreshBtn").addEventListener("click", () => load());
+$("#list").addEventListener("toggle", e => {
+  const d = e.target; if (!d.dataset?.id) return;
+  d.open ? openIds.add(d.dataset.id) : openIds.delete(d.dataset.id);
+}, true);
+
+async function update(id, patch, msg) {
+  const out = await api("update", { id, ...patch });
+  const b = bookings.find(x => x.id === id);
+  Object.assign(b, out.booking);
+  if (msg) toast(msg);
+  return b;
+}
+
+$("#list").addEventListener("click", async e => {
+  const btn = e.target.closest("[data-act]"); if (!btn) return;
+  const cardEl = btn.closest(".card"); const id = cardEl.dataset.id;
+  const b = bookings.find(x => x.id === id);
+  const act = btn.dataset.act;
+  try {
+    if (act === "confirm-open") {
+      const box = $("[data-confirm]", cardEl); box.hidden = !box.hidden;
+      if (!box.hidden) $("input", box).focus();
+      return;
+    }
+    btn.disabled = true;
+    if (act === "confirm-save") {
+      const val = $("input[type=datetime-local]", cardEl).value;
+      if (!val) { toast("Pick a date and time first."); return; }
+      const when = new Date(val);
+      // open Messages first (iPhone needs this to happen right after the tap)
+      if (btn.dataset.text && b.phone) {
+        const body = `Hi ${firstName(b.name)}! You're confirmed for your ${SERVICE_NOUN[b.service] || "appointment"} at ${STUDIO} on ${when.toLocaleString(undefined, { weekday: "long", month: "long", day: "numeric", hour: "numeric", minute: "2-digit" })}. Reply here with any questions ✨`;
+        location.href = smsLink(b.phone, body);
+      }
+      await update(id, { status: "confirmed", scheduled_at: when.toISOString() }, "Confirmed ✦");
+      render();
+    } else if (act === "status") {
+      const to = btn.dataset.to;
+      await update(id, { status: to }, { completed: "Marked done", declined: "Declined", cancelled: "Marked cancelled", new: "Moved to new", confirmed: "Moved to upcoming" }[to]);
+      render();
+    } else if (act === "delete") {
+      if (!confirm(`Delete ${b.name}'s request for good? This also deletes their photos.`)) return;
+      await api("delete", { id });
+      bookings = bookings.filter(x => x.id !== id); openIds.delete(id);
+      render(); toast("Deleted");
+    }
+  } catch (err) { toast(err.message); }
+  finally { btn.disabled = false; }
+});
+
+// notes save automatically when you leave the box
+$("#list").addEventListener("focusout", async e => {
+  const ta = e.target.closest("[data-notes]"); if (!ta) return;
+  const id = ta.closest(".card").dataset.id; const b = bookings.find(x => x.id === id);
+  if ((b.owner_notes || "") === ta.value) return;
+  const saved = $("[data-saved]", ta.parentElement);
+  try { await update(id, { owner_notes: ta.value }); saved.textContent = "Saved"; setTimeout(() => (saved.textContent = ""), 2000); }
+  catch (err) { saved.textContent = ""; toast(err.message); }
+});
+
+/* ---------- settings ---------- */
+function openSheet() {
+  $("#sheet").hidden = false; $("#sheetBg").hidden = false;
+  api("notify_info").then(o => { $("#topicName").textContent = o.ntfy_topic || "not set"; }).catch(() => {});
+}
+function closeSheet() { $("#sheet").hidden = true; $("#sheetBg").hidden = true; }
+$("#settingsBtn").addEventListener("click", openSheet);
+$("#closeSheet").addEventListener("click", closeSheet);
+$("#sheetBg").addEventListener("click", closeSheet);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeSheet(); });
+$("#copyTopic").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText($("#topicName").textContent); toast("Copied"); }
+  catch { toast("Press and hold the name to copy it"); }
+});
+$("#testNotify").addEventListener("click", async e => {
+  e.target.disabled = true;
+  try { await api("test_notify"); toast("Test alert sent — check your phone"); }
+  catch (err) { toast(err.message); }
+  finally { e.target.disabled = false; }
+});
+$("#pinForm").addEventListener("submit", async e => {
+  e.preventDefault(); $("#pinErr").textContent = "";
+  try {
+    await api("change_pin", { current_pin: $("#curPin").value, new_pin: $("#newPin").value });
+    e.target.reset(); toast("PIN updated");
+  } catch (err) { $("#pinErr").textContent = err.message; }
+});
+$("#logoutBtn").addEventListener("click", () => signOut());
+
+/* ---------- start ---------- */
+if (token) { showApp(); load(); } else { showLogin(); }
+// keep fresh while open
+// (skipped while you're typing a note or picking a time, so nothing gets wiped)
+const busy = () => $("#list").contains(document.activeElement) || $$("[data-confirm]:not([hidden])").length > 0;
+const autoLoad = () => { if (token && document.visibilityState === "visible" && !busy()) load(true); };
+setInterval(autoLoad, 60000);
+document.addEventListener("visibilitychange", autoLoad);
+window.addEventListener("hashchange", focusHash);
+</script>
+</body>
+</html>
