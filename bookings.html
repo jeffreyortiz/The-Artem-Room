@@ -167,6 +167,33 @@
   .confirm-box { display: grid; gap: 10px; padding: 14px; border-radius: 16px; border: 1px dashed rgba(255,145,197,.45); }
   .saved { color: #CFF5DB; font-size: .95rem; min-height: 1.2em; }
 
+  /* deposits */
+  .body { grid-template-columns: minmax(0, 1fr); }
+  .body > *, .dep > * { min-width: 0; }
+  .dep { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 14px; border-radius: 16px; border: 1px solid rgba(255,145,197,.3); background: rgba(73,4,19,.45); }
+  .dep h4 { margin: 0; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .dep p { margin: 0; color: var(--beige-trans); line-height: 1.5; }
+  .dep .alert { color: var(--pale-pink); background: rgba(255,145,197,.14); border: 1px solid rgba(255,145,197,.4); padding: 10px 12px; border-radius: 12px; }
+  .dep .ok { color: #CFF5DB; }
+  .money-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .money { position: relative; }
+  .money span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--beige-trans); pointer-events: none; }
+  .money .input { padding-left: 28px; }
+  .quick { display: flex; gap: 6px; flex-wrap: wrap; }
+  .quick button { font-size: .95rem; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,145,197,.4); background: transparent; cursor: pointer; }
+  .quick button:hover { border-color: var(--pale-pink); }
+  .linkbox { display: flex; gap: 8px; align-items: center; }
+  .linkbox code { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 8px 10px; border-radius: 10px; background: rgba(0,0,0,.25); font-size: .85rem; }
+  .depchip { font-size: .95rem; padding: 2px 10px; border-radius: 20px; border: 1px solid rgba(255,145,197,.45); color: var(--light-pink); }
+  .depchip.paid { border-color: #9FE0B5; color: #CFF5DB; }
+  .depchip.claimed { background: var(--light-pink); color: var(--deep-pink); border-color: var(--light-pink); }
+  select.input {
+    -webkit-appearance: none; appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--light-pink) 50%), linear-gradient(135deg, var(--light-pink) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 52%, calc(100% - 12px) 52%; background-size: 6px 6px; background-repeat: no-repeat;
+  }
+  .stripe-on { color: #CFF5DB; }
+
   /* settings sheet */
   .sheet-bg { position: fixed; inset: 0; background: rgba(20,0,6,.6); z-index: 40; }
   .sheet {
@@ -218,6 +245,7 @@
       </div>
       <div class="tabs" role="tablist" aria-label="Filter bookings">
         <button class="tab" role="tab" data-tab="new" aria-selected="true">New <span class="count" id="c-new">0</span></button>
+        <button class="tab" role="tab" data-tab="deposit" aria-selected="false">Awaiting deposit <span class="count" id="c-deposit">0</span></button>
         <button class="tab" role="tab" data-tab="upcoming" aria-selected="false">Upcoming <span class="count" id="c-upcoming">0</span></button>
         <button class="tab" role="tab" data-tab="past" aria-selected="false">Past</button>
         <button class="tab" role="tab" data-tab="all" aria-selected="false">All <span class="count" id="c-all">0</span></button>
@@ -250,6 +278,42 @@
       </div>
       <p style="margin:0 0 10px">Keep the topic name private — anyone with it could see alerts. Alerts show the client's first name, service and day, never their phone or email.</p>
       <button class="btn btn-outline btn-sm" type="button" id="testNotify">Send a test alert</button>
+    </div>
+
+    <form id="payForm">
+      <h3>Deposit payment options</h3>
+      <p style="margin:0 0 12px">Fill in the ones you use. Clients see them on their deposit page; leave a box empty to hide it.</p>
+      <div style="display:grid;gap:10px">
+        <label class="label" for="pCash" style="margin:0">Cash App $cashtag</label>
+        <input class="input" id="pCash" placeholder="$yourcashtag" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <label class="label" for="pVenmo" style="margin:0">Venmo username</label>
+        <input class="input" id="pVenmo" placeholder="@your-venmo" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <label class="label" for="pZelle" style="margin:0">Zelle email or phone</label>
+        <input class="input" id="pZelle" placeholder="name@email.com or phone" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <label class="label" for="pPolicy" style="margin:0">Deposit policy (shown to clients)</label>
+        <textarea class="input" id="pPolicy" rows="4"></textarea>
+        <button class="btn btn-outline btn-sm" type="submit">Save payment options</button>
+      </div>
+    </form>
+
+    <div id="stripeBox">
+      <h3>Card payments (Stripe)</h3>
+      <div id="stripeOff">
+        <ol>
+          <li>Make a free account at <a href="https://dashboard.stripe.com/register" target="_blank" rel="noopener">stripe.com</a> and add the bank account deposits should go to.</li>
+          <li>In Stripe go to <b>Developers → API keys</b> and copy the <b>Secret key</b> (starts with <code>sk_live_</code>). Want to try it first? Turn on <b>Test mode</b> and use the <code>sk_test_</code> key — test card 4242 4242 4242 4242.</li>
+          <li>Paste it here. Payment confirmations get set up automatically.</li>
+        </ol>
+        <div style="display:grid;gap:10px;margin-top:10px">
+          <input class="input" id="stripeKey" type="password" placeholder="sk_live_…" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <button class="btn btn-outline btn-sm" type="button" id="stripeConnect">Connect Stripe</button>
+        </div>
+      </div>
+      <div id="stripeOn" hidden>
+        <p class="stripe-on" id="stripeStatus" style="margin:0 0 10px">Connected ✓</p>
+        <button class="btn btn-danger btn-sm" type="button" id="stripeDisconnect">Disconnect Stripe</button>
+      </div>
+      <p class="msg-err" id="stripeErr" role="alert" style="margin:8px 0 0"></p>
     </div>
 
     <div>
@@ -351,23 +415,124 @@ const toLocalInput = iso => {
   const d = new Date(iso); return new Date(d - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
 };
 
+/* ---------- deposits ---------- */
+const money = c => "$" + (c / 100).toFixed(c % 100 ? 2 : 0);
+const toCents = v => { const n = parseFloat(String(v).replace(/[^0-9.]/g, "")); return Number.isFinite(n) ? Math.round(n * 100) : null; };
+const METHOD = { stripe: "card", cashapp: "Cash App", venmo: "Venmo", zelle: "Zelle", cash: "cash", other: "other" };
+const depLink = b => new URL("deposit.html?t=" + encodeURIComponent(b.deposit_token), location.href).href;
+
+function depChip(b) {
+  if (!b.deposit_status || b.deposit_status === "none") return "";
+  if (b.deposit_status === "paid") return `<span class="depchip paid">✓ ${money(b.deposit_paid_cents || b.deposit_cents)} paid</span>`;
+  if (b.deposit_status === "claimed") return `<span class="depchip claimed">Check ${esc(METHOD[b.deposit_claimed_method] || "payment")}</span>`;
+  if (b.deposit_status === "waived") return `<span class="depchip">No deposit</span>`;
+  return `<span class="depchip">${money(b.deposit_cents)} requested</span>`;
+}
+
+function depForm(b) {
+  const quote = b.quote_cents != null ? (b.quote_cents / 100).toString() : "";
+  const dep = b.deposit_cents != null ? (b.deposit_cents / 100).toString() : "";
+  return `
+    <div data-depform ${b.deposit_status === "none" || !b.deposit_status ? "" : "hidden"}>
+      <div style="display:grid;gap:10px">
+        <div class="money-row">
+          <div><label class="label" for="q-${esc(b.id)}">Full price <span style="opacity:.7">(optional)</span></label>
+            <div class="money"><span>$</span><input class="input" id="q-${esc(b.id)}" data-quote inputmode="decimal" value="${esc(quote)}" placeholder="300"></div></div>
+          <div><label class="label" for="d-${esc(b.id)}">Deposit</label>
+            <div class="money"><span>$</span><input class="input" id="d-${esc(b.id)}" data-dep inputmode="decimal" value="${esc(dep)}" placeholder="150"></div></div>
+        </div>
+        <div class="quick" aria-label="Deposit shortcuts">
+          <button type="button" data-pct="50">50% of price</button>
+          <button type="button" data-pct="30">30%</button>
+          <button type="button" data-flat="50">$50</button>
+          <button type="button" data-flat="100">$100</button>
+        </div>
+        <label class="label" for="dn-${esc(b.id)}" style="margin:0">Note to ${esc(firstName(b.name))} <span style="opacity:.7">(optional, shows on their deposit page)</span></label>
+        <textarea class="input" id="dn-${esc(b.id)}" data-depnote placeholder="Love this idea! I'll have a sketch ready before your session.">${esc(b.deposit_note || "")}</textarea>
+        <button class="btn btn-solid btn-sm" data-act="dep-create">${b.deposit_token ? "Update deposit" : "Approve & create deposit link"}</button>
+      </div>
+    </div>`;
+}
+
+function depSection(b) {
+  const st = b.deposit_status || "none";
+  if (["declined", "cancelled"].includes(b.status) && st === "none") return "";
+  const first = firstName(b.name);
+  let inner = "";
+  if (st === "none") {
+    inner = `<h4>💳 Deposit</h4>
+      <p>Approve this request and send ${esc(first)} a private link to pay a deposit.</p>
+      <button class="btn btn-solid btn-sm" data-act="dep-open">Approve &amp; request deposit</button>
+      <button class="btn btn-outline btn-sm" data-act="dep-mark" data-to="waived">No deposit needed</button>
+      ${depForm(b)}`;
+    // the form starts hidden until "Approve" is tapped
+    inner = inner.replace('<div data-depform >', '<div data-depform hidden>');
+  } else if (st === "requested" || st === "claimed") {
+    const link = depLink(b);
+    inner = `<h4>💳 ${money(b.deposit_cents)} deposit requested</h4>
+      ${st === "claimed" ? `<p class="alert">${esc(first)} says they sent it on <b>${esc(METHOD[b.deposit_claimed_method])}</b>. Check the app, then mark it paid.</p>` : `<p>Send ${esc(first)} the link. You'll get a phone alert when they pay by card, or when they tap "I've sent it" for Cash App, Venmo or Zelle.</p>`}
+      <div class="linkbox"><code>${esc(link)}</code><button class="btn btn-outline btn-sm" data-act="dep-copy">Copy</button></div>
+      <div class="actions">
+        ${b.email ? `<button class="btn btn-solid btn-sm" data-act="dep-email">Email link</button>` : ""}
+        ${b.phone ? `<button class="btn ${b.email ? "btn-outline" : "btn-solid"} btn-sm" data-act="dep-text">Text link</button>` : ""}
+        <a class="btn btn-outline btn-sm" href="${esc(link)}" target="_blank" rel="noopener">Preview</a>
+      </div>
+      <div class="actions" style="align-items:center">
+        <select class="input" data-paymethod style="width:auto;min-height:40px;padding:6px 34px 6px 12px;font-size:1rem" aria-label="How they paid">
+          ${["cashapp", "venmo", "zelle", "cash", "stripe", "other"].map(m => `<option value="${m}" ${m === (b.deposit_claimed_method || "cashapp") ? "selected" : ""}>${METHOD[m][0].toUpperCase() + METHOD[m].slice(1)}</option>`).join("")}
+        </select>
+        <button class="btn btn-solid btn-sm" data-act="dep-paid">Mark paid</button>
+      </div>
+      <div class="actions">
+        <button class="btn btn-outline btn-sm" data-act="dep-open">Change amount</button>
+        <button class="btn btn-outline btn-sm" data-act="dep-mark" data-to="waived">Waive</button>
+        <button class="btn btn-danger btn-sm" data-act="dep-mark" data-to="none">Cancel request</button>
+      </div>
+      ${depForm(b).replace('<div data-depform ', '<div data-depform hidden ')}`;
+  } else if (st === "paid") {
+    inner = `<h4 class="ok">✓ ${money(b.deposit_paid_cents || b.deposit_cents)} deposit paid</h4>
+      <p>By ${esc(METHOD[b.deposit_method] || "—")}${b.deposit_paid_at ? " · " + esc(new Date(b.deposit_paid_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })) : ""}${b.quote_cents != null ? ` · ${money(Math.max(0, b.quote_cents - (b.deposit_paid_cents || b.deposit_cents)))} left at the appointment` : ""}</p>
+      <div class="actions"><button class="btn btn-outline btn-sm" data-act="dep-mark" data-to="requested">Undo</button></div>`;
+  } else if (st === "waived") {
+    inner = `<h4>No deposit for this one</h4>
+      <div class="actions"><button class="btn btn-outline btn-sm" data-act="dep-mark" data-to="none">Undo</button></div>`;
+  }
+  return `<div class="dep">${inner}</div>`;
+}
+
+function depMessage(b, kind) {
+  const link = depLink(b);
+  const svc = SERVICE_NOUN[b.service] || "appointment";
+  const first = firstName(b.name);
+  if (kind === "text") {
+    return `Hi ${first}! Your ${svc} request with ${STUDIO} is approved ✨ To hold your spot, here's your ${money(b.deposit_cents)} deposit link: ${link}`;
+  }
+  return {
+    subject: `Your ${svc} deposit · ${STUDIO}`,
+    body: `Hi ${first}!\n\nGreat news, your ${svc} request is approved ✨ To hold your spot, please pay your ${money(b.deposit_cents)} deposit here:\n\n${link}\n\n` +
+      (b.deposit_note ? `${b.deposit_note}\n\n` : "") +
+      `Once it's in, we'll lock in your date. Any questions, just reply to this email.\n\nOlie\n${STUDIO}`
+  };
+}
+
 /* ---------- list ---------- */
 function bucket(b) {
+  if (b.status === "new" && ["requested", "claimed"].includes(b.deposit_status)) return "deposit";
   if (b.status === "new") return "new";
   if (b.status === "confirmed") return "upcoming";
   return "past";
 }
 function render() {
-  const counts = { new: 0, upcoming: 0, all: bookings.length };
+  const counts = { new: 0, deposit: 0, upcoming: 0, all: bookings.length };
   bookings.forEach(b => { const k = bucket(b); if (k in counts) counts[k]++; });
-  $("#c-new").textContent = counts.new; $("#c-upcoming").textContent = counts.upcoming; $("#c-all").textContent = counts.all;
+  $("#c-new").textContent = counts.new; $("#c-deposit").textContent = counts.deposit; $("#c-upcoming").textContent = counts.upcoming; $("#c-all").textContent = counts.all;
   $$(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.tab === tab));
 
   let rows = tab === "all" ? bookings.slice() : bookings.filter(b => bucket(b) === tab);
   if (tab === "upcoming") rows.sort((a, b) => new Date(a.scheduled_at || "2999") - new Date(b.scheduled_at || "2999"));
   const list = $("#list");
   if (!rows.length) {
-    const msg = { new: "No new requests right now.", upcoming: "Nothing confirmed yet.", past: "No past bookings yet.", all: "No bookings yet." }[tab];
+    const msg = { new: "No new requests right now.", deposit: "No deposits waiting.", upcoming: "Nothing confirmed yet.", past: "No past bookings yet.", all: "No bookings yet." }[tab];
     list.innerHTML = `<div class="empty"><span class="big">✦</span>${msg}</div>`;
     return;
   }
@@ -399,6 +564,7 @@ function card(b) {
     b.placement ? ["Placement", esc(b.placement)] : null,
     b.size ? ["Size", esc(b.size)] : null,
     b.service === "tattooing" ? ["18+", b.is_adult ? "Confirmed" : "Not confirmed"] : null,
+    b.quote_cents != null ? ["Full price", esc(money(b.quote_cents))] : null,
     ["Received", esc(new Date(b.created_at).toLocaleString())]
   ].filter(Boolean);
 
@@ -426,6 +592,7 @@ function card(b) {
         ${whenLine}
         <span>${esc(ago(b.created_at))}</span>
         ${b.photos?.length ? `<span>📎 ${b.photos.length}</span>` : ""}
+        ${depChip(b)}
         <span class="chev" aria-hidden="true">⌄</span>
       </div>
     </summary>
@@ -434,6 +601,8 @@ function card(b) {
       ${b.photos?.length ? `<div class="photos">${b.photos.map((u, i) => `<a href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="Reference photo ${i + 1}" loading="lazy"></a>`).join("")}</div>` : ""}
       <dl class="kv">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
       <div class="actions">${contact}</div>
+
+      ${depSection(b)}
 
       <div class="confirm-box" data-confirm hidden>
         <label class="label" for="dt-${esc(b.id)}">Appointment date &amp; time</label>
@@ -511,8 +680,43 @@ $("#list").addEventListener("click", async e => {
       if (!box.hidden) $("input", box).focus();
       return;
     }
+    if (act === "dep-open") {
+      const f = $("[data-depform]", cardEl); f.hidden = !f.hidden;
+      if (!f.hidden) $("[data-quote]", f).focus();
+      return;
+    }
+    if (btn.dataset.pct || btn.dataset.flat) return; // handled below
+    if (act === "dep-copy") {
+      try { await navigator.clipboard.writeText(depLink(b)); toast("Link copied"); } catch { toast("Press and hold the link to copy"); }
+      return;
+    }
+    if (act === "dep-email") {
+      const m = depMessage(b, "email");
+      location.href = `mailto:${encodeURIComponent(b.email)}?subject=${encodeURIComponent(m.subject)}&body=${encodeURIComponent(m.body)}`;
+      return;
+    }
+    if (act === "dep-text") { location.href = smsLink(b.phone, depMessage(b, "text")); return; }
     btn.disabled = true;
-    if (act === "confirm-save") {
+    if (act === "dep-create") {
+      const dep = toCents($("[data-dep]", cardEl).value);
+      const quoteRaw = $("[data-quote]", cardEl).value.trim();
+      const quote = quoteRaw ? toCents(quoteRaw) : null;
+      if (!dep || dep < 100) { toast("Enter a deposit amount"); return; }
+      if (quote != null && dep > quote) { toast("Deposit is more than the full price"); return; }
+      const out = await api("request_deposit", { id, deposit_cents: dep, quote_cents: quote, note: $("[data-depnote]", cardEl).value });
+      Object.assign(b, out.booking);
+      openIds.add(id); render(); toast("Deposit link ready ✦");
+    } else if (act === "dep-paid") {
+      const method = $("[data-paymethod]", cardEl).value;
+      const out = await api("mark_deposit", { id, status: "paid", method });
+      Object.assign(b, out.booking); render(); toast("Deposit marked paid");
+    } else if (act === "dep-mark") {
+      const to = btn.dataset.to;
+      if (to === "none" && b.deposit_token && !confirm("Cancel this deposit request? The link you sent will stop working.")) return;
+      const out = await api("mark_deposit", { id, status: to });
+      Object.assign(b, out.booking); render();
+      toast({ waived: "No deposit needed", none: "Deposit request cancelled", requested: "Back to requested" }[to] || "Updated");
+    } else if (act === "confirm-save") {
       const val = $("input[type=datetime-local]", cardEl).value;
       if (!val) { toast("Pick a date and time first."); return; }
       const when = new Date(val);
@@ -537,6 +741,27 @@ $("#list").addEventListener("click", async e => {
   finally { btn.disabled = false; }
 });
 
+// deposit shortcuts: 50% / 30% of full price, or a flat amount
+$("#list").addEventListener("click", e => {
+  const q = e.target.closest("[data-pct],[data-flat]"); if (!q) return;
+  const f = q.closest("[data-depform]");
+  const depIn = $("[data-dep]", f);
+  if (q.dataset.flat) { depIn.value = q.dataset.flat; return; }
+  const price = toCents($("[data-quote]", f).value);
+  if (!price) { toast("Enter the full price first"); $("[data-quote]", f).focus(); return; }
+  const c = Math.round(price * Number(q.dataset.pct) / 100);
+  depIn.value = (c / 100).toFixed(c % 100 ? 2 : 0);
+});
+// typing a full price pre-fills a 50% deposit if the deposit box is still empty
+$("#list").addEventListener("input", e => {
+  const qIn = e.target.closest("[data-quote]"); if (!qIn) return;
+  const depIn = $("[data-dep]", qIn.closest("[data-depform]"));
+  if (depIn.dataset.touched) return;
+  const p = toCents(qIn.value);
+  depIn.value = p ? ((Math.round(p / 2)) / 100).toFixed(Math.round(p / 2) % 100 ? 2 : 0) : "";
+});
+$("#list").addEventListener("input", e => { if (e.target.matches("[data-dep]")) e.target.dataset.touched = "1"; });
+
 // notes save automatically when you leave the box
 $("#list").addEventListener("focusout", async e => {
   const ta = e.target.closest("[data-notes]"); if (!ta) return;
@@ -551,7 +776,37 @@ $("#list").addEventListener("focusout", async e => {
 function openSheet() {
   $("#sheet").hidden = false; $("#sheetBg").hidden = false;
   api("notify_info").then(o => { $("#topicName").textContent = o.ntfy_topic || "not set"; }).catch(() => {});
+  api("payment_settings").then(showPay).catch(() => {});
 }
+function showPay(o) {
+  $("#pCash").value = o.cashapp_tag ? "$" + o.cashapp_tag : "";
+  $("#pVenmo").value = o.venmo_user ? "@" + o.venmo_user : "";
+  $("#pZelle").value = o.zelle_contact || "";
+  $("#pPolicy").value = o.deposit_policy || "";
+  showStripe(o);
+}
+function showStripe(o) {
+  $("#stripeOff").hidden = !!o.stripe_connected; $("#stripeOn").hidden = !o.stripe_connected;
+  $("#stripeStatus").textContent = o.stripe_mode === "test" ? "Connected in TEST mode ✓ (no real money moves)" : "Connected ✓ Clients can pay by card, Apple Pay and Google Pay.";
+}
+$("#payForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  try {
+    const o = await api("save_payment_settings", { cashapp_tag: $("#pCash").value, venmo_user: $("#pVenmo").value, zelle_contact: $("#pZelle").value, deposit_policy: $("#pPolicy").value });
+    $("#pCash").value = o.cashapp_tag ? "$" + o.cashapp_tag : ""; $("#pVenmo").value = o.venmo_user ? "@" + o.venmo_user : "";
+    toast("Payment options saved");
+  } catch (err) { toast(err.message); }
+});
+$("#stripeConnect").addEventListener("click", async e => {
+  const b = e.currentTarget; b.disabled = true; b.textContent = "Connecting…"; $("#stripeErr").textContent = "";
+  try { const o = await api("connect_stripe", { secret_key: $("#stripeKey").value.trim() }); $("#stripeKey").value = ""; showStripe(o); toast("Stripe connected ✦"); }
+  catch (err) { $("#stripeErr").textContent = err.message; }
+  finally { b.disabled = false; b.textContent = "Connect Stripe"; }
+});
+$("#stripeDisconnect").addEventListener("click", async () => {
+  if (!confirm("Disconnect Stripe? Clients won't be able to pay deposits by card until you connect it again.")) return;
+  try { const o = await api("disconnect_stripe"); showStripe(o); toast("Stripe disconnected"); } catch (err) { toast(err.message); }
+});
 function closeSheet() { $("#sheet").hidden = true; $("#sheetBg").hidden = true; }
 $("#settingsBtn").addEventListener("click", openSheet);
 $("#closeSheet").addEventListener("click", closeSheet);
@@ -580,7 +835,7 @@ $("#logoutBtn").addEventListener("click", () => signOut());
 if (token) { showApp(); load(); } else { showLogin(); }
 // keep fresh while open
 // (skipped while you're typing a note or picking a time, so nothing gets wiped)
-const busy = () => $("#list").contains(document.activeElement) || $$("[data-confirm]:not([hidden])").length > 0;
+const busy = () => $("#list").contains(document.activeElement) || $$("[data-confirm]:not([hidden]), [data-depform]:not([hidden])").length > 0 || !$("#sheet").hidden;
 const autoLoad = () => { if (token && document.visibilityState === "visible" && !busy()) load(true); };
 setInterval(autoLoad, 60000);
 document.addEventListener("visibilitychange", autoLoad);
