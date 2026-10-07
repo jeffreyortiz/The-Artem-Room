@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your Deposit · The Artem Room</title>
+<!-- Private, per-client page: keep out of search and don't leak the link to other sites -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#490413">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="fonts/grenze-gotisch-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face {
+    font-family: 'Grenze Gotisch';
+    src: url('fonts/grenze-gotisch-latin.woff2') format('woff2');
+    font-weight: 100 900; font-style: normal; font-display: swap;
+  }
+  :root {
+    --deep-pink: #490413; --light-pink: #FF91C5; --pale-pink: #FFF7FC;
+    --beige-trans: #ECE4D6cc; --burgundy: #A8175E; --error: #FFB3C7;
+    --c-tattooing: #7E93A7; --c-piercing: #C7BFB2; --c-nails: #C1485B; --c-makeup: #D6A24C; --c-hair: #A97452;
+    --grenze: 'Grenze Gotisch', Georgia, serif;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; min-height: 100vh;
+    background: var(--deep-pink);
+    color: var(--pale-pink);
+    font-family: var(--grenze); font-size: 1.1rem; letter-spacing: .02em;
+    -webkit-font-smoothing: antialiased;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+  }
+  .bg {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .18;
+    background: url('img/bg-heart-sigil-900.webp') center / cover no-repeat;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--light-pink); outline-offset: 3px; }
+  .top { text-align: center; padding: 28px 16px 6px; }
+  .top a { font-size: 1.9rem; font-weight: 600; text-decoration: none; }
+
+  .card {
+    width: calc(100% - 32px); max-width: 520px; margin: 18px auto 40px;
+    border: 1px solid rgba(255,145,197,.22); border-radius: 24px;
+    background: linear-gradient(145deg, rgba(73,4,19,.92), rgba(168,23,94,.32));
+    box-shadow: 0 15px 35px rgba(0,0,0,.3);
+    padding: 34px 22px; display: grid; gap: 22px; text-align: center;
+  }
+  @media (min-width: 560px) { .card { padding: 40px 36px; } }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; justify-content: center; color: var(--beige-trans); font-size: 1.05rem; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--light-pink)); }
+  h1 { margin: 6px 0 0; font-size: clamp(2rem, 7vw, 2.6rem); line-height: 1.1; font-weight: 600; }
+  .lead { margin: 0; color: var(--beige-trans); line-height: 1.6; font-size: 1.15rem; }
+  .amount { display: grid; gap: 2px; }
+  .amount strong { font-size: 3.4rem; line-height: 1; font-weight: 700; }
+  .amount span { color: var(--beige-trans); }
+  .note {
+    margin: 0; text-align: left; padding: 14px 16px; line-height: 1.55;
+    border-left: 3px solid var(--c, var(--light-pink)); background: rgba(73,4,19,.55);
+    border-radius: 0 12px 12px 0; white-space: pre-wrap; overflow-wrap: anywhere;
+  }
+  .note small { display: block; color: var(--light-pink); margin-top: 6px; font-size: .95rem; }
+
+  .pay { display: grid; gap: 12px; }
+  .btn {
+    font: 600 1.25rem/1.1 var(--grenze); letter-spacing: .02em;
+    padding: 14px 22px; min-height: 54px; border-radius: 30px; cursor: pointer; width: 100%;
+    text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    border: 1px solid transparent; transition: transform .15s ease, opacity .15s ease, border-color .15s ease;
+  }
+  .btn-solid { background: var(--pale-pink); color: var(--deep-pink); }
+  .btn-solid:hover { opacity: .92; transform: scale(1.01); }
+  .btn-outline { background: rgba(73,4,19,.35); color: var(--pale-pink); border-color: rgba(255,145,197,.45); }
+  .btn-outline:hover { border-color: var(--pale-pink); }
+  .btn[disabled] { opacity: .6; cursor: progress; transform: none; }
+  .sub { color: var(--beige-trans); font-size: .98rem; margin: -4px 0 0; }
+  .or { display: flex; align-items: center; gap: 12px; color: var(--beige-trans); font-size: 1rem; margin: 4px 0; }
+  .or::before, .or::after { content: ""; flex: 1; height: 1px; background: rgba(255,145,197,.25); }
+
+  .app {
+    border: 1px solid rgba(255,145,197,.25); border-radius: 18px; padding: 14px; display: grid; gap: 10px;
+    background: rgba(73,4,19,.35); text-align: left;
+  }
+  .app-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .app-name { font-size: 1.25rem; font-weight: 600; }
+  .handle { color: var(--beige-trans); overflow-wrap: anywhere; }
+  .app .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .app .row .btn { width: auto; flex: 1 1 140px; font-size: 1.1rem; min-height: 46px; padding: 10px 16px; }
+  .sent-link { background: none; border: 0; color: var(--light-pink); font: inherit; font-size: 1rem; text-decoration: underline; cursor: pointer; padding: 4px 0; justify-self: start; }
+
+  .policy { margin: 0; color: var(--beige-trans); font-size: .98rem; line-height: 1.55; text-align: left; border-top: 1px solid rgba(255,145,197,.2); padding-top: 18px; }
+  .policy b { color: var(--pale-pink); font-weight: 600; }
+  .err { color: var(--error); margin: 0; }
+  .sigil { font-size: 2.8rem; color: var(--light-pink); line-height: 1; }
+  .contact { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .contact .btn { width: auto; font-size: 1.1rem; min-height: 46px; padding: 10px 20px; }
+  .spinner { width: 34px; height: 34px; border-radius: 50%; margin: 10px auto; border: 3px solid rgba(255,145,197,.25); border-top-color: var(--light-pink); animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .toast {
+    position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+    background: var(--pale-pink); color: var(--deep-pink); padding: 10px 20px; border-radius: 30px; z-index: 60;
+    font-weight: 600; box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  }
+  @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } .btn { transition: none; } }
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<header class="top"><a href="./">The Artem Room</a></header>
+
+<main class="card" id="card" aria-live="polite">
+  <div class="spinner" role="img" aria-label="Loading"></div>
+</main>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+const API = "https://fgcrygrjyyvnwxatungm.supabase.co/functions/v1/artem-deposit";
+const STUDIO = { phone: "+17866943553", email: "theartemroom@gmail.com" };
+
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const params = new URLSearchParams(location.search);
+const token = params.get("t") || "";
+const cameBackPaid = params.get("paid") === "1";
+const money = c => "$" + (c / 100).toFixed(c % 100 ? 2 : 0);
+const dollars = c => (c / 100).toFixed(c % 100 ? 2 : 0);
+const card = $("#card");
+let info = null;
+
+function toast(m) { const t = $("#toast"); t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2400); }
+
+async function api(action, data = {}) {
+  const r = await fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action, token, ...data }) });
+  const out = await r.json().catch(() => ({}));
+  if (!r.ok || !out.ok) throw new Error(out.error || "Something went wrong. Please try again.");
+  return out;
+}
+
+const contactBlock = `
+  <div class="contact">
+    <a class="btn btn-outline" href="sms:${STUDIO.phone}">Text us</a>
+    <a class="btn btn-outline" href="mailto:${STUDIO.email}">Email</a>
+  </div>`;
+
+function renderError(msg) {
+  card.innerHTML = `
+    <div class="sigil" aria-hidden="true">✦</div>
+    <h1>Link not active</h1>
+    <p class="lead">${esc(msg)}</p>
+    ${contactBlock}`;
+}
+
+function renderDone(title, text) {
+  card.innerHTML = `
+    <div class="sigil" aria-hidden="true">✦</div>
+    <h1>${esc(title)}</h1>
+    <p class="lead">${text}</p>
+    <a class="btn btn-outline" href="./" style="width:auto;justify-self:center">Back to the site</a>`;
+}
+
+function render() {
+  const d = info;
+  card.style.setProperty("--c", `var(--c-${d.service})`);
+  const svc = d.service_name.toLowerCase();
+
+  if (d.status === "paid") {
+    const when = d.scheduled_at ? new Date(d.scheduled_at).toLocaleString(undefined, { weekday: "long", month: "long", day: "numeric", hour: "numeric", minute: "2-digit" }) : null;
+    return renderDone("Deposit received",
+      `Thank you, ${esc(d.first_name)}! Your ${money(d.paid_cents || d.amount_cents)} ${esc(svc)} deposit is in.` +
+      (when ? ` See you <b>${esc(when)}</b>.` : ` We'll reach out to lock in your date.`));
+  }
+  if (d.status === "waived") {
+    return renderDone("You're all set", `No deposit is needed for your ${esc(svc)}, ${esc(d.first_name)}. We'll be in touch to confirm your time.`);
+  }
+  if (d.status === "claimed") {
+    const name = { cashapp: "Cash App", venmo: "Venmo", zelle: "Zelle" }[d.claimed_method] || "your payment app";
+    return renderDone("Thank you!", `We'll confirm your ${money(d.amount_cents)} deposit as soon as it shows up on ${esc(name)}, then reach out to lock in your date.`);
+  }
+
+  const o = d.options;
+  const memo = `Artem Room ${d.service_name} deposit - ${d.first_name}`;
+  const apps = [];
+  if (o.cashapp) apps.push({ id: "cashapp", name: "Cash App", handle: "$" + o.cashapp, url: `https://cash.app/$${encodeURIComponent(o.cashapp)}/${dollars(d.amount_cents)}` });
+  if (o.venmo) apps.push({ id: "venmo", name: "Venmo", handle: "@" + o.venmo, url: `https://venmo.com/${encodeURIComponent(o.venmo)}?txn=pay&amount=${dollars(d.amount_cents)}&note=${encodeURIComponent(memo)}` });
+  if (o.zelle) apps.push({ id: "zelle", name: "Zelle", handle: o.zelle, url: null });
+
+  const cardBtn = o.card ? `
+    <div class="pay">
+      <button class="btn btn-solid" id="payCard" type="button">Pay ${money(d.amount_cents)} with card</button>
+      <p class="sub">Apple Pay, Google Pay and all major cards · secure checkout by Stripe</p>
+    </div>` : "";
+
+  const appBlocks = apps.map(a => `
+    <div class="app">
+      <div class="app-head"><span class="app-name">${a.name}</span><span class="handle">${esc(a.handle)}</span></div>
+      <div class="row">
+        ${a.url ? `<a class="btn ${o.card ? "btn-outline" : "btn-solid"}" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer" data-open="${a.id}">Open ${a.name}</a>` : ""}
+        <button class="btn btn-outline" type="button" data-copy="${esc(a.handle)}">Copy ${a.id === "zelle" ? "Zelle info" : a.name === "Cash App" ? "$cashtag" : "username"}</button>
+      </div>
+      ${a.id === "zelle" ? `<p class="sub" style="margin:0">Send ${money(d.amount_cents)} with Zelle in your bank's app.</p>` : ""}
+      <button class="sent-link" type="button" data-claim="${a.id}">I've sent it on ${a.name}</button>
+    </div>`).join("");
+
+  const nothing = !o.card && !apps.length;
+
+  card.innerHTML = `
+    <div class="eyebrow"><span class="dot"></span>${esc(d.service_name)}</div>
+    <h1>You're approved, ${esc(d.first_name)}</h1>
+    <p class="lead">Your ${esc(svc)} request is a go. A deposit holds your spot.</p>
+    <div class="amount"><strong>${money(d.amount_cents)}</strong><span>deposit</span></div>
+    ${d.note ? `<p class="note">${esc(d.note)}<small>— Olie</small></p>` : ""}
+    ${nothing ? `<p class="lead">We'll send payment details shortly. Questions? Reach out anytime.</p>${contactBlock}` : `
+      ${cardBtn}
+      ${o.card && apps.length ? `<div class="or">or pay with</div>` : ""}
+      ${appBlocks}
+      <p class="err" id="err" role="alert" hidden></p>`}
+    ${d.policy ? `<p class="policy"><b>Deposit policy.</b> ${esc(d.policy)}</p>` : ""}`;
+
+  $("#payCard")?.addEventListener("click", async e => {
+    const b = e.currentTarget; b.disabled = true; b.textContent = "Opening secure checkout…";
+    try { const out = await api("checkout"); location.href = out.url; }
+    catch (err) { showErr(err.message); b.disabled = false; b.textContent = `Pay ${money(d.amount_cents)} with card`; }
+  });
+  card.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(b.dataset.copy); toast("Copied"); } catch { toast(b.dataset.copy); }
+  }));
+  card.querySelectorAll("[data-claim]").forEach(b => b.addEventListener("click", async () => {
+    b.disabled = true;
+    try { const out = await api("claim", { method: b.dataset.claim }); info.status = out.status; if (out.status === "claimed") info.claimed_method = b.dataset.claim; render(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+    catch (err) { showErr(err.message); b.disabled = false; }
+  }));
+}
+function showErr(m) { const e = $("#err"); if (e) { e.textContent = m; e.hidden = false; } else toast(m); }
+
+async function load() {
+  if (!token) return renderError("This link is missing its code. Please use the link the studio sent you, or reach out to us.");
+  try {
+    info = await api("view");
+    // back from Stripe: the payment confirmation can take a few seconds to arrive
+    if (cameBackPaid && info.status !== "paid") {
+      card.innerHTML = `<div class="spinner" role="img" aria-label="Confirming"></div><h1>Confirming your payment…</h1><p class="lead">This only takes a moment.</p>`;
+      for (let i = 0; i < 10 && info.status !== "paid"; i++) {
+        await new Promise(r => setTimeout(r, 2000));
+        info = await api("view");
+      }
+      if (info.status !== "paid") {
+        return renderDone("Payment received", `Thanks, ${esc(info.first_name)}! Stripe is finishing up — you'll get a receipt by email, and we'll reach out to lock in your date.`);
+      }
+    }
+    render();
+  } catch (err) {
+    renderError(err.message);
+  }
+}
+load();
+</script>
+</body>
+</html>

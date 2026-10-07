@@ -6,11 +6,11 @@
 <title>Bookings · The Artem Room</title>
 <!-- Private page for the studio owner: keep it out of search engines -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#490413">
+<meta name="theme-color" content="#FAF1EF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Bookings">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -22,49 +22,65 @@
     src: url('fonts/grenze-gotisch-latin.woff2') format('woff2');
     font-weight: 100 900; font-style: normal; font-display: swap;
   }
+  /* ============================================================
+     DASHBOARD COLORS — light blush, built to sit against the site's dark red.
+     Change the look here; everything below uses these.
+     ============================================================ */
   :root {
-    --deep-pink: #490413; --light-pink: #FF91C5; --pale-pink: #FFF7FC;
-    --beige-trans: #ECE4D6cc; --burgundy: #A8175E; --error: #FFB3C7;
-    --c-tattooing: #7E93A7; --c-piercing: #C7BFB2; --c-nails: #C1485B; --c-makeup: #D6A24C; --c-hair: #A97452;
+    --bg:          #FAF1EF;  /* page: very light blush-cream */
+    --surface:     #FFFCFB;  /* cards, sheets */
+    --surface-2:   #F5E7E5;  /* insets: quotes, deposit box, inputs on cards */
+    --line:        #EBD6D4;  /* hairlines */
+    --line-strong: #D8B4B6;  /* input + outline-button borders */
+    --ink:         #490413;  /* main text = the site's dark red */
+    --muted:       #7A4C55;  /* secondary text */
+    --accent:      #A8175E;  /* burgundy highlights */
+    --accent-soft: #F6DCE6;
+    --on-ink:      #FFF7FC;  /* text on dark-red buttons */
+    --ok-ink: #1D6A3B; --ok-bg: #E3F2E8; --ok-line: #A9D6B8;
+    --err-ink: #AE1F3E; --err-bg: #FBE5EA; --err-line: #EBA9B8;
+    --shadow: 0 6px 20px rgba(73, 4, 19, .07);
+    --c-tattooing: #7E93A7; --c-piercing: #B7AC9B; --c-nails: #C1485B; --c-makeup: #D6A24C; --c-hair: #A97452;
     --grenze: 'Grenze Gotisch', Georgia, serif;
     --edge: 16px;
-    color-scheme: dark;
+    color-scheme: light;
   }
   *, *::before, *::after { box-sizing: border-box; }
   [hidden] { display: none !important; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0; min-height: 100vh;
-    background: var(--deep-pink);
-    background-image: radial-gradient(1200px 600px at 80% -10%, rgba(168,23,94,.35), transparent 60%);
+    background: var(--bg);
+    background-image: radial-gradient(1100px 520px at 85% -12%, rgba(168,23,94,.09), transparent 60%);
     background-attachment: fixed;
-    color: var(--pale-pink);
+    color: var(--ink);
     font-family: var(--grenze); font-size: 1.1rem; letter-spacing: .02em;
     -webkit-font-smoothing: antialiased;
     padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
   }
   a { color: inherit; }
   button { font: inherit; letter-spacing: inherit; color: inherit; }
-  :focus-visible { outline: 2px solid var(--light-pink); outline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  ::placeholder { color: var(--muted); opacity: .55; }
   .wrap { max-width: 760px; margin: 0 auto; padding: 0 var(--edge); }
 
   /* header */
   .top {
     position: sticky; top: 0; z-index: 20;
-    background: rgba(73,4,19,.94); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--burgundy);
+    background: rgba(250, 241, 239, .92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
     padding-top: env(safe-area-inset-top, 0px);
     margin-top: calc(-1 * env(safe-area-inset-top, 0px));
   }
   .top-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 62px; }
   .brand { font-size: 1.6rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
-  .brand small { font-size: 1rem; color: var(--light-pink); font-weight: 500; margin-left: 6px; }
+  .brand small { font-size: 1rem; color: var(--accent); font-weight: 500; margin-left: 6px; }
   .icon-btn {
     width: 42px; height: 42px; border-radius: 50%;
-    border: 1px solid rgba(255,145,197,.4); background: rgba(73,4,19,.5);
+    border: 1px solid var(--line-strong); background: var(--surface);
     display: grid; place-items: center; cursor: pointer; font-size: 1.25rem; line-height: 1;
   }
-  .icon-btn:hover { border-color: var(--pale-pink); }
+  .icon-btn:hover { border-color: var(--ink); }
   .top-actions { display: flex; gap: 8px; }
   .spin { animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -74,119 +90,157 @@
   .tab {
     flex: none; display: inline-flex; align-items: center; gap: 8px;
     padding: 8px 16px; min-height: 40px; border-radius: 30px;
-    border: 1px solid rgba(255,145,197,.4); background: rgba(73,4,19,.4);
-    color: var(--beige-trans); cursor: pointer; font-size: 1.05rem;
+    border: 1px solid var(--line-strong); background: var(--surface);
+    color: var(--muted); cursor: pointer; font-size: 1.05rem;
   }
-  .tab[aria-selected="true"] { background: var(--pale-pink); color: var(--deep-pink); border-color: var(--pale-pink); }
+  .tab:hover { color: var(--ink); }
+  .tab[aria-selected="true"] { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
   .count {
     min-width: 22px; height: 22px; padding: 0 6px; border-radius: 11px;
-    background: var(--burgundy); color: var(--pale-pink); font-size: .9rem; display: grid; place-items: center;
+    background: var(--accent-soft); color: var(--accent); font-size: .9rem; display: grid; place-items: center;
   }
-  .tab[aria-selected="true"] .count { background: var(--deep-pink); }
+  .tab[aria-selected="true"] .count { background: var(--on-ink); color: var(--ink); }
 
   /* login */
   .login { min-height: 80vh; display: grid; place-items: center; padding: 24px var(--edge); }
   .login-card {
     width: 100%; max-width: 380px; text-align: center;
-    border: 1px solid rgba(255,145,197,.2); border-radius: 24px; padding: 40px 26px;
-    background: linear-gradient(145deg, rgba(73,4,19,.85), rgba(168,23,94,.3));
-    box-shadow: 0 15px 35px rgba(0,0,0,.3);
+    border: 1px solid var(--line); border-radius: 24px; padding: 40px 26px;
+    background: var(--surface); box-shadow: 0 18px 40px rgba(73,4,19,.10);
   }
   .login-card img { width: 72px; height: 72px; border-radius: 18px; margin: 0 auto 16px; display: block; }
   .login-card h1 { font-size: 2.2rem; margin: 0 0 4px; font-weight: 600; }
-  .login-card p { color: var(--beige-trans); margin: 0 0 24px; }
+  .login-card p { color: var(--muted); margin: 0 0 24px; }
   .pin {
     width: 100%; text-align: center; font: 600 1.8rem/1 var(--grenze); letter-spacing: .4em;
     padding: 14px 10px 14px calc(10px + .4em); border-radius: 16px;
-    border: 1px solid rgba(255,145,197,.4); background: rgba(73,4,19,.6); color: var(--pale-pink);
+    border: 1px solid var(--line-strong); background: var(--surface-2); color: var(--ink);
   }
-  .msg-err { color: var(--error); min-height: 1.5em; margin: 12px 0 0 !important; }
+  .msg-err { color: var(--err-ink); min-height: 1.5em; margin: 12px 0 0 !important; }
 
   .btn {
     font: 600 1.15rem/1 var(--grenze); letter-spacing: .02em;
     padding: 12px 22px; min-height: 46px; border-radius: 30px; cursor: pointer;
     text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-    border: 1px solid transparent; transition: transform .15s ease, opacity .15s ease, border-color .15s ease;
+    border: 1px solid transparent; transition: transform .15s ease, opacity .15s ease, border-color .15s ease, background .15s ease;
   }
-  .btn-solid { background: var(--pale-pink); color: var(--deep-pink); }
-  .btn-solid:hover { opacity: .9; }
-  .btn-outline { background: transparent; color: var(--pale-pink); border-color: rgba(255,145,197,.4); }
-  .btn-outline:hover { border-color: var(--pale-pink); }
+  .btn-solid { background: var(--ink); color: var(--on-ink); }
+  .btn-solid:hover { background: #5E0A1C; }
+  .btn-outline { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
+  .btn-outline:hover { border-color: var(--ink); }
   .btn-sm { font-size: 1.05rem; padding: 8px 16px; min-height: 40px; }
-  .btn-danger { color: var(--error); border-color: rgba(255,107,139,.4); background: transparent; }
+  .btn-danger { color: var(--err-ink); border-color: var(--err-line); background: transparent; }
+  .btn-danger:hover { background: var(--err-bg); }
   .btn[disabled] { opacity: .55; cursor: progress; }
   .btn-block { width: 100%; margin-top: 16px; }
 
   /* list */
   .list { display: grid; gap: 16px; padding: 18px 0 40px; }
-  .empty { text-align: center; color: var(--beige-trans); padding: 60px 10px; }
-  .empty .big { font-size: 2.4rem; color: var(--light-pink); display: block; margin-bottom: 10px; }
+  .empty { text-align: center; color: var(--muted); padding: 60px 10px; }
+  .empty .big { font-size: 2.4rem; color: var(--accent); display: block; margin-bottom: 10px; }
 
   .card {
-    border: 1px solid rgba(255,145,197,.22); border-radius: 20px;
-    background: linear-gradient(160deg, rgba(73,4,19,.9), rgba(120,12,58,.35));
-    box-shadow: 0 10px 26px rgba(0,0,0,.25);
+    border: 1px solid var(--line); border-radius: 20px;
+    background: var(--surface); box-shadow: var(--shadow);
     overflow: hidden; scroll-margin-top: 140px;
   }
   .card.flash { animation: flash 1.6s ease 2; }
-  @keyframes flash { 50% { border-color: var(--light-pink); box-shadow: 0 0 0 3px rgba(255,145,197,.35); } }
+  @keyframes flash { 50% { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(168,23,94,.2); } }
   .card summary { list-style: none; cursor: pointer; padding: 16px 18px; display: grid; gap: 6px; }
   .card summary::-webkit-details-marker { display: none; }
   .row1 { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
   .who { font-size: 1.45rem; font-weight: 600; line-height: 1.15; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .svc { display: inline-flex; align-items: center; gap: 8px; color: var(--beige-trans); font-size: 1.05rem; }
-  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; }
-  .meta { display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--beige-trans); font-size: 1rem; }
-  .when-strong { color: var(--pale-pink); }
-  .pill {
-    flex: none; font-size: .9rem; padding: 4px 12px; border-radius: 20px; border: 1px solid; white-space: nowrap;
-  }
-  .pill.new { background: var(--light-pink); color: var(--deep-pink); border-color: var(--light-pink); }
-  .pill.confirmed { border-color: #9FE0B5; color: #CFF5DB; }
-  .pill.completed { border-color: rgba(236,228,214,.5); color: var(--beige-trans); }
-  .pill.declined, .pill.cancelled { border-color: rgba(255,107,139,.5); color: var(--error); }
-  .chev { transition: transform .2s ease; color: var(--light-pink); }
+  .svc { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 1.05rem; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; box-shadow: inset 0 0 0 1px rgba(73,4,19,.15); }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--muted); font-size: 1rem; }
+  .when-strong { color: var(--ink); }
+  .pill { flex: none; font-size: .9rem; padding: 4px 12px; border-radius: 20px; border: 1px solid; white-space: nowrap; }
+  .pill.new { background: var(--accent); color: var(--on-ink); border-color: var(--accent); }
+  .pill.confirmed { background: var(--ok-bg); border-color: var(--ok-line); color: var(--ok-ink); }
+  .pill.completed { border-color: var(--line-strong); color: var(--muted); }
+  .pill.declined, .pill.cancelled { background: var(--err-bg); border-color: var(--err-line); color: var(--err-ink); }
+  .chev { transition: transform .2s ease; color: var(--accent); }
   details[open] .chev { transform: rotate(180deg); }
 
-  .body { padding: 0 18px 18px; display: grid; gap: 16px; border-top: 1px solid rgba(255,145,197,.15); padding-top: 16px; }
+  .body { padding: 16px 18px 18px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; border-top: 1px solid var(--line); }
+  .body > *, .dep > * { min-width: 0; }
   .kv { display: grid; grid-template-columns: 110px 1fr; gap: 6px 12px; margin: 0; }
-  .kv dt { color: var(--beige-trans); }
+  .kv dt { color: var(--muted); }
   .kv dd { margin: 0; overflow-wrap: anywhere; }
-  .quote { margin: 0; padding: 12px 14px; border-left: 3px solid var(--c); background: rgba(73,4,19,.5); border-radius: 0 12px 12px 0; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .quote { margin: 0; padding: 12px 14px; border-left: 3px solid var(--c); background: var(--surface-2); border-radius: 0 12px 12px 0; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
   .photos { display: flex; gap: 10px; flex-wrap: wrap; }
   .photos a { display: block; width: 92px; height: 92px; }
-  .photos img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; border: 1px solid rgba(255,145,197,.35); }
+  .photos img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); }
   .actions { display: flex; flex-wrap: wrap; gap: 8px; }
-  .label { color: var(--beige-trans); font-size: 1rem; margin: 0 0 6px; }
+  .label { color: var(--muted); font-size: 1rem; margin: 0 0 6px; }
   .input {
-    width: 100%; font: inherit; font-size: 1.1rem; color: var(--pale-pink);
-    background: rgba(73,4,19,.6); border: 1px solid rgba(255,145,197,.35); border-radius: 14px;
+    width: 100%; font: inherit; font-size: 1.1rem; color: var(--ink);
+    background: #fff; border: 1px solid var(--line-strong); border-radius: 14px;
     padding: 10px 14px; min-height: 46px;
   }
+  .input:focus-visible { border-color: var(--accent); }
   textarea.input { min-height: 80px; resize: vertical; line-height: 1.45; }
-  .confirm-box { display: grid; gap: 10px; padding: 14px; border-radius: 16px; border: 1px dashed rgba(255,145,197,.45); }
-  .saved { color: #CFF5DB; font-size: .95rem; min-height: 1.2em; }
+  select.input {
+    -webkit-appearance: none; appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 52%, calc(100% - 12px) 52%; background-size: 6px 6px; background-repeat: no-repeat;
+  }
+  .confirm-box { display: grid; gap: 10px; padding: 14px; border-radius: 16px; border: 1px dashed var(--line-strong); background: var(--surface-2); }
+  .saved { color: var(--ok-ink); font-size: .95rem; min-height: 1.2em; }
+
+  /* deposits */
+  .dep { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 14px; border-radius: 16px; border: 1px solid var(--line); background: var(--surface-2); }
+  .dep h4 { margin: 0; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .dep p { margin: 0; color: var(--muted); line-height: 1.5; }
+  .dep .alert { color: var(--ink); background: var(--accent-soft); border: 1px solid #E7B3C8; padding: 10px 12px; border-radius: 12px; }
+  .dep .ok { color: var(--ok-ink); }
+  .money-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .money { position: relative; }
+  .money span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+  .money .input { padding-left: 28px; }
+  .quick { display: flex; gap: 6px; flex-wrap: wrap; }
+  .quick button { font-size: .95rem; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--line-strong); background: var(--surface); cursor: pointer; }
+  .quick button:hover { border-color: var(--ink); }
+  .linkbox { display: flex; gap: 8px; align-items: center; }
+  .linkbox code { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 8px 10px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); font-size: .85rem; }
+  .depchip { font-size: .95rem; padding: 2px 10px; border-radius: 20px; border: 1px solid #E7B3C8; color: var(--accent); background: var(--accent-soft); }
+  .depchip.paid { background: var(--ok-bg); border-color: var(--ok-line); color: var(--ok-ink); }
+  .depchip.claimed { background: var(--accent); color: var(--on-ink); border-color: var(--accent); }
+  .stripe-on { color: var(--ok-ink); }
+
+  /* setup checklist */
+  .setup { margin: 18px 0 0; padding: 16px 18px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); display: grid; gap: 10px; }
+  .setup-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .setup h2 { margin: 0; font-size: 1.35rem; }
+  .setup ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .setup li { display: flex; gap: 10px; align-items: flex-start; color: var(--muted); line-height: 1.4; }
+  .setup li .tick { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--line-strong); display: grid; place-items: center; font-size: .8rem; margin-top: 1px; }
+  .setup li.done { text-decoration: line-through; opacity: .7; }
+  .setup li.done .tick { background: var(--ok-bg); border-color: var(--ok-line); color: var(--ok-ink); }
+  .setup .x { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 1rem; text-decoration: underline; padding: 4px; }
 
   /* settings sheet */
-  .sheet-bg { position: fixed; inset: 0; background: rgba(20,0,6,.6); z-index: 40; }
+  .sheet-bg { position: fixed; inset: 0; background: rgba(73,4,19,.28); z-index: 40; }
   .sheet {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 41;
     max-height: 88vh; overflow-y: auto;
-    background: var(--deep-pink); border-top: 1px solid var(--burgundy);
+    background: var(--surface); border-top: 1px solid var(--line);
     border-radius: 24px 24px 0 0; padding: 22px var(--edge) calc(28px + env(safe-area-inset-bottom, 0px));
-    box-shadow: 0 -20px 40px rgba(0,0,0,.4);
+    box-shadow: 0 -18px 40px rgba(73,4,19,.15);
   }
   .sheet-inner { max-width: 560px; margin: 0 auto; display: grid; gap: 26px; }
   .sheet h2 { margin: 0; font-size: 1.9rem; }
   .sheet h3 { margin: 0 0 8px; font-size: 1.35rem; }
-  .sheet p, .sheet li { color: var(--beige-trans); line-height: 1.55; }
+  .sheet p, .sheet li { color: var(--muted); line-height: 1.55; }
+  .sheet a { color: var(--accent); }
   .sheet ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+  .sheet code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; }
   .topic { display: flex; gap: 8px; align-items: center; }
-  .topic code { flex: 1; min-width: 0; overflow-x: auto; padding: 10px 12px; border-radius: 12px; background: rgba(0,0,0,.25); font-size: .95rem; white-space: nowrap; }
+  .topic code { flex: 1; min-width: 0; overflow-x: auto; padding: 10px 12px; border-radius: 12px; font-size: .95rem; white-space: nowrap; }
   .toast {
     position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
-    background: var(--pale-pink); color: var(--deep-pink); padding: 10px 20px; border-radius: 30px; z-index: 60;
-    font-weight: 600; box-shadow: 0 10px 24px rgba(0,0,0,.35); max-width: calc(100% - 32px); text-align: center;
+    background: var(--ink); color: var(--on-ink); padding: 10px 20px; border-radius: 30px; z-index: 60;
+    font-weight: 600; box-shadow: 0 10px 24px rgba(73,4,19,.25); max-width: calc(100% - 32px); text-align: center;
   }
 </style>
 </head>
@@ -218,6 +272,7 @@
       </div>
       <div class="tabs" role="tablist" aria-label="Filter bookings">
         <button class="tab" role="tab" data-tab="new" aria-selected="true">New <span class="count" id="c-new">0</span></button>
+        <button class="tab" role="tab" data-tab="deposit" aria-selected="false">Awaiting deposit <span class="count" id="c-deposit">0</span></button>
         <button class="tab" role="tab" data-tab="upcoming" aria-selected="false">Upcoming <span class="count" id="c-upcoming">0</span></button>
         <button class="tab" role="tab" data-tab="past" aria-selected="false">Past</button>
         <button class="tab" role="tab" data-tab="all" aria-selected="false">All <span class="count" id="c-all">0</span></button>
@@ -225,6 +280,13 @@
     </div>
   </header>
   <main class="wrap">
+    <section class="setup" id="setup" aria-labelledby="setup-title" hidden>
+      <div class="setup-head">
+        <h2 id="setup-title">Finish setting up</h2>
+        <button class="x" type="button" id="setupHide">Hide</button>
+      </div>
+      <ul id="setupList"></ul>
+    </section>
     <div class="list" id="list" aria-live="polite"></div>
   </main>
 </div>
@@ -250,6 +312,42 @@
       </div>
       <p style="margin:0 0 10px">Keep the topic name private — anyone with it could see alerts. Alerts show the client's first name, service and day, never their phone or email.</p>
       <button class="btn btn-outline btn-sm" type="button" id="testNotify">Send a test alert</button>
+    </div>
+
+    <form id="payForm">
+      <h3>Deposit payment options</h3>
+      <p style="margin:0 0 12px">Fill in the ones you use. Clients see them on their deposit page; leave a box empty to hide it.</p>
+      <div style="display:grid;gap:10px">
+        <label class="label" for="pCash" style="margin:0">Cash App $cashtag</label>
+        <input class="input" id="pCash" placeholder="$yourcashtag" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <label class="label" for="pVenmo" style="margin:0">Venmo username</label>
+        <input class="input" id="pVenmo" placeholder="@your-venmo" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <label class="label" for="pZelle" style="margin:0">Zelle email or phone</label>
+        <input class="input" id="pZelle" placeholder="name@email.com or phone" autocapitalize="off" autocorrect="off" spellcheck="false">
+        <label class="label" for="pPolicy" style="margin:0">Deposit policy (shown to clients)</label>
+        <textarea class="input" id="pPolicy" rows="4"></textarea>
+        <button class="btn btn-outline btn-sm" type="submit">Save payment options</button>
+      </div>
+    </form>
+
+    <div id="stripeBox">
+      <h3>Card payments (Stripe)</h3>
+      <div id="stripeOff">
+        <ol>
+          <li>Make a free account at <a href="https://dashboard.stripe.com/register" target="_blank" rel="noopener">stripe.com</a> and add the bank account deposits should go to.</li>
+          <li>In Stripe go to <b>Developers → API keys</b> and copy the <b>Secret key</b> (starts with <code>sk_live_</code>). Want to try it first? Turn on <b>Test mode</b> and use the <code>sk_test_</code> key — test card 4242 4242 4242 4242.</li>
+          <li>Paste it here. Payment confirmations get set up automatically.</li>
+        </ol>
+        <div style="display:grid;gap:10px;margin-top:10px">
+          <input class="input" id="stripeKey" type="password" placeholder="sk_live_…" autocomplete="off" autocapitalize="off" spellcheck="false">
+          <button class="btn btn-outline btn-sm" type="button" id="stripeConnect">Connect Stripe</button>
+        </div>
+      </div>
+      <div id="stripeOn" hidden>
+        <p class="stripe-on" id="stripeStatus" style="margin:0 0 10px">Connected ✓</p>
+        <button class="btn btn-danger btn-sm" type="button" id="stripeDisconnect">Disconnect Stripe</button>
+      </div>
+      <p class="msg-err" id="stripeErr" role="alert" style="margin:8px 0 0"></p>
     </div>
 
     <div>
@@ -351,23 +449,152 @@ const toLocalInput = iso => {
   const d = new Date(iso); return new Date(d - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
 };
 
+/* ---------- setup checklist (shows until everything's done or she hides it) ---------- */
+const DEFAULT_POLICY = "Your deposit holds your appointment and goes toward your final price. Deposits are non-refundable, but can be moved to a new date once with at least 48 hours' notice.";
+let paySettings = null;
+async function refreshSetup() {
+  if (store.get("artem_setup_hidden") === "1") { $("#setup").hidden = true; return; }
+  try { paySettings = await api("payment_settings"); } catch { return; }
+  const ps = paySettings;
+  const items = [
+    { done: store.get("artem_alerts_ok") === "1", text: "Turn on phone alerts — Settings → Phone alerts, then “Send a test alert”", go: "settings" },
+    { done: !!(ps.cashapp_tag || ps.venmo_user || ps.zelle_contact), text: "Add your Cash App, Venmo or Zelle so clients can pay deposits", go: "settings" },
+    { done: (ps.deposit_policy || "").trim() !== DEFAULT_POLICY, text: "Read the deposit policy and make it yours (it's starter text right now)", go: "settings" },
+    { done: !!ps.stripe_connected, text: "Optional: connect Stripe so clients can pay by card / Apple Pay", go: "settings" },
+    { done: !bookings.some(b => /\(Claude\)|^TEST|TEST booking/i.test(b.name + " " + (b.details || ""))), text: "Delete the practice bookings marked “Test” (open one → Delete)", go: "all" },
+  ];
+  const left = items.filter(i => !i.done).length;
+  $("#setup").hidden = left === 0;
+  $("#setupList").innerHTML = items.map((it, i) =>
+    `<li class="${it.done ? "done" : ""}"><span class="tick" aria-hidden="true">${it.done ? "✓" : ""}</span>
+      ${it.done ? `<span>${esc(it.text)}</span>` : `<a href="#" data-setup="${it.go}">${esc(it.text)}</a>`}</li>`).join("");
+}
+$("#setupList").addEventListener("click", e => {
+  const a = e.target.closest("[data-setup]"); if (!a) return;
+  e.preventDefault();
+  if (a.dataset.setup === "settings") openSheet();
+  else { tab = "all"; render(); window.scrollTo({ top: 0 }); }
+});
+$("#setupHide").addEventListener("click", () => { store.set("artem_setup_hidden", "1"); $("#setup").hidden = true; });
+
+/* ---------- deposits ---------- */
+const money = c => "$" + (c / 100).toFixed(c % 100 ? 2 : 0);
+const toCents = v => { const n = parseFloat(String(v).replace(/[^0-9.]/g, "")); return Number.isFinite(n) ? Math.round(n * 100) : null; };
+const METHOD = { stripe: "card", cashapp: "Cash App", venmo: "Venmo", zelle: "Zelle", cash: "cash", other: "other" };
+const depLink = b => new URL("deposit.html?t=" + encodeURIComponent(b.deposit_token), location.href).href;
+
+function depChip(b) {
+  if (!b.deposit_status || b.deposit_status === "none") return "";
+  if (b.deposit_status === "paid") return `<span class="depchip paid">✓ ${money(b.deposit_paid_cents || b.deposit_cents)} paid</span>`;
+  if (b.deposit_status === "claimed") return `<span class="depchip claimed">Check ${esc(METHOD[b.deposit_claimed_method] || "payment")}</span>`;
+  if (b.deposit_status === "waived") return `<span class="depchip">No deposit</span>`;
+  return `<span class="depchip">${money(b.deposit_cents)} requested</span>`;
+}
+
+function depForm(b) {
+  const quote = b.quote_cents != null ? (b.quote_cents / 100).toString() : "";
+  const dep = b.deposit_cents != null ? (b.deposit_cents / 100).toString() : "";
+  return `
+    <div data-depform ${b.deposit_status === "none" || !b.deposit_status ? "" : "hidden"}>
+      <div style="display:grid;gap:10px">
+        <div class="money-row">
+          <div><label class="label" for="q-${esc(b.id)}">Full price <span style="opacity:.7">(optional)</span></label>
+            <div class="money"><span>$</span><input class="input" id="q-${esc(b.id)}" data-quote inputmode="decimal" value="${esc(quote)}" placeholder="300"></div></div>
+          <div><label class="label" for="d-${esc(b.id)}">Deposit</label>
+            <div class="money"><span>$</span><input class="input" id="d-${esc(b.id)}" data-dep inputmode="decimal" value="${esc(dep)}" placeholder="150"></div></div>
+        </div>
+        <div class="quick" aria-label="Deposit shortcuts">
+          <button type="button" data-pct="50">50% of price</button>
+          <button type="button" data-pct="30">30%</button>
+          <button type="button" data-flat="50">$50</button>
+          <button type="button" data-flat="100">$100</button>
+        </div>
+        <label class="label" for="dn-${esc(b.id)}" style="margin:0">Note to ${esc(firstName(b.name))} <span style="opacity:.7">(optional, shows on their deposit page)</span></label>
+        <textarea class="input" id="dn-${esc(b.id)}" data-depnote placeholder="Love this idea! I'll have a sketch ready before your session.">${esc(b.deposit_note || "")}</textarea>
+        <button class="btn btn-solid btn-sm" data-act="dep-create">${b.deposit_token ? "Update deposit" : "Approve & create deposit link"}</button>
+      </div>
+    </div>`;
+}
+
+function depSection(b) {
+  const st = b.deposit_status || "none";
+  if (["declined", "cancelled"].includes(b.status) && st === "none") return "";
+  const first = firstName(b.name);
+  let inner = "";
+  if (st === "none") {
+    inner = `<h4>💳 Deposit</h4>
+      <p>Approve this request and send ${esc(first)} a private link to pay a deposit.</p>
+      <button class="btn btn-solid btn-sm" data-act="dep-open">Approve &amp; request deposit</button>
+      <button class="btn btn-outline btn-sm" data-act="dep-mark" data-to="waived">No deposit needed</button>
+      ${depForm(b)}`;
+    // the form starts hidden until "Approve" is tapped
+    inner = inner.replace('<div data-depform >', '<div data-depform hidden>');
+  } else if (st === "requested" || st === "claimed") {
+    const link = depLink(b);
+    inner = `<h4>💳 ${money(b.deposit_cents)} deposit requested</h4>
+      ${st === "claimed" ? `<p class="alert">${esc(first)} says they sent it on <b>${esc(METHOD[b.deposit_claimed_method])}</b>. Check the app, then mark it paid.</p>` : `<p>Send ${esc(first)} the link. You'll get a phone alert when they pay by card, or when they tap "I've sent it" for Cash App, Venmo or Zelle.</p>`}
+      <div class="linkbox"><code>${esc(link)}</code><button class="btn btn-outline btn-sm" data-act="dep-copy">Copy</button></div>
+      <div class="actions">
+        ${b.email ? `<button class="btn btn-solid btn-sm" data-act="dep-email">Email link</button>` : ""}
+        ${b.phone ? `<button class="btn ${b.email ? "btn-outline" : "btn-solid"} btn-sm" data-act="dep-text">Text link</button>` : ""}
+        <a class="btn btn-outline btn-sm" href="${esc(link)}" target="_blank" rel="noopener">Preview</a>
+      </div>
+      <div class="actions" style="align-items:center">
+        <select class="input" data-paymethod style="width:auto;min-height:40px;padding:6px 34px 6px 12px;font-size:1rem" aria-label="How they paid">
+          ${["cashapp", "venmo", "zelle", "cash", "stripe", "other"].map(m => `<option value="${m}" ${m === (b.deposit_claimed_method || "cashapp") ? "selected" : ""}>${METHOD[m][0].toUpperCase() + METHOD[m].slice(1)}</option>`).join("")}
+        </select>
+        <button class="btn btn-solid btn-sm" data-act="dep-paid">Mark paid</button>
+      </div>
+      <div class="actions">
+        <button class="btn btn-outline btn-sm" data-act="dep-open">Change amount</button>
+        <button class="btn btn-outline btn-sm" data-act="dep-mark" data-to="waived">Waive</button>
+        <button class="btn btn-danger btn-sm" data-act="dep-mark" data-to="none">Cancel request</button>
+      </div>
+      ${depForm(b).replace('<div data-depform ', '<div data-depform hidden ')}`;
+  } else if (st === "paid") {
+    inner = `<h4 class="ok">✓ ${money(b.deposit_paid_cents || b.deposit_cents)} deposit paid</h4>
+      <p>By ${esc(METHOD[b.deposit_method] || "—")}${b.deposit_paid_at ? " · " + esc(new Date(b.deposit_paid_at).toLocaleDateString(undefined, { month: "short", day: "numeric" })) : ""}${b.quote_cents != null ? ` · ${money(Math.max(0, b.quote_cents - (b.deposit_paid_cents || b.deposit_cents)))} left at the appointment` : ""}</p>
+      <div class="actions"><button class="btn btn-outline btn-sm" data-act="dep-mark" data-to="requested">Undo</button></div>`;
+  } else if (st === "waived") {
+    inner = `<h4>No deposit for this one</h4>
+      <div class="actions"><button class="btn btn-outline btn-sm" data-act="dep-mark" data-to="none">Undo</button></div>`;
+  }
+  return `<div class="dep">${inner}</div>`;
+}
+
+function depMessage(b, kind) {
+  const link = depLink(b);
+  const svc = SERVICE_NOUN[b.service] || "appointment";
+  const first = firstName(b.name);
+  if (kind === "text") {
+    return `Hi ${first}! Your ${svc} request with ${STUDIO} is approved ✨ To hold your spot, here's your ${money(b.deposit_cents)} deposit link: ${link}`;
+  }
+  return {
+    subject: `Your ${svc} deposit · ${STUDIO}`,
+    body: `Hi ${first}!\n\nGreat news, your ${svc} request is approved ✨ To hold your spot, please pay your ${money(b.deposit_cents)} deposit here:\n\n${link}\n\n` +
+      (b.deposit_note ? `${b.deposit_note}\n\n` : "") +
+      `Once it's in, we'll lock in your date. Any questions, just reply to this email.\n\nOlie\n${STUDIO}`
+  };
+}
+
 /* ---------- list ---------- */
 function bucket(b) {
+  if (b.status === "new" && ["requested", "claimed"].includes(b.deposit_status)) return "deposit";
   if (b.status === "new") return "new";
   if (b.status === "confirmed") return "upcoming";
   return "past";
 }
 function render() {
-  const counts = { new: 0, upcoming: 0, all: bookings.length };
+  const counts = { new: 0, deposit: 0, upcoming: 0, all: bookings.length };
   bookings.forEach(b => { const k = bucket(b); if (k in counts) counts[k]++; });
-  $("#c-new").textContent = counts.new; $("#c-upcoming").textContent = counts.upcoming; $("#c-all").textContent = counts.all;
+  $("#c-new").textContent = counts.new; $("#c-deposit").textContent = counts.deposit; $("#c-upcoming").textContent = counts.upcoming; $("#c-all").textContent = counts.all;
   $$(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.tab === tab));
 
   let rows = tab === "all" ? bookings.slice() : bookings.filter(b => bucket(b) === tab);
   if (tab === "upcoming") rows.sort((a, b) => new Date(a.scheduled_at || "2999") - new Date(b.scheduled_at || "2999"));
   const list = $("#list");
   if (!rows.length) {
-    const msg = { new: "No new requests right now.", upcoming: "Nothing confirmed yet.", past: "No past bookings yet.", all: "No bookings yet." }[tab];
+    const msg = { new: "No new requests right now.", deposit: "No deposits waiting.", upcoming: "Nothing confirmed yet.", past: "No past bookings yet.", all: "No bookings yet." }[tab];
     list.innerHTML = `<div class="empty"><span class="big">✦</span>${msg}</div>`;
     return;
   }
@@ -399,6 +626,7 @@ function card(b) {
     b.placement ? ["Placement", esc(b.placement)] : null,
     b.size ? ["Size", esc(b.size)] : null,
     b.service === "tattooing" ? ["18+", b.is_adult ? "Confirmed" : "Not confirmed"] : null,
+    b.quote_cents != null ? ["Full price", esc(money(b.quote_cents))] : null,
     ["Received", esc(new Date(b.created_at).toLocaleString())]
   ].filter(Boolean);
 
@@ -426,6 +654,7 @@ function card(b) {
         ${whenLine}
         <span>${esc(ago(b.created_at))}</span>
         ${b.photos?.length ? `<span>📎 ${b.photos.length}</span>` : ""}
+        ${depChip(b)}
         <span class="chev" aria-hidden="true">⌄</span>
       </div>
     </summary>
@@ -434,6 +663,8 @@ function card(b) {
       ${b.photos?.length ? `<div class="photos">${b.photos.map((u, i) => `<a href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="Reference photo ${i + 1}" loading="lazy"></a>`).join("")}</div>` : ""}
       <dl class="kv">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
       <div class="actions">${contact}</div>
+
+      ${depSection(b)}
 
       <div class="confirm-box" data-confirm hidden>
         <label class="label" for="dt-${esc(b.id)}">Appointment date &amp; time</label>
@@ -463,6 +694,7 @@ async function load(quiet) {
     bookings = out.bookings || [];
     render();
     focusHash();
+    refreshSetup();
   } catch (err) { if (!quiet && token) toast(err.message); }
   finally { rb.classList.remove("spin"); }
 }
@@ -511,8 +743,43 @@ $("#list").addEventListener("click", async e => {
       if (!box.hidden) $("input", box).focus();
       return;
     }
+    if (act === "dep-open") {
+      const f = $("[data-depform]", cardEl); f.hidden = !f.hidden;
+      if (!f.hidden) $("[data-quote]", f).focus();
+      return;
+    }
+    if (btn.dataset.pct || btn.dataset.flat) return; // handled below
+    if (act === "dep-copy") {
+      try { await navigator.clipboard.writeText(depLink(b)); toast("Link copied"); } catch { toast("Press and hold the link to copy"); }
+      return;
+    }
+    if (act === "dep-email") {
+      const m = depMessage(b, "email");
+      location.href = `mailto:${encodeURIComponent(b.email)}?subject=${encodeURIComponent(m.subject)}&body=${encodeURIComponent(m.body)}`;
+      return;
+    }
+    if (act === "dep-text") { location.href = smsLink(b.phone, depMessage(b, "text")); return; }
     btn.disabled = true;
-    if (act === "confirm-save") {
+    if (act === "dep-create") {
+      const dep = toCents($("[data-dep]", cardEl).value);
+      const quoteRaw = $("[data-quote]", cardEl).value.trim();
+      const quote = quoteRaw ? toCents(quoteRaw) : null;
+      if (!dep || dep < 100) { toast("Enter a deposit amount"); return; }
+      if (quote != null && dep > quote) { toast("Deposit is more than the full price"); return; }
+      const out = await api("request_deposit", { id, deposit_cents: dep, quote_cents: quote, note: $("[data-depnote]", cardEl).value });
+      Object.assign(b, out.booking);
+      openIds.add(id); render(); toast("Deposit link ready ✦");
+    } else if (act === "dep-paid") {
+      const method = $("[data-paymethod]", cardEl).value;
+      const out = await api("mark_deposit", { id, status: "paid", method });
+      Object.assign(b, out.booking); render(); toast("Deposit marked paid");
+    } else if (act === "dep-mark") {
+      const to = btn.dataset.to;
+      if (to === "none" && b.deposit_token && !confirm("Cancel this deposit request? The link you sent will stop working.")) return;
+      const out = await api("mark_deposit", { id, status: to });
+      Object.assign(b, out.booking); render();
+      toast({ waived: "No deposit needed", none: "Deposit request cancelled", requested: "Back to requested" }[to] || "Updated");
+    } else if (act === "confirm-save") {
       const val = $("input[type=datetime-local]", cardEl).value;
       if (!val) { toast("Pick a date and time first."); return; }
       const when = new Date(val);
@@ -537,6 +804,27 @@ $("#list").addEventListener("click", async e => {
   finally { btn.disabled = false; }
 });
 
+// deposit shortcuts: 50% / 30% of full price, or a flat amount
+$("#list").addEventListener("click", e => {
+  const q = e.target.closest("[data-pct],[data-flat]"); if (!q) return;
+  const f = q.closest("[data-depform]");
+  const depIn = $("[data-dep]", f);
+  if (q.dataset.flat) { depIn.value = q.dataset.flat; return; }
+  const price = toCents($("[data-quote]", f).value);
+  if (!price) { toast("Enter the full price first"); $("[data-quote]", f).focus(); return; }
+  const c = Math.round(price * Number(q.dataset.pct) / 100);
+  depIn.value = (c / 100).toFixed(c % 100 ? 2 : 0);
+});
+// typing a full price pre-fills a 50% deposit if the deposit box is still empty
+$("#list").addEventListener("input", e => {
+  const qIn = e.target.closest("[data-quote]"); if (!qIn) return;
+  const depIn = $("[data-dep]", qIn.closest("[data-depform]"));
+  if (depIn.dataset.touched) return;
+  const p = toCents(qIn.value);
+  depIn.value = p ? ((Math.round(p / 2)) / 100).toFixed(Math.round(p / 2) % 100 ? 2 : 0) : "";
+});
+$("#list").addEventListener("input", e => { if (e.target.matches("[data-dep]")) e.target.dataset.touched = "1"; });
+
 // notes save automatically when you leave the box
 $("#list").addEventListener("focusout", async e => {
   const ta = e.target.closest("[data-notes]"); if (!ta) return;
@@ -551,7 +839,37 @@ $("#list").addEventListener("focusout", async e => {
 function openSheet() {
   $("#sheet").hidden = false; $("#sheetBg").hidden = false;
   api("notify_info").then(o => { $("#topicName").textContent = o.ntfy_topic || "not set"; }).catch(() => {});
+  api("payment_settings").then(showPay).catch(() => {});
 }
+function showPay(o) {
+  $("#pCash").value = o.cashapp_tag ? "$" + o.cashapp_tag : "";
+  $("#pVenmo").value = o.venmo_user ? "@" + o.venmo_user : "";
+  $("#pZelle").value = o.zelle_contact || "";
+  $("#pPolicy").value = o.deposit_policy || "";
+  showStripe(o);
+}
+function showStripe(o) {
+  $("#stripeOff").hidden = !!o.stripe_connected; $("#stripeOn").hidden = !o.stripe_connected;
+  $("#stripeStatus").textContent = o.stripe_mode === "test" ? "Connected in TEST mode ✓ (no real money moves)" : "Connected ✓ Clients can pay by card, Apple Pay and Google Pay.";
+}
+$("#payForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  try {
+    const o = await api("save_payment_settings", { cashapp_tag: $("#pCash").value, venmo_user: $("#pVenmo").value, zelle_contact: $("#pZelle").value, deposit_policy: $("#pPolicy").value });
+    $("#pCash").value = o.cashapp_tag ? "$" + o.cashapp_tag : ""; $("#pVenmo").value = o.venmo_user ? "@" + o.venmo_user : "";
+    toast("Payment options saved"); refreshSetup();
+  } catch (err) { toast(err.message); }
+});
+$("#stripeConnect").addEventListener("click", async e => {
+  const b = e.currentTarget; b.disabled = true; b.textContent = "Connecting…"; $("#stripeErr").textContent = "";
+  try { const o = await api("connect_stripe", { secret_key: $("#stripeKey").value.trim() }); $("#stripeKey").value = ""; showStripe(o); refreshSetup(); toast("Stripe connected ✦"); }
+  catch (err) { $("#stripeErr").textContent = err.message; }
+  finally { b.disabled = false; b.textContent = "Connect Stripe"; }
+});
+$("#stripeDisconnect").addEventListener("click", async () => {
+  if (!confirm("Disconnect Stripe? Clients won't be able to pay deposits by card until you connect it again.")) return;
+  try { const o = await api("disconnect_stripe"); showStripe(o); toast("Stripe disconnected"); } catch (err) { toast(err.message); }
+});
 function closeSheet() { $("#sheet").hidden = true; $("#sheetBg").hidden = true; }
 $("#settingsBtn").addEventListener("click", openSheet);
 $("#closeSheet").addEventListener("click", closeSheet);
@@ -563,7 +881,7 @@ $("#copyTopic").addEventListener("click", async () => {
 });
 $("#testNotify").addEventListener("click", async e => {
   e.target.disabled = true;
-  try { await api("test_notify"); toast("Test alert sent — check your phone"); }
+  try { await api("test_notify"); store.set("artem_alerts_ok", "1"); refreshSetup(); toast("Test alert sent — check your phone"); }
   catch (err) { toast(err.message); }
   finally { e.target.disabled = false; }
 });
@@ -580,7 +898,7 @@ $("#logoutBtn").addEventListener("click", () => signOut());
 if (token) { showApp(); load(); } else { showLogin(); }
 // keep fresh while open
 // (skipped while you're typing a note or picking a time, so nothing gets wiped)
-const busy = () => $("#list").contains(document.activeElement) || $$("[data-confirm]:not([hidden])").length > 0;
+const busy = () => $("#list").contains(document.activeElement) || $$("[data-confirm]:not([hidden]), [data-depform]:not([hidden])").length > 0 || !$("#sheet").hidden;
 const autoLoad = () => { if (token && document.visibilityState === "visible" && !busy()) load(true); };
 setInterval(autoLoad, 60000);
 document.addEventListener("visibilitychange", autoLoad);

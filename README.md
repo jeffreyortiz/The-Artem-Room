@@ -10,6 +10,7 @@ No build step. Plain HTML/CSS/JS files, hosted for free on Netlify.
 |---|---|
 | `index.html` | The public site: hero carousel, services, booking request form |
 | `bookings.html` | Olie's private bookings dashboard (PIN-protected, not indexed by Google) |
+| `deposit.html` | The private page a client opens from their deposit link |
 | `img/` | Optimized photos (WebP, several sizes each), share image, app icons |
 | `photos/` | Original full-size photos. Not loaded by the site — kept as source files |
 | `fonts/` | Self-hosted Grenze Gotisch (faster than Google Fonts) |
@@ -59,6 +60,25 @@ write a short `alt` description of what's in the photo (this helps Google Images
 Backend lives in the existing Supabase project (`one-page-lvl`), in tables prefixed
 `artem_`. Row-level security is on with no public policies, so the website's visitors can't
 read anything — only the two functions can.
+
+### Deposits
+
+1. On a request in the dashboard, Olie taps **Approve & request deposit**, enters the full
+   price (the deposit fills in at 50%, or tap 30% / $50 / $100, or type any amount) and an
+   optional note.
+2. That creates a private link (`deposit.html?t=…`). **Email link** / **Text link** opens her
+   own Mail or Messages app with the message already written, so it comes from her real
+   address/number.
+3. The client's page shows the amount, her note, the deposit policy, and how to pay:
+   - **Card / Apple Pay / Google Pay** through Stripe (once connected). Marked paid
+     automatically, and Olie gets a "Deposit paid" alert.
+   - **Cash App / Venmo / Zelle** with the amount pre-filled. The client taps "I've sent it",
+     Olie gets a "check for a deposit" alert, checks her app, and taps **Mark paid**.
+4. Paid requests move back to **New** with a green "paid" tag, ready for her to confirm a time.
+
+Payment handles, the deposit policy text, and Stripe are all set in the dashboard under ⚙︎
+Settings. The Stripe key is stored encrypted in Supabase Vault and never shown again; the
+payment-confirmation webhook is created automatically when the key is connected.
 
 ### Phone alerts setup (once)
 
